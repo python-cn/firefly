@@ -1,0 +1,89 @@
+-inherit base.html
+-namespace name="widgets_editor" widgets/markdown_editor.html
+-namespace name="login_form" login.html
+
+-def title()
+  首页
+
+-block list_controls
+  div.list-controls
+    div.container.list-control
+      ol.category-breadcrumb
+        li.bullet
+          a.badge-category href='' style="background-color: #eee; color: #333"
+            all categories
+          a.badge-category.category-dropdown-button style="background-color: #eee; color: #333"
+            i.fa.fa-caret-right
+          section.category-dropdown-menu.hidden
+            div.cat
+              a.badge-category href='/'
+                all categories
+      ul#navigation-bar.nav.nav-pills
+        li.active title="topics with recent posts"
+          a href="/latest"
+            Latest
+        li title="all topics grouped by category"
+          a href="/categories"
+            Categories
+      button#create-topic.btn.btn-default.right
+        i.fa.fa-plus
+        New Topic
+
+-block container
+  div.container.list-container
+    div#list-area
+      div.contents
+        table.topic-list
+          thead
+            tr
+              th.default
+                主题
+              th.category
+                分类
+                i.fa.fa-chevron-down
+              th.posts.num
+                回应数
+              th.views.num
+                阅读量
+              th.activity.num
+                最近活跃时间
+          tbody
+            tr.topic-list-item
+              td.main-link.clearfix
+                a.title href="/t/emojis-not-displaying-old-avatar-styles/13986"
+                  Emojis Not Displaying / Old Avatar Styles
+                span.topic-post-badges
+              td.category
+                a.badge-wrapper.bullet href="/c/support/wordpress"
+                  span.badge-category-parent-bg style="background-color: #CEA9A9;"
+                  span.badge-category-bg style="background-color: #F9CFCF;"
+                  span.badge-category.clear-badge style="color: #FFFFFF;" title="Support for the official Discourse WordPress plugin at https://github.com/discourse/wp-discourse"
+                    wordpress
+              td.num.posts-map.post title="This topic has 7 replies"
+                a.posts-map.badge-posts href=''
+                  7
+              td.num.views
+                span.number title="this topic has been viewed 413 times"
+                  413
+              td.num.age.activity title="First post: March 22, 2014 6:29am Last post: February 1, 2015 5:09am"
+                a href="/t/emojis-not-displaying-old-avatar-styles/13986/8"
+                  span class="relative-date" title="February 1, 2015 5:09am"
+                    Feb 1
+
+- def others()
+  ${widgets_editor.main()}
+
+- def login()
+  ${login_form.login()}
+  ${login_form.signup()}
+
+-def head_script()
+  link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
+  link href="${url_for('static', filename='stylesheets/codemirror.css')}" rel="stylesheet"
+  link href="${url_for('static', filename='stylesheets/hljs.css')}" rel="stylesheet"
+
+-def footer_script()
+  script
+    require(['../static/javascripts/common'], function (common) {
+      require(['index']);
+    });

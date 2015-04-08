@@ -1,0 +1,19 @@
+- def render(render)
+  fieldset
+    - for field in form
+      - if field.type in ['CSRFTokenField', 'HiddenField']
+        ${field()}
+      - else
+        div.form-group
+          ${field.label()}
+          div.input
+          - if field.name == 'body'
+            ${field(rows=10, cols=40)}
+          - else
+            ${field()}
+          - if field.errors or (hasattr(field, 'help_text') and field.help_text)
+            span.help-inline
+            - if field.errors
+              ${field.errors|join(' ')}
+            - else
+              ${field.help_text}

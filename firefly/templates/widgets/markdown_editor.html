@@ -1,0 +1,67 @@
+- def main()
+  div#reply-control.open.edit-title.hide
+    div.contents
+      div.edit-control
+        a.toggler href="" class="toggler" title="hide or show the composer panel"
+        div.control-row.reply-area
+          div.composer-fields
+            div.reply-to
+              创建新主题:
+            div.form-element.clearfix
+              div.title-input
+                input#reply-title placeholder="What is this discussion about in one brief sentence?" tabindex="2" type="text" maxlength="255"
+              div.category-input
+                div.select2-container.combobox.category-combobox style="width: 430px;"
+                  a.select2-choice href="javascript:void(0)" tabindex="-1"
+                    span#select2-chosen-2.select2-chosen
+                       未分类
+                    abbr.select2-search-choice-close
+                    span.select2-arrow role="presentation"
+                      b role="presentation"
+                  label.select2-offscreen for="s2id_autogen2"
+                  input.select2-focusser.select2-offscreen type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-2" id="s2id_autogen2" tabindex="3"
+                    div.select2-drop.select2-display-none.select2-with-searchbox
+                    div.select2-search
+                      label.select2-offscreen for="s2id_autogen2_search"
+                      ul class="select2-results" role="listbox" id="select2-results-2"
+                  select.combobox.category-combobox tabindex="-1" title="" style="display: none;"
+                    option value=""
+                      uncategorized
+                    option value="6"
+                      support
+                    option value="21"
+                      wordpress
+                    div.popup-tip.good.hide
+                      span.close
+                        i.fa.fa-times-circle
+
+          div.wmd-controls style="top: 100px; bottom: 89px;"
+            div.textarea-wrapper
+              textarea#wmd-input tabindex="4"
+
+            div.preview-wrapper.regular
+              div#wmd-preview.cooked
+            div.composer-bottom-right
+              a.toggle-preview href="#"
+                « 关闭预览
+              div#file-uploading.hidden
+                div.spinner.small
+                Uploading %
+                a#cancel-file-upload
+                  cancel
+
+          div.submit-panel
+            div.composer-fields-below-outlet.add-tags
+              div.select2-container.select2-container-multi.ember-text-field.tag-chooser
+                ul.select2-choices
+                   li.select2-search-field
+                     label.select2-offscreen for="s2id_autogen1"
+                     input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input select2-default" id="s2id_autogen1" tabindex="4" maxlength="20" placeholder="" style="width: 481px;"
+                div.select2-drop.select2-drop-multi.select2-display-none
+                  ul.select2-results
+              input.tag-chooser type="text" tabindex="-1" style="display: none;"
+            button.btn.btn-primary.create tabindex="5" title="Or press Ctrl+Enter"
+              i.fa.fa-plus
+              创建主题
+            a.cancel href="#" tabindex="6"
+              取消

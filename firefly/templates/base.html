@@ -1,0 +1,77 @@
+-py
+  from flask import url_for
+
+doctype html
+html
+  head
+    meta charset="UTF-8"
+    meta http-equiv="cache-control" content="max-age=0"
+    meta http-equiv="cache-control" content="no-cache"
+    meta http-equiv="pragma" content="no-cache"
+    meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+
+    title
+        ${self.title()}
+    link rel="icon" type="image/png" href="${url_for('static', filename='icon.png')}"
+    link href="${url_for('static', filename='stylesheets/style.css')}" rel="stylesheet" media="all"
+    script src="${url_for('static', filename='javascripts/libs/require.min.js')}"
+    script src="//localhost:35729/livereload.js"
+    style
+      @font-face {
+        font-family: 'FontAwesome';
+        src: url("${url_for('static', filename='fonts/fontawesome-webfont.eot')}");
+        src: url("${url_for('static', filename='fonts/fontawesome-webfont.eot#iefix')}") format('embedded-opentype'),
+             url("${url_for('static', filename='fonts/fontawesome-webfont.woff2')}") format('woff2'),
+             url("${url_for('static', filename='fonts/fontawesome-webfont.woff')}") format('woff'),
+             url("${url_for('static', filename='fonts/fontawesome-webfont.ttf')}") format('truetype');
+        font-weight: normal;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Ionicons';
+        src: url("${url_for('static', filename='fonts/ionicons.eot')}");
+        src: url("${url_for('static', filename='fonts/ionicons.eot#iefix')}") format('embedded-opentype$
+             url("${url_for('static', filename='fonts/ionicons.woff2')}") format('woff2'),
+             url("${url_for('static', filename='fonts/ionicons.woff')}") format('woff'),
+             url("${url_for('static', filename='fonts/ionicons.ttf')}") format('truetype');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+    ${self.head_script()}
+    -block extra_head
+
+  body
+    section#main
+      div.articles
+        header.header
+          .container
+            .contents
+              div.title
+                a href='/'
+                  span class='.valign-helper'
+                  img.site-logo.logo-big src="${url_for('static', filename='pics/dongxi.jpg')}" alt='pythoncn'
+              div.panel
+                button.btn-primary.btn-small.btn.sign-up-button title='注册'
+                  注册
+                button.btn-primary.btn-small.btn.login-button title='登录'
+                  i.fa
+                  登录
+        div#main-outlet
+          -block list_controls
+          -block container
+        div#login-modal.modal.hide
+          ${self.login()}
+
+        ${self.others()}
+    ${self.footer_script()}
+
+-def title()
+
+-def head_script()
+
+-def footer_script()
+
+-def others()
+
+-def login()

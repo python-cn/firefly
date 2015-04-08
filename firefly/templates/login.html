@@ -1,0 +1,89 @@
+- def login()
+  div.login.hide
+    div.modal-header
+      a.close
+        i.fa.fa-times
+      h3
+        登录
+      div.clearfix
+
+    form#signinform.login-form" role="form"
+      div.form-group
+        label.control-label for=""
+          第三方登录
+          div.thirdparty-login-btns
+            div.table-space
+              a.login-btn.btn-github href="/1/oauth2/goto/github"
+                i.fa.fa-github
+                  GitHub
+            div.table-space
+              a.login-btn.btn-weibo href="/1/oauth2/goto/weibo"
+                i.fa.fa-weibo
+                  微博
+            div.table-space
+              a.login-btn.btn-google href="/1/oauth2/goto/google"
+                Google
+
+      div.form-group
+        label.control-label for="inputEmail"
+          邮箱
+        input#inputEmail.form-control type="email" required="" tabindex="1" name="email"
+      div.form-group
+        label.control-label for="inputPassword"
+          密码（<a tabindex="4" href="#/forgotpass">忘记密码</a>）
+        input#inputPassword.form-control type="password" required="" tabindex="2" name="password"
+      div.form-group
+        button#loginBtn.login-btn.btn-default tabindex="3" translate="ACTION_LOGIN" type="submit"
+          登录
+
+- def signup()
+  div.signup
+    div.modal-header
+      a.close
+        i.fa.fa-times
+      h3
+        注册
+      div.clearfix
+
+    form#signupform.login-form" role="form"
+      div.form-group
+        label.control-label for=""
+          第三方注册
+          div.thirdparty-login-btns
+            div.table-space
+              a.login-btn.btn-github href="/1/oauth2/goto/github"
+                i.fa.fa-github
+                  GitHub
+            div.table-space
+              a.login-btn.btn-weibo href="/1/oauth2/goto/weibo"
+                i.fa.fa-weibo
+                  微博
+            div.table-space
+              a.login-btn.btn-google href="/1/oauth2/goto/google"
+                i.fa.fa-google
+                  Google
+
+      div.form-group
+        label.control-label for="inputUsername"
+          用户名
+          b.has-required data-title="必填"
+            Required
+        input#inputUsername.form-control type="text" name="username" tabindex="1"
+
+      div.form-group
+        label.control-label for="inputEmail"
+          邮箱
+          b.has-required data-title="必填"
+            Required
+        input#inputEmail.form-control type="email" name="email" tabindex="2"
+
+      div.form-group
+        label.control-label for="inputPassword"
+          密码
+          b.has-required data-title="必填，至少 8 位，同时包含数字、小写字母、大写字母"
+            Required
+        input#inputPassword.form-control type="password" name="password" tabindex="3"
+
+      div.form-group
+        button.#signupBtn.signup-btn.btn.btn-default type="submit" tabindex="4" disabled="disabled"
+          注册

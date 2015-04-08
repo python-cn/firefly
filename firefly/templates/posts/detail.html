@@ -1,0 +1,24 @@
+-inherit /base.html
+- namespace name='forms' /_forms.html
+- block content
+  - if post.body
+    - if post.post_type == 'Quote'
+      blockquote
+        ${post.body}
+      p
+        ${post.author}
+    - else
+      ${post.body}
+  - if hasattr(post, 'embed_code') and post.embed_code
+    ${post.embed_code}
+  - if hasattr(post, 'image_url') and post.image_url
+    p
+      img src="${post.image_url}"
+  p
+    ${post.created_at.strftime('%H:%M %Y-%m-%d')}
+  h2
+    Add a comment
+  form action="." method="post"
+    ${forms.render(form)}
+    div.actions
+    input.btn.btn-primary type='submit' value='comment'

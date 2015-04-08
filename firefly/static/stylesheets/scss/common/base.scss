@@ -1,0 +1,46 @@
+html {
+    color: #222;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 19px;
+    background-color: #fff;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+}
+
+ul, ol, dd {
+    margin: 0 0 9px 25px;
+    padding: 0;
+}
+
+a {
+    color: #08c;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.right {
+    float: right;
+}
+
+.close {
+    float: right;
+    font-size: 16px;
+    text-decoration: none;
+    color: #6f6f6f;
+    cursor: pointer;
+}
+
+.emoji {
+    width: 20px;
+}
