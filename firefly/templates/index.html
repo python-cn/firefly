@@ -74,13 +74,14 @@
   ${widgets_editor.main()}
 
 - def login()
-  ${login_form.login()}
+  ${login_form.signin()}
   ${login_form.signup()}
 
 -def head_script()
   link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
   link href="${url_for('static', filename='stylesheets/codemirror.css')}" rel="stylesheet"
   link href="${url_for('static', filename='stylesheets/hljs.css')}" rel="stylesheet"
+  link href="${url_for('static', filename='stylesheets/themes/zenburn.css')}" rel="stylesheet"
 
 -def footer_script()
   script

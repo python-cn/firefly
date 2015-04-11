@@ -1,5 +1,5 @@
-- def login()
-  div.login.hide
+- def signin()
+  div.signin.hide
     div.modal-header
       a.close
         i.fa.fa-times
@@ -30,10 +30,10 @@
         input#inputEmail.form-control type="email" required="" tabindex="1" name="email"
       div.form-group
         label.control-label for="inputPassword"
-          密码（<a tabindex="4" href="#/forgotpass">忘记密码</a>）
+          密码（<a tabindex="4" href="/forgotpass">忘记密码</a>）
         input#inputPassword.form-control type="password" required="" tabindex="2" name="password"
       div.form-group
-        button#loginBtn.login-btn.btn-default tabindex="3" translate="ACTION_LOGIN" type="submit"
+        button#loginBtn.login-btn.btn-default tabindex="3" type="submit"
           登录
 
 - def signup()

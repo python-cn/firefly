@@ -8,7 +8,8 @@ require(['jquery', 'markdown-it', 'markdown-it-footnote', 'highlight.pack', 'emo
          'codemirror/mode/css/css', 'codemirror/mode/django/django', 'codemirror/mode/jinja2/jinja2',
          'codemirror/mode/python/python', 'codemirror/mode/sass/sass', 'codemirror/mode/ruby/ruby',
          'codemirror/mode/shell/shell', 'codemirror/mode/tornado/tornado', 'codemirror/mode/sql/sql',
-         'codemirror/mode/yaml/yaml', 'codemirror/mode/yaml/yaml', 'codemirror/mode/htmlmixed/htmlmixed'],
+         'codemirror/mode/yaml/yaml', 'codemirror/mode/yaml/yaml', 'codemirror/mode/htmlmixed/htmlmixed',
+         '../login'],
         function($, markdownit, markdownitFootnote, hljs, emojify, createTopic, CodeMirror){
             var languageOverrides = {
                 js: 'javascript',
@@ -24,7 +25,7 @@ require(['jquery', 'markdown-it', 'markdown-it-footnote', 'highlight.pack', 'emo
 
             $('#create-topic').click(function(e) {
                 e.preventDefault();
-                topic.open();
+                topic.openModal();
             });
 
             emojify.setConfig({
@@ -81,4 +82,6 @@ require(['jquery', 'markdown-it', 'markdown-it-footnote', 'highlight.pack', 'emo
                 };
                 theReader.readAsText(theFile);
             }, false);
+
+            /* 提交表单 */
         });

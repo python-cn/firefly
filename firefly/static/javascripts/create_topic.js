@@ -17,6 +17,7 @@ define(['jquery'], function($) {
             this.$toggleDiv = $('.toggle-preview');
             this.$cancel = $('.cancel');
             this.$toggler = $('.toggler');
+            this.$createButton = $('.create');
 
             this.$toggleDiv.click(function(e) {
                 self.previewToggle();
@@ -24,19 +25,23 @@ define(['jquery'], function($) {
 
             this.$toggler.click(function(e) {
                 e.preventDefault();
-                self.close();
+                self.closeModal();
             });
 
             this.$cancel.click(function(e) {
-                self.close();
+                self.closeModal();
+            });
+
+            this.$createButton.click(function(e) {
+                self.create();
             });
         },
 
-        close: function(){
+        closeModal: function(){
             this.$modal.addClass('hide');
         },
 
-        open: function(){
+        openModal: function(){
             this.$modal.removeClass('hide');
         },
 
@@ -47,6 +52,46 @@ define(['jquery'], function($) {
             } else {
                 this.$toggleDiv.html('« 关闭预览');
             }
+        },
+
+        create : function(){
+            var title = $('#reply-title').val(),
+                self = this,
+                content = [], params, text;
+            $('.CodeMirror-code pre span span').each(
+                function () {
+                    text = $(this).text();
+                    if (text.length > 1) {
+                        content.push(text);
+                    }
+                }
+            );
+
+            if (!title.length) {
+                alert('标题没有内容');
+                return
+            }
+            if (!content.length) {
+                alert('正文内容太少');
+                return
+            }
+            params = {
+                'title': title,
+                'content': content.join('$')
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/create',
+                traditional: true,
+                data: params,
+                dataType: "json",
+                success: function(res) {
+                    if (!res.ok) {
+                        alert('发表成功');
+                        self.closeModal();
+                    }
+                }
+            });
         }
     };
 

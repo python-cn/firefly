@@ -52,5 +52,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-sass-globbing');
     //    grunt.loadNpmTasks('grunt-autoprefixer');
 
-    grunt.registerTask('default', ['sass_globbing', 'watch']);
+    grunt.registerTask('default', ['sass_globbing', 'sass', 'watch']);
 };

@@ -7,6 +7,8 @@
     overflow: auto;
     margin-left: -15px;
     margin-right: -15px;
+    background-color: #222;
+    opacity: .93;
 }
 
 .login-form {
@@ -14,18 +16,9 @@
     padding-bottom: 1px;
 }
 
-.modal-active {
-    background-color: #222;
-    opacity: .93;
-}
-
-.login, .signup {
+.signin, .signup {
     margin-left: 33.33%;
     width: 33.33%;
-    background-color: #222;
-}
-
-.login-active, .signup-active {
     background-color: #fff;
 }
 
@@ -111,5 +104,46 @@
     h3 {
         font-size: 14px;
         padding: 12px;
+    }
+}
+
+b.has-required {
+    display: inline;
+    position: relative;
+    font-size: 10px;
+    line-height: 1;
+    text-transform: uppercase;
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin-left: 5px;
+    vertical-align: 1px;
+    color: #bbb;
+    cursor: help;
+    &:hover {
+        color: #ffbb5a;
+    }
+    &:hover:after {
+        background: #333;
+        background: rgba(0,0,0,.8);
+        border-radius: 5px;
+        bottom: 26px;
+        color: #fff;
+        content: attr(data-title);
+        left: 20%;
+        padding: 5px 15px;
+        position: absolute;
+        z-index: 98;
+        width: 150px;
+    }
+    &:hover:before{
+        border: solid;
+        border-color: #333 transparent;
+        border-width: 6px 6px 0 6px;
+        bottom: 20px;
+        content: "";
+        left: 50%;
+        position: absolute;
+        z-index: 99;
     }
 }

@@ -1818,7 +1818,7 @@ default_rules.fence = function (tokens, idx, options, env, self) {
     highlighted = escapeHtml(token.content);
   }
 
-  return  '<pre><code' + self.renderAttrs(token) + '>'
+  return  '<pre class="hljs"><code' + self.renderAttrs(token) + '>'
         + highlighted
         + '</code></pre>\n';
 };

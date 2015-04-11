@@ -12,12 +12,11 @@ class Post(db.Document):
     id = db.SequenceField(primary_key=True)
     created_at = db.DateTimeField(default=datetime.now, required=True)
     title = db.StringField(max_length=255, required=True)
-    slug = db.StringField(max_length=255, required=True)
-    body = db.StringField(required=True)
+    content = db.StringField(required=True)
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
 
     def get_absolute_url(self):
-        return url_for('post', kwargs={'slug': self.slug})
+        return url_for('post', kwargs={'id': self.id})
 
     def __unicode__(self):
         return self.title
@@ -28,13 +27,9 @@ class Post(db.Document):
 
     meta = {
         'allow_inheritance': True,
-        'indexes': ['-created_at', 'slug'],
+        'indexes': ['-created_at', 'id'],
         'ordering': ['-created_at']
     }
-
-
-class BlogPost(Post):
-    body = db.StringField(required=True)
 
 
 class Video(Post):

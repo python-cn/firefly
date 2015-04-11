@@ -1,3 +1,5 @@
+pymongo==2.8
+mongoengine==0.8.7.1
 flask-mongoengine
 flask-script
 flask-mako

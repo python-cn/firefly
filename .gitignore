@@ -110,3 +110,4 @@ Temporary Items
 ## firefly
 venv
 firefly/static/node_modules
+firefly/static/.sass-cache
