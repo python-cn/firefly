@@ -242,6 +242,8 @@ ol.category-breadcrumb {
     }
     .main-link {
         font-size: 1.143em;
+        width: 400px;
+        padding-right: 20px;
         a.title {
             padding: 15px 0;
         }
@@ -266,7 +268,7 @@ ol.category-breadcrumb {
         }
     }
     .num {
-        text-align: center;
+        text-align: right;
         a:not(.badge-posts) {
             color: inherit;
         }

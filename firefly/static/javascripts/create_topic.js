@@ -41,8 +41,11 @@ define(['jquery'], function($) {
             this.$modal.addClass('hide');
         },
 
-        openModal: function(){
+        openModal: function(callback){
             this.$modal.removeClass('hide');
+            if (typeof callback !== 'undefined') {
+                callback();
+            }
         },
 
         previewToggle: function(){
