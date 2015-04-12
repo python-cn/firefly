@@ -33,8 +33,7 @@ class Post(db.Document):
     @property
     def recent_activity_time(self):
         if self.comments:
-            activity = self.comments.order_by(
-                'created_at', '-created_at')[0].created_at
+            activity = self.comments[-1].created_at
         else:
             activity = self.created_at
         return timesince(activity)

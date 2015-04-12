@@ -23,11 +23,6 @@ require(['jquery', 'markdown-it', 'markdown-it-footnote', 'highlight.pack', 'emo
             },
                 topic = new createTopic();
 
-            $('#create-topic').click(function(e) {
-                e.preventDefault();
-                topic.openModal();
-            });
-
             emojify.setConfig({
                 img_dir: '/static/pics/emoji'
             });
@@ -64,24 +59,32 @@ require(['jquery', 'markdown-it', 'markdown-it-footnote', 'highlight.pack', 'emo
                     }
                 }
             }
-            var editor = CodeMirror.fromTextArea(document.getElementById('wmd-input'), {
-                mode: 'gfm',
-                lineNumbers: false,
-                matchBrackets: true,
-                lineWrapping: true,
-                theme: 'base16-light'
-            });
-            editor.on('change', update);
-            document.addEventListener('drop', function(e){
+
+            $('#create-topic').click(function(e) {
                 e.preventDefault();
-                e.stopPropagation();
-                var theFile = e.dataTransfer.files[0];
-                var theReader = new FileReader();
-                theReader.onload = function(e){
-                    editor.setValue(e.target.result);
-                };
-                theReader.readAsText(theFile);
-            }, false);
+                topic.openModal(function() {
+                    $('.CodeMirror').remove();
+                    $('#wmd-preview').html('');
+                    var editor = CodeMirror.fromTextArea(document.getElementById('wmd-input'), {
+                        mode: 'gfm',
+                        lineNumbers: false,
+                        matchBrackets: true,
+                        lineWrapping: true,
+                        theme: 'base16-light'
+                    });
+                    editor.on('change', update);
+                    document.addEventListener('drop', function(e){
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var theFile = e.dataTransfer.files[0];
+                        var theReader = new FileReader();
+                        theReader.onload = function(e){
+                            editor.setValue(e.target.result);
+                        };
+                        theReader.readAsText(theFile);
+                    }, false);
+                });
+            });
 
             /* 提交表单 */
         });
