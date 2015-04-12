@@ -1,14 +1,18 @@
+-py!
+  from firefly.libs.markdown import Markdown
 -inherit /base.html
 - namespace name='forms' /_forms.html
-- block content
-  - if post.body
+- block list_controls
+  - if post.content
+    -py
+      content = Markdown.render(post.content)
     - if post.post_type == 'Quote'
       blockquote
-        ${post.body}
+        ${content|n}
       p
         ${post.author}
     - else
-      ${post.body}
+      ${content|n}
   - if hasattr(post, 'embed_code') and post.embed_code
     ${post.embed_code}
   - if hasattr(post, 'image_url') and post.image_url

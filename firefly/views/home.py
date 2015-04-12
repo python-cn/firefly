@@ -12,13 +12,8 @@ bp = Blueprint("home", __name__, url_prefix="/")
 
 class HomeView(MethodView):
     def get(self):
-        return render_template('index.html', ctx=self)
-
-
-class ListView(MethodView):
-    def get(self):
         posts = Post.objects.all()
-        return render_template('posts/list.html', posts=posts)
+        return render_template('index.html', posts=posts)
 
 
 class CreateView(MethodView):
@@ -28,7 +23,7 @@ class CreateView(MethodView):
         post = Post(
             title=title,
             content=content)
-#        post.save()
+        post.save()
         return jsonify(ok=0)
 
 

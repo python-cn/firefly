@@ -331,6 +331,36 @@ ol.category-breadcrumb {
     color: #7a7a7a;
 }
 
+.badge-wrapper {
+    font-size: 0.857em;
+    font-weight: bold;
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    line-height: 1.25;
+
+    .badge-category-parent-bg, .badge-category-bg {
+        background-color: #258af1;
+        display: inline-block;
+        padding: 1px;
+
+        &:before {
+            content: "\a0";
+        }
+    }
+
+    .badge-category {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #222 !important;
+        padding: 3px;
+        vertical-align: text-top;
+        margin-top: -3px;
+        display: inline-block;
+    }
+}
+
 // 功能没出, 先隐藏了
 ol.category-breadcrumb {
     visibility: hidden;

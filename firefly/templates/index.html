@@ -48,27 +48,36 @@
               th.activity.num
                 最近活跃时间
           tbody
-            tr.topic-list-item
-              td.main-link.clearfix
-                a.title href="/t/emojis-not-displaying-old-avatar-styles/13986"
-                  Emojis Not Displaying / Old Avatar Styles
-                span.topic-post-badges
-              td.category
-                a.badge-wrapper.bullet href="/c/support/wordpress"
-                  span.badge-category-parent-bg style="background-color: #CEA9A9;"
-                  span.badge-category-bg style="background-color: #F9CFCF;"
-                  span.badge-category.clear-badge style="color: #FFFFFF;" title="Support for the official Discourse WordPress plugin at https://github.com/discourse/wp-discourse"
-                    wordpress
-              td.num.posts-map.post title="This topic has 7 replies"
-                a.posts-map.badge-posts href=''
-                  7
-              td.num.views
-                span.number title="this topic has been viewed 413 times"
-                  413
-              td.num.age.activity title="First post: March 22, 2014 6:29am Last post: February 1, 2015 5:09am"
-                a href="/t/emojis-not-displaying-old-avatar-styles/13986/8"
-                  span class="relative-date" title="February 1, 2015 5:09am"
-                    Feb 1
+            -for post in posts
+              -py
+                id = post.id
+                # author = post.author
+                title = post.title
+                replies = len(post.comments)
+                views = post.views
+                created_at = post.created_at
+                activity = post.recent_activity_time
+              tr.topic-list-item
+                td.main-link.clearfix
+                  a.title href="${url_for('post.detail', id=id)}"
+                    ${title}
+                  span.topic-post-badges
+
+                td.category
+                  a.badge-wrapper.bullet href="/category/uncategorized"
+                    span.badge-category-parent-bg
+                    span.badge-category.clear-badge 未分类
+
+                td.num.posts-map.post
+                  a.posts-map.badge-posts href=''
+                    ${replies}
+                td.num.views
+                  span.number
+                    ${views}
+                td.num.age.activity
+                  a
+                    span class="relative-date" title="${activity}"
+                      ${activity}
 
 - def others()
   ${widgets_editor.main()}
@@ -80,8 +89,6 @@
 -def head_script()
   link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
   link href="${url_for('static', filename='stylesheets/codemirror.css')}" rel="stylesheet"
-  link href="${url_for('static', filename='stylesheets/hljs.css')}" rel="stylesheet"
-  link href="${url_for('static', filename='stylesheets/themes/zenburn.css')}" rel="stylesheet"
 
 -def footer_script()
   script

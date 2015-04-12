@@ -57,13 +57,11 @@ define(['jquery'], function($) {
         create : function(){
             var title = $('#reply-title').val(),
                 self = this,
-                content = [], params, text;
-            $('.CodeMirror-code pre span span').each(
+                params, content = [];
+            $('.CodeMirror-code pre span[style]').each(
                 function () {
                     text = $(this).text();
-                    if (text.length > 1) {
-                        content.push(text);
-                    }
+                    content.push(text);
                 }
             );
 
@@ -77,7 +75,7 @@ define(['jquery'], function($) {
             }
             params = {
                 'title': title,
-                'content': content.join('$')
+                'content': content.join('\n')
             };
             $.ajax({
                 type: 'POST',

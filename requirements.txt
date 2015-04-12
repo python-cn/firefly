@@ -6,3 +6,5 @@ flask-mako
 Flask-Cache
 redis
 plim
+mistune
+pygments

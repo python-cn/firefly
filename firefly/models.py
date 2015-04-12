@@ -6,6 +6,7 @@ from datetime import datetime
 from flask import url_for
 
 from firefly import db
+from firefly.views.utils import timesince
 
 
 class Post(db.Document):
@@ -13,6 +14,10 @@ class Post(db.Document):
     created_at = db.DateTimeField(default=datetime.now, required=True)
     title = db.StringField(max_length=255, required=True)
     content = db.StringField(required=True)
+    views = db.IntField(default=0)
+    # 有了登录系统author就是必选项
+    author = db.StringField(verbose_name='Name', max_length=255,
+                            required=False)
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
 
     def get_absolute_url(self):
@@ -24,6 +29,15 @@ class Post(db.Document):
     @property
     def post_type(self):
         return self.__class__.__name__
+
+    @property
+    def recent_activity_time(self):
+        if self.comments:
+            activity = self.comments.order_by(
+                'created_at', '-created_at')[0].created_at
+        else:
+            activity = self.created_at
+        return timesince(activity)
 
     meta = {
         'allow_inheritance': True,
