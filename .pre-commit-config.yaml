@@ -1,0 +1,7 @@
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    sha: b03733bc86d9e8b2564a5798ade40d64baae3055
+    hooks:
+    -   id: autopep8-wrapper
+        args: ['-i', '--ignore=E309']
+    -   id: trailing-whitespace
+    -   id: flake8

@@ -1,7 +1,7 @@
 # coding=utf-8
 from functools import wraps
 
-from werkzeug.utils import secure_filename
+from werkzeug.utils import secure_filename  # noqa
 from flask import g, request, redirect, url_for
 from flask.ext.mako import render_template
 

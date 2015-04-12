@@ -11,7 +11,6 @@ install:
   - pip install -r dev-requirements.txt
 # command to run checkers
 script:
-  - pep8 --ignore=E501,E225 .
-  - pyflakes .
+  - flake8 --ignore=E501,E225 .
 after_success:
   - coveralls
