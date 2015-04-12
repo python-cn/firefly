@@ -1,0 +1,17 @@
+language: python
+python:
+  - "2.6"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "pypy"
+# command to install dependencies
+install:
+  - pip install .
+  - pip install -r requirements.txt
+# command to run checkers
+script:
+  - pep8 --ignore=E501,E225 .
+  - pyflakes .
+after_success:
+  - coveralls
