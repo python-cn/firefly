@@ -42,7 +42,7 @@ MT.testMode(
 );
 
 // Unclosed backticks
-// Instead of simply marking as CODE, it would be nice to have an 
+// Instead of simply marking as CODE, it would be nice to have an
 // incomplete flag for CODE, that is styled slightly different.
 MT.testMode(
   'unclosedBackticks',
@@ -53,8 +53,8 @@ MT.testMode(
   ]
 );
 
-// Per documentation: "To include a literal backtick character within a 
-// code span, you can use multiple backticks as the opening and closing 
+// Per documentation: "To include a literal backtick character within a
+// code span, you can use multiple backticks as the opening and closing
 // delimiters"
 MT.testMode(
   'doubleBackticks',
@@ -66,7 +66,7 @@ MT.testMode(
 
 // Tests based on Dingus
 // http://daringfireball.net/projects/markdown/dingus
-// 
+//
 // Multiple backticks within an inline code block
 MT.testMode(
   'consecutiveBackticks',
@@ -105,7 +105,7 @@ MT.testMode(
 
 // atx headers
 // http://daringfireball.net/projects/markdown/syntax#header
-// 
+//
 // H1
 MT.testMode(
   'atxH1',
@@ -167,10 +167,10 @@ MT.testMode(
 // Setext headers - H1, H2
 // Per documentation, "Any number of underlining =’s or -’s will work."
 // http://daringfireball.net/projects/markdown/syntax#header
-// Ideally, the text would be marked as `header` as well, but this is 
-// not really feasible at the moment. So, instead, we're testing against 
+// Ideally, the text would be marked as `header` as well, but this is
+// not really feasible at the moment. So, instead, we're testing against
 // what works today, to avoid any regressions.
-// 
+//
 // Check if single underlining = works
 MT.testMode(
   'setextH1',
@@ -505,7 +505,7 @@ MT.testMode(
 );
 
 // Nested list
-// 
+//
 // *
 MT.testMode(
   'listAsteriskNested',
@@ -897,9 +897,9 @@ MT.testMode(
     null, 'hello'
   ]
 );
-// Per documentation: "...surround an * or _ with spaces, it’ll be 
+// Per documentation: "...surround an * or _ with spaces, it’ll be
 // treated as a literal asterisk or underscore."
-// 
+//
 // Inside EM
 MT.testMode(
   'emEscapedBySpaceIn',
@@ -922,7 +922,7 @@ MT.testMode(
 );
 
 // Unclosed emphasis characters
-// Instead of simply marking as EM / STRONG, it would be nice to have an 
+// Instead of simply marking as EM / STRONG, it would be nice to have an
 // incomplete flag for EM and STRONG, that is styled slightly different.
 MT.testMode(
   'emIncompleteAsterisk',
@@ -1018,7 +1018,7 @@ MT.testMode(
 // -   minus sign (hyphen)
 // .   dot
 // !   exclamation mark
-// 
+//
 // Backtick (code)
 MT.testMode(
   'escapeBacktick',
