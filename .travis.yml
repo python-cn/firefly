@@ -11,6 +11,6 @@ install:
   - pip install -r dev-requirements.txt
 # command to run checkers
 script:
-  - flake8 --ignore=E501,E225 .
+  - flake8 .
 after_success:
   - coveralls
