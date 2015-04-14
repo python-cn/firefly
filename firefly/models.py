@@ -3,7 +3,7 @@
 
 from datetime import datetime
 
-from flask import url_for
+from flask import url_for, g
 
 from firefly import db
 from firefly.views.utils import timesince
@@ -36,7 +36,7 @@ class Post(db.Document):
             activity = self.comments[-1].created_at
         else:
             activity = self.created_at
-        return timesince(activity)
+        return timesince(activity, locale=g.locale)
 
     meta = {
         'allow_inheritance': True,

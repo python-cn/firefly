@@ -2,6 +2,7 @@
 
 from flask import Flask
 from flask.ext.mako import render_template, MakoTemplates
+from flask.ext.babel import Babel
 from flask.ext.cache import Cache
 from flask.ext.mongoengine import MongoEngine
 
@@ -12,6 +13,7 @@ app.config.from_object(config)
 db = MongoEngine(app)
 mako = MakoTemplates(app)
 cache = Cache(app)
+babel = Babel(app)
 
 
 def configure_error_handles(app):

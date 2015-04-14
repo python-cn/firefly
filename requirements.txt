@@ -3,6 +3,7 @@ mongoengine==0.8.7.1
 flask-mongoengine
 flask-script
 -e git+https://github.com/benselme/flask-mako.git@4c6a190a12f107d82b91e4bd60c97eab58eb4a5c#egg=Flask-Mako
+flask-babel
 Flask-Cache
 redis
 plim
