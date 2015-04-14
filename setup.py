@@ -5,7 +5,9 @@ from setuptools import setup
 
 here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'requirements.txt')) as f:
-    install_requires = [p.strip() for p in f.readlines()]
+    lines = f.readlines()
+    install_requires = [p.strip() for p in lines if ' ' not in p]
+    dependency_links = [p.split()[-1].strip() for p in lines if ' ' in p]
 
 setup(
     name='pythoncn',
@@ -31,4 +33,5 @@ setup(
 
     packages=find_packages('.', exclude=('tests*')),
     install_requires=install_requires,
+    dependency_links=dependency_links,
 )
