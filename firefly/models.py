@@ -11,7 +11,7 @@ from firefly.views.utils import timesince
 
 class Post(db.Document):
     id = db.SequenceField(primary_key=True)
-    created_at = db.DateTimeField(default=datetime.now, required=True)
+    created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     title = db.StringField(max_length=255, required=True)
     content = db.StringField(required=True)
     views = db.IntField(default=0)
