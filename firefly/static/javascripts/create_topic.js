@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery', 'sweetAlert'], function($, sweetAlert) {
     function createTopic() {
         if (!(this instanceof createTopic)) {
             return new createTopic();
@@ -69,11 +69,17 @@ define(['jquery'], function($) {
             );
 
             if (!title.length) {
-                alert('标题没有内容');
+                sweetAlert({
+                    title: "标题没有内容",
+                    type: "error"
+                });
                 return
             }
             if (!content.length) {
-                alert('正文内容太少');
+                sweetAlert({
+                    title: "正文内容太少",
+                    type: "error"
+                });
                 return
             }
             params = {

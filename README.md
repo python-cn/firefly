@@ -43,3 +43,5 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/guid
 - [ ] 设计用户密码找回方案
 - [ ] 用户可以设置自己介绍, 坐标(比如北京), 以及个人的站点
 - [ ] 用户可以设置github/stackoverflow的地址
+- [ ] 用户model, oauth2方案
+- [x] 使用sweetalert替代alert
