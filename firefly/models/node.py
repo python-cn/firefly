@@ -3,10 +3,9 @@
 
 from datetime import datetime
 
-from flask import url_for, g
+from flask import url_for
 
 from firefly import db
-from firefly.models import Section
 
 __all__ = ["Node"]
 
