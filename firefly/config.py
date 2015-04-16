@@ -25,6 +25,14 @@ BABEL_DEFAULT_LOCALE = 'zh'
 GRAVATAR_BASE_URL = 'http://www.gravatar.com/avatar/'
 DEAFULT_AVATAR = 'your default avatar'
 
+LOGIN_DISABLED = False
+SECURITY_CONFIRMABLE = True
+SECURITY_REGISTERABLE = True
+SECURITY_RECOVERABLE = True
+SECURITY_CHANGEABLE = True
+SECURITY_DEFAULT_REMEMBER_ME = True
+CSRF_ENABLED = True
+
 try:
     from local_settings import *  # noqa
 except ImportError:
