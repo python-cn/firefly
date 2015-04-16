@@ -1,14 +1,14 @@
 Work In Process
 ==
 
-导航请移步到: http://python-cn.github.io/guide
+导航请移步到: http://python-cn.github.io
 
 说明
 --
 
 这里只包含等待开发的Todo List. 会尽量更新到最新状态.
 
-有兴趣参与者请使用: [teambition](http://tburl.in/aba6fdf0)去获取最新的任务列表. 防止任务已被认领造成重复.
+有兴趣参与者请使用: [teambition](https://www.teambition.com/project/552c777f19a7db9f2ba9eca4/home)去获取最新的任务列表. 防止任务已被认领造成重复.
 
 沟通请使用: [pythoncn-slack](https://pythoncn.slack.com)(需要邀请, 请发邮件到ciici123@gmail.com, 或者联系组内其他成员),
 参与开发者才会被通过(slack没有灌水区)，请谨慎加入
@@ -23,7 +23,7 @@ Work In Process
 
 英语好的不妨看这个视频教程[http://discoverflask.com](https://github.com/realpython/discover-flask)
 
-PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/guide/#/post/used.md
+PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/post/used.md
 
 ## 集思广益
 
@@ -57,8 +57,9 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/guid
 - [x] 使用sweetalert替代alert
 - [ ] follow用户的功能
 - [ ] 站内信模型
+- [ ] 提醒模型(类似豆瓣的提醒)
 - [ ] @ 能弹出被@用户
-- [ ] @ 的消息能被该用户收到站内信
+- [ ] @ 的消息能被该用户收到提醒
 - [ ] 使用站内信和其他人私聊
 - [ ] 首页每个类型都能排序, 比如按分类, 按最热
 - [ ] 设计公告位
@@ -67,7 +68,11 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/guid
 - [ ] 能评论其他人的评论
 - [ ] 站内信未读 给标志标示
 - [ ] 主题内容在首页就可以预览, 可以选择`阅读更多`点到单个主题页
-- [ ] 发布主题可以上传图片
+- [ ] 发布主题可以上传图片(也可粘贴一个图片url)
 - [ ] 单个主题可以看到上传的图片
 - [ ] 发布主题可以插入视频url
 - [ ] 单个主题可以看到视频
+- [ ] 个人发表的主题页
+- [ ] 徽章系统, 但是不能种类多, 我想目前只包含开发者
+- [ ] 设计一个好看的logo
+- [ ] 设计管理员系统(可能是一个子url, 也可能是一个其他的项目),就是可以开发者的权限, 有对应权限的开发者可以删帖, 修改标题等. 但是一切操作都要被系统记录
