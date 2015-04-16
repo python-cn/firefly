@@ -33,9 +33,11 @@ def configure_error_handles(app):
 
 def register_blueprints(app):
     from firefly.views import (home, post, api)
+    from firefly.models import auth
+    auth.init_app(app)
     for i in (home, post, api):
         app.register_blueprint(i.bp)
-#    configure_error_handles(app)
+    configure_error_handles(app)
 
 
 register_blueprints(app)
