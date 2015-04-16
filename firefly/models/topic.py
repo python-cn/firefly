@@ -7,6 +7,9 @@ from flask import url_for, g
 
 from firefly import db
 from firefly.views.utils import timesince
+from firefly.models import Node
+
+__all__ = ["Post", "Video", "Image", "Image", "Comment"]
 
 
 class Post(db.Document):
@@ -14,11 +17,14 @@ class Post(db.Document):
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     title = db.StringField(max_length=255, required=True)
     content = db.StringField(required=True)
+    # markdown渲染后存贮
+    content_markdown_html = db.StringField(required=True)
     views = db.IntField(default=0)
     # 有了登录系统author就是必选项
     author = db.StringField(verbose_name='Name', max_length=255,
                             required=False)
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
+    node = db.ReferenceField(Node)
 
     def get_absolute_url(self):
         return url_for('post', kwargs={'id': self.id})
