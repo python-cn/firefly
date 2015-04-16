@@ -20,6 +20,9 @@ Work In Process
 - react
 - oauth2
 - select2
+- flask-wtf
+- flask-restful
+- flask ext
 
 英语好的不妨看这个视频教程[http://discoverflask.com](https://github.com/realpython/discover-flask)
 
@@ -75,4 +78,4 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 个人发表的主题页
 - [ ] 徽章系统, 但是不能种类多, 我想目前只包含开发者
 - [ ] 设计一个好看的logo
-- [ ] 设计管理员系统(可能是一个子url, 也可能是一个其他的项目),就是可以开发者的权限, 有对应权限的开发者可以删帖, 修改标题等. 但是一切操作都要被系统记录
+- [ ] 设计管理员系统(可能是一个子url, 也可能是一个其他的项目),就是可以开发者的权限, 有对应权限的开发者可以删帖, 修改标题等. 但是一切操作都要被系统记录(flask-admin好丑)
