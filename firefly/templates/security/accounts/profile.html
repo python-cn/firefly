@@ -1,5 +1,5 @@
--inherit base.html
--block list_controls
+-inherit accounts/base.html
+-block container
   div.container
     div.row
       div.page-header
@@ -35,17 +35,3 @@
               - for connection in connections
                 a href="${connection.profile_url}"
                   img.img-circle src="${connection.image_url}" alt="" width="50" height="50"
-    div.row
-      div.text-center
-        h2.text-center
-          Connect another account
-
-      div
-        a.social-facebook.btn.btn-primary.btn-lg href="${url_for('social.login', provider='Facebook')}"
-          i.fa.fa-2x.fa-facebook-square
-        a.social-google.btn.btn-primary.btn-lg href="${url_for('social.login', provider='Google')}"
-          i.fa.fa-2x.fa-google-plus
-        a.social-github.btn.btn-primary.btn-lg href="${url_for('social.login', provider='Github')}"
-          i.fa.fa-2x.fa-twitter
-        a.social-twtter.btn.btn-primary.btn-lg href="${url_for('social.login', provider='Twitter')}"
-          i.fa.fa-2x.fa-twitter

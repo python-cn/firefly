@@ -27,18 +27,17 @@ MAIL_PASSWORD = 'MAIL_PASSWORD'
 MAIL_DEFAULT_SENDER = 'admin@python-cn.org'
 
 SECURITY_PASSWORD_SALT = "abc"
-# SECURITY_PASSWORD_HASH = "bcrypt"  # requires py-bcrypt
+SECURITY_PASSWORD_HASH = "bcrypt"
 # SECURITY_PASSWORD_HASH = "pbkdf2_sha512"
-SECURITY_PASSWORD_HASH = "plaintext"
 SECURITY_EMAIL_SENDER = "support@python-cn.org"
 
 SECURITY_CONFIRM_SALT = "570be5f24e690ce5af208244f3e539a93b6e4f05"
 SECURITY_REMEMBER_SALT = "de154140385c591ea771dcb3b33f374383e6ea47"
 
 # Set secret keys for CSRF protection
-CSRF_SESSION_KEY = '8a7474974efcf76896aa84eea9cbe016bbc08828'
+CSRF_SESSION_KEY = 'f17474974efcf74896aa84eea9cbe016bbc08812'
 
-SERVER_EMAIL = 'Flask-SocialBlueprint <support@example.com>'
+SERVER_EMAIL = 'Python-China <support@python-cn.org>'
 
 # Flask-SocialBlueprint
 SOCIAL_BLUEPRINT = {

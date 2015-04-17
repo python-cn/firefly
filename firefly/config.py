@@ -1,11 +1,13 @@
 # coding=utf-8
 '''
-这里firefly的默认配置
+firefly settings
 '''
 from __future__ import print_function
 from plim import preprocessor
 
 SECRET_KEY = 'you need modify this into local_settings.py'
+
+DEBUG = False
 
 # plim
 MAKO_DEFAULT_FILTERS = ['decode.utf_8', 'h']

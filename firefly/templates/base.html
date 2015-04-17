@@ -1,5 +1,6 @@
 -py
   from flask import url_for
+  from flask.ext.login import current_user
 
 doctype html
 html
@@ -55,11 +56,17 @@ html
                   span class='.valign-helper'
                   img.site-logo.logo-big src="${url_for('static', filename='pics/dongxi.jpg')}" alt='pythoncn'
               div.panel
-                button.btn-primary.btn-small.btn.sign-up-button title='注册'
-                  注册
-                button.btn-primary.btn-small.btn.login-button title='登录'
-                  i.fa
-                  登录
+                - if current_user.is_authenticated()
+                  Hi ${current_user.id}
+                  a.btn-primary.btn-small.btn.sign-out-button title='退出' href='/logout'
+                    i.fa.fa-sign-out
+                    退出
+                - else
+                  button.btn-primary.btn-small.btn.sign-up-button title='注册'
+                    注册
+                  button.btn-primary.btn-small.btn.login-button title='登录'
+                    i.fa
+                    登录
         div#main-outlet
           -block list_controls
           -block container
