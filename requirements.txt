@@ -6,7 +6,7 @@ flask-script
 flask-babel
 Flask-Cache
 Flask-Mail
-redis
+flask-redis
 plim
 mistune
 pygments

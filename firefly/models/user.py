@@ -2,13 +2,12 @@
 '''Define Schema'''
 
 from datetime import datetime
-from hashlib import md5
 
 from flask import url_for
 from werkzeug import security
 from flask_mail import Message
 
-from firefly import app, db, mail
+from firefly import app, db, mail, redis_store
 
 
 class User(db.Document):
@@ -16,10 +15,8 @@ class User(db.Document):
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     name = db.StringField(max_length=25, required=True, unique=True)
     email = db.StringField(max_length=255, required=True, unique=True)
-    email_md5 = db.StringField(max_length=255)
+    email_md5 = db.StringField(max_length=32)
     encrypted_password = db.StringField(max_length=255, required=True)
-    reset_password_token = db.StringField(max_length=255)
-    reset_password_sent_at = db.StringField(max_length=255)  # expire in 1 hour
     current_sign_in_at = db.DateTimeField(default=datetime.utcnow,
                                           required=True)
     last_sign_in_at = db.DateTimeField(default=datetime.utcnow)
@@ -45,42 +42,34 @@ class User(db.Document):
         return security.gen_salt(length)
 
     def reset_password(self):
-        self.reset_password_token = self.create_token()
+        redis_store.set(self.name+'token', self.create_token())
+        redis_store.expire(self.name+'token', 3600)
         msg = Message("Reset your password",
                       sender=app.config['MAIL_DEFAULT_SENDER'],
                       recipients=[self.email])
         msg.body = "link to check token callback"
         mail.send(msg)
-        self.reset_password_sent_at = datetime.utcnow()
 
     def verify_reset_password_token(self, token):
-        # if the token not expire
-        if (datetime.utcnow() - self.reset_password_sent_at) \
-                .total_seconds() > 3600:
-            return False, 'token expired'
+        if redis_store.get(self.name+'token') is None:
+            return False, 'token expired or wrong'
         else:
-            if token == self.reset_password_token:
-                return True, 'success'
-            else:
-                return False, 'wrong token'
+            return True, 'success'
 
     def change_password(self, password, token):
         result = self.verify_reset_password_token(token)
         if result[0]:
             if self.encrypted_password == User.generate_encrypted_password(
                     password):
-                # can not use the previous password
                 return False, 'duplicate password'
             else:
                 self.encrypted_password = User.generate_encrypted_password(
                     password)
+                self.save()
+                redis_store.remove(self.name+'token')
                 return True, 'success'
         else:
             return result
-
-    def clean(self):
-        # generate the email_md5 for gravatar
-        self.email_md5 = md5(self.email).hexdigest()
 
     def __unicode__(self):
         return self.name
