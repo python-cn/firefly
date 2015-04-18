@@ -2,17 +2,8 @@
 from functools import wraps
 
 from werkzeug.utils import secure_filename  # noqa
-from flask import g, request, redirect, url_for
+from flask import request
 from flask_mako import render_template
-
-
-def login_required(f):
-    @wraps(f)
-    def deco(*args, **kwargs):
-        if g.user is None:
-            return redirect(url_for('login', next=request.url))
-        return f(*args, **kwargs)
-    return deco
 
 
 def templated(template=None):

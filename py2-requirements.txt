@@ -1,0 +1,3 @@
+oauth2
+Flask-OAuth
+-e git+https://github.com/python-cn/flask-social-blueprint.git@b90c37af3f841190825d9705701240312b2b7a03#egg=flask-social-blueprint

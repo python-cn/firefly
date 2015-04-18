@@ -1,4 +1,5 @@
 ipython
 flake8
 autopep8
+coveralls
 pre-commit

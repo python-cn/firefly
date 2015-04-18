@@ -1,0 +1,43 @@
+-inherit accounts/base.html
+-block container
+  div.container
+    div.row
+      div.page-header
+        h1.text-center
+          Please sign in
+    div.row
+      div.col-md-5.col-md-offset-1
+        div.social-login-buttons
+          a.social-facebook.btn.btn-default.btn-lg href="${url_for('social.login', provider='Facebook')}"
+            i.fa.fa-facebook-square with Facebook
+          a.social-google.btn.btn-default.btn-lg href="${url_for('social.login', provider='Google')}"
+            i.fa.fa-google-plus with Google
+          a.social-github.btn.btn-default.btn-lg href="${url_for('social.login', provider='Github')}"
+            i.fa.fa-github with Github
+          a.social-twitter.btn.btn-default.btn-lg href="${url_for('social.login', provider='Twitter')}"
+            i.fa.fa-twitter with Twitter
+
+      div.col-md-5
+        form.form-signin role="form"
+          input type="email" class="form-control input-lg" placeholder="Email address" required autofocus
+          input type="password" class="form-control input-lg" placeholder="Password" required
+          label.checkbox
+          input id="remember" name="remember" type="checkbox" value="y"
+            Remember me
+          input id="next" name="next" type="hidden" value=""
+          button.btn.btn-lg.btn-primary.btn-block type="submit"
+            Sign in
+      div.text-center
+        ul.nav.nav-pills style="display: inline-block;"
+          li
+            a href="${url_for_security('login')}"
+              Login
+          li
+            a href="${url_for_security('register')}"
+              Register
+          li
+            a href="${url_for_security('forgot_password')}"
+              Forgot password
+          li
+            a href="${url_for_security('send_confirmation')}"
+              Confirm account

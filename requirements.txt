@@ -11,3 +11,11 @@ plim
 mistune
 pygments
 arrow
+Flask_Security
+facebook-sdk
+python-twitter
+google-api-python-client
+httplib2
+requests
+requests-oauthlib
+py-bcrypt

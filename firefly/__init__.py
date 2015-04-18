@@ -19,6 +19,10 @@ cache = Cache(app)
 babel = Babel(app)
 mail = Mail(app)
 
+if app.config['DEBUG']:
+    from werkzeug.debug import DebuggedApplication
+    app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
+
 
 def configure_error_handles(app):
 
@@ -32,10 +36,12 @@ def configure_error_handles(app):
 
 
 def register_blueprints(app):
+    from firefly.models import auth
+    auth.init_app(app)
     from firefly.views import (home, post, api)
     for i in (home, post, api):
         app.register_blueprint(i.bp)
-#    configure_error_handles(app)
+    configure_error_handles(app)
 
 
 register_blueprints(app)

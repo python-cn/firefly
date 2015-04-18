@@ -1,11 +1,13 @@
 # coding=utf-8
 '''
-这里firefly的默认配置
+firefly settings
 '''
 from __future__ import print_function
 from plim import preprocessor
 
 SECRET_KEY = 'you need modify this into local_settings.py'
+
+DEBUG = False
 
 # plim
 MAKO_DEFAULT_FILTERS = ['decode.utf_8', 'h']
@@ -24,6 +26,14 @@ BABEL_DEFAULT_LOCALE = 'zh'
 
 GRAVATAR_BASE_URL = 'http://www.gravatar.com/avatar/'
 DEAFULT_AVATAR = 'your default avatar'
+
+LOGIN_DISABLED = False
+SECURITY_CONFIRMABLE = True
+SECURITY_REGISTERABLE = True
+SECURITY_RECOVERABLE = True
+SECURITY_CHANGEABLE = True
+SECURITY_DEFAULT_REMEMBER_ME = True
+CSRF_ENABLED = True
 
 try:
     from local_settings import *  # noqa
