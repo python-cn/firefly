@@ -1,6 +1,6 @@
 # coding=utf-8
 from flask.blueprints import Blueprint
-from flask.ext.mako import render_template
+from flask_mako import render_template
 from flask_security import login_required
 
 bp = Blueprint('auth', __name__, url_prefix="/auth")
