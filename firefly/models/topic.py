@@ -15,7 +15,7 @@ class Category(db.Document):
     id = db.SequenceField(primary_key=True)
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     name = db.StringField(max_length=50, required=True, unique=True)
-    summary = db.StringField(max_length=120, required=True)
+    description = db.StringField(max_length=120, required=True)
     priority = db.IntField(default=0)
     posts = db.ListField(db.EmbeddedDocumentField('Post'))
 
