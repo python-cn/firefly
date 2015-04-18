@@ -5,7 +5,7 @@ from flask.blueprints import Blueprint
 from flask.ext.mako import render_template
 from flask.ext.mongoengine.wtf import model_form
 
-from firefly.models import Post, Comment
+from firefly.models.topic import Post, Comment
 
 
 bp = Blueprint("post", __name__, url_prefix="/post")
