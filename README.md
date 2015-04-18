@@ -8,7 +8,7 @@ Work In Process
 
 这里只包含等待开发的Todo List. 会尽量更新到最新状态.
 
-有兴趣参与者请使用: [teambition](https://www.teambition.com/project/552c777f19a7db9f2ba9eca4/home)去获取最新的任务列表. 防止任务已被认领造成重复.
+有兴趣参与者请使用: [trello](https://trello.com/b/amhH9swr/python-china)去获取最新的任务列表. 防止任务已被认领造成重复.
 
 沟通请使用: [pythoncn-slack](https://pythoncn.slack.com)(需要邀请, 请发邮件到ciici123@gmail.com, 或者联系组内其他成员),
 参与开发者才会被通过(slack没有灌水区)，请谨慎加入
@@ -41,7 +41,7 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 3. 首页 = 首页显示了文章的列表, 默认按活跃时间排序
 4. 单个主题 = 类似/post/post_id/这样的链接. 包含文章正文, 对应评论等
 
-- [ ] 主题的分类model, 早期可以是先插入的一些固定数据,比如devops, web开发, 爬虫..(选项不重要, 要有后台的支持)
+- [x] 主题的分类model, 早期可以是先插入的一些固定数据,比如devops, web开发, 爬虫..(选项不重要, 要有后台的支持) - [halfcrazy]
 - [ ] 主题的分类model的接口. 前端可以通过ajax调用这个url 获得全部的分类信息: 分类id, 分类名, 分类描述
 - [ ] 创建主题时候可以通过select2选择分类, 效果类似meta.discourse.org创建主题的分类下拉框效果(可以只是功能, 没有css样式)
 - [ ] 创建请求中会带上分类的参数, 后端save的时候会生成含有分类的主题(Post)
@@ -50,14 +50,14 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 设计阅读量的实现, 就是刷新一下页面, 阅读量就会+1
 - [ ] 让每个主题页面(http://web:port/post/post_id/)里面显示出评论的内容.
 - [ ] 首页注册和登陆页面的浏览器兼容性(chrome下正常, FF下不正常)
-- [x] 注册页面当用户名/密码/邮箱都有正确输入的时候让`注册`按钮变成enable
+- [x] 注册页面当用户名/密码/邮箱都有正确输入的时候让`注册`按钮变成enable - [dongweiming]
 - [ ] 设计用户个人页面, 只需要包含对应的view, 个人基本信息: 注册源(微博/github/google), 昵称, 头像(使用Gravatar)等，加入时间, 用户id
 - [ ] 设计用户设置密码页面, 对应的view, 简陋的模板
-- [ ] 设计用户密码找回方案
+- [x] 设计用户密码找回方案 - [halfcrazy]
 - [ ] 用户可以设置自己介绍, 坐标(比如北京), 以及个人的站点
 - [ ] 用户可以设置github/stackoverflow的地址
-- [ ] 用户model, oauth2方案
-- [x] 使用sweetalert替代alert
+- [x] 用户model, oauth2方案 - [dongweiming]
+- [x] 使用sweetalert替代alert - [dongweiming]
 - [ ] follow用户的功能
 - [ ] 站内信模型
 - [ ] 提醒模型(类似豆瓣的提醒)
@@ -79,3 +79,14 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 徽章系统, 但是不能种类多, 我想目前只包含开发者
 - [ ] 设计一个好看的logo
 - [ ] 设计管理员系统(可能是一个子url, 也可能是一个其他的项目),就是可以开发者的权限, 有对应权限的开发者可以删帖, 修改标题等. 但是一切操作都要被系统记录(flask-admin好丑)
+- [ ] 设计站内检索，全文本检索方案
+- [ ] 社区事件系统, 无论做什么操作, 都是一个事件, 能够容易的单个人获得操作记录, 单种类型的操作记录, 比如可以列出来创建主题的时间列表
+- [ ] 用户个人页面能看到用户的操作记录(默认按时间排序), 比如回复什么主题, 创建了什么主题. follow了xx
+- [ ] 把现有的代码都补上事件
+- [ ] 和github一样. 有页面的键盘快捷键, 给这种类型的geek最好的体验
+
+贡献者列表可以看这里: [CONTRIBUTORS.txt](https://github.com/python-cn/firefly/blob/master/CONTRIBUTORS.txt)
+
+[dongweiming]: https://github.com/dongweiming
+[halfcrazy]: https://github.com/halfcrazy
+[mozillazg]: https://github.com/mozillazg

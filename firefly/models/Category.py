@@ -27,4 +27,4 @@ class Category(db.Document):
     meta = {
         'indexes': ['-priority', 'name', 'id'],
         'ordering': ['-priority']
-        }
+    }

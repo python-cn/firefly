@@ -42,8 +42,8 @@ class User(db.Document):
         return security.gen_salt(length)
 
     def reset_password(self):
-        redis_store.set(self.name+'token', self.create_token())
-        redis_store.expire(self.name+'token', 3600)
+        redis_store.set(self.name + 'token', self.create_token())
+        redis_store.expire(self.name + 'token', 3600)
         msg = Message("Reset your password",
                       sender=app.config['MAIL_DEFAULT_SENDER'],
                       recipients=[self.email])
@@ -51,7 +51,7 @@ class User(db.Document):
         mail.send(msg)
 
     def verify_reset_password_token(self, token):
-        if redis_store.get(self.name+'token') is None:
+        if redis_store.get(self.name + 'token') is None:
             return False, 'token expired or wrong'
         else:
             return True, 'success'
@@ -66,7 +66,7 @@ class User(db.Document):
                 self.encrypted_password = User.generate_encrypted_password(
                     password)
                 self.save()
-                redis_store.remove(self.name+'token')
+                redis_store.remove(self.name + 'token')
                 return True, 'success'
         else:
             return result
