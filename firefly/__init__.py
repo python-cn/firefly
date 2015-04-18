@@ -5,7 +5,8 @@ from flask_mako import render_template, MakoTemplates
 from flask_babel import Babel
 from flask_cache import Cache
 from flask_mongoengine import MongoEngine
-from flask_redis import FlaskRedis
+# from flask_redis import FlaskRedis
+from flask_redis import Redis as FlaskRedis
 from flask_mail import Mail
 
 from firefly import config
