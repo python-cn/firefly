@@ -111,3 +111,6 @@ Temporary Items
 venv
 firefly/static/node_modules
 firefly/static/.sass-cache
+firefly/local_settings.py
+firefly/static/stylesheets/style.css
+firefly/static/stylesheets/style.css.map
