@@ -1,11 +1,11 @@
 # coding=utf-8
 
 from flask import Flask
-from flask.ext.mako import render_template, MakoTemplates
-from flask.ext.babel import Babel
-from flask.ext.cache import Cache
-from flask.ext.mongoengine import MongoEngine
-from flask.ext.redis import FlaskRedis
+from flask_mako import render_template, MakoTemplates
+from flask_babel import Babel
+from flask_cache import Cache
+from flask_mongoengine import MongoEngine
+from flask_redis import FlaskRedis
 from flask_mail import Mail
 
 from firefly import config

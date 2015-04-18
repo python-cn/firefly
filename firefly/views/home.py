@@ -2,7 +2,7 @@
 from flask import request, jsonify
 from flask.views import MethodView
 from flask.blueprints import Blueprint
-from flask.ext.mako import render_template
+from flask_mako import render_template
 
 from firefly.models.topic import Post
 

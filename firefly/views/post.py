@@ -2,8 +2,8 @@
 from flask import request, redirect, url_for
 from flask.views import MethodView
 from flask.blueprints import Blueprint
-from flask.ext.mako import render_template
-from flask.ext.mongoengine.wtf import model_form
+from flask_mako import render_template
+from flask_mongoengine.wtf import model_form
 
 from firefly.models.topic import Post, Comment
 

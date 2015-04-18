@@ -3,7 +3,7 @@ from functools import wraps
 
 from werkzeug.utils import secure_filename  # noqa
 from flask import g, request, redirect, url_for
-from flask.ext.mako import render_template
+from flask_mako import render_template
 
 
 def login_required(f):
