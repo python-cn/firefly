@@ -35,6 +35,9 @@ def register_blueprints(app):
     from firefly.views import (home, post)
     for i in (home, post):
         app.register_blueprint(i.bp)
+    # register api blueprint
+    from firefly.view.api import api
+    app.register_blueprint(api.bp)
 #    configure_error_handles(app)
 
 
