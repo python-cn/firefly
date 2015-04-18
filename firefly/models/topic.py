@@ -7,15 +7,16 @@ from flask import url_for, g
 
 from firefly import db
 from firefly.views.utils import timesince
+from ._base import JsonMixin
 
 __all__ = ["Category", "Post", "Video", "Image", "Comment"]
 
 
-class Category(db.Document):
+class Category(db.Document, JsonMixin):
     id = db.SequenceField(primary_key=True)
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     name = db.StringField(max_length=50, required=True, unique=True)
-    summary = db.StringField(max_length=120, required=True)
+    description = db.StringField(max_length=120, required=True)
     priority = db.IntField(default=0)
     posts = db.ListField(db.EmbeddedDocumentField('Post'))
 
@@ -31,7 +32,7 @@ class Category(db.Document):
     }
 
 
-class Post(db.Document):
+class Post(db.Document, JsonMixin):
     id = db.SequenceField(primary_key=True)
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     title = db.StringField(max_length=255, required=True)

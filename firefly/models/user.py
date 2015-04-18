@@ -8,9 +8,10 @@ from werkzeug import security
 from flask_mail import Message
 
 from firefly import app, db, mail, redis_store
+from ._base import JsonMixin
 
 
-class User(db.Document):
+class User(db.Document, JsonMixin):
     id = db.SequenceField(primary_key=True)
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     name = db.StringField(max_length=25, required=True, unique=True)
