@@ -22,6 +22,9 @@ LANGUAGES = {
 
 BABEL_DEFAULT_LOCALE = 'zh'
 
+GRAVATAR_BASE_URL = 'http://www.gravatar.com/avatar/'
+DEAFULT_AVATAR = 'your default avatar'
+
 try:
     from local_settings import *  # noqa
 except ImportError:

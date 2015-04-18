@@ -5,15 +5,19 @@ from flask.ext.mako import render_template, MakoTemplates
 from flask.ext.babel import Babel
 from flask.ext.cache import Cache
 from flask.ext.mongoengine import MongoEngine
+from flask.ext.redis import FlaskRedis
+from flask_mail import Mail
 
 from firefly import config
 
 app = Flask(__name__)
 app.config.from_object(config)
 db = MongoEngine(app)
+redis_store = FlaskRedis(app)
 mako = MakoTemplates(app)
 cache = Cache(app)
 babel = Babel(app)
+mail = Mail(app)
 
 
 def configure_error_handles(app):

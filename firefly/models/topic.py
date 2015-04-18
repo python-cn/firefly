@@ -7,6 +7,9 @@ from flask import url_for, g
 
 from firefly import db
 from firefly.views.utils import timesince
+from firefly.models import Category
+
+__all__ = ["Post", "Video", "Image", "Comment"]
 
 
 class Post(db.Document):
@@ -19,6 +22,7 @@ class Post(db.Document):
     author = db.StringField(verbose_name='Name', max_length=255,
                             required=False)
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
+    category = db.ReferenceField(Category)
 
     def get_absolute_url(self):
         return url_for('post', kwargs={'id': self.id})
