@@ -7,9 +7,28 @@ from flask import url_for, g
 
 from firefly import db
 from firefly.views.utils import timesince
-from firefly.models import Category
 
-__all__ = ["Post", "Video", "Image", "Comment"]
+__all__ = ["Category", "Post", "Video", "Image", "Comment"]
+
+
+class Category(db.Document):
+    id = db.SequenceField(primary_key=True)
+    created_at = db.DateTimeField(default=datetime.utcnow, required=True)
+    name = db.StringField(max_length=50, required=True, unique=True)
+    summary = db.StringField(max_length=120, required=True)
+    priority = db.IntField(default=0)
+    posts = db.ListField(db.EmbeddedDocumentField('Post'))
+
+    def get_absolute_url(self):
+        return url_for('category', kwargs={'name': self.name})
+
+    def __unicode__(self):
+        return self.name
+
+    meta = {
+        'indexes': ['-priority', 'name', 'id'],
+        'ordering': ['-priority']
+    }
 
 
 class Post(db.Document):

@@ -5,3 +5,4 @@
         args: ['-i', '--ignore=E309']
     -   id: trailing-whitespace
     -   id: flake8
+        args: ['--exclude=node_modules']
