@@ -11,4 +11,3 @@ plim
 mistune
 pygments
 arrow
-werkzeug

@@ -17,10 +17,9 @@ class Category(db.Document):
     summary = db.StringField(max_length=120, required=True)
     priority = db.IntField(default=0)
     posts = db.ListField(db.EmbeddedDocumentField('Post'))
-    posts_count = db.IntField(default=0)
 
     def get_absolute_url(self):
-        return url_for('node', kwargs={'name': self.name})
+        return url_for('category', kwargs={'name': self.name})
 
     def __unicode__(self):
         return self.name
