@@ -2,28 +2,27 @@
 from flask import jsonify
 from flask.views import MethodView
 
-from firefly.models import Category
+from firefly.models.topic import Category
 
 
 class CategoryView(MethodView):
 
     def get(self, name):
-        rs = None
         if name is None:
             categories = [
-                {'id': c.id, 'name': c.name, 'description': c.description}
+                c.to_json(only=['id', 'name', 'description'])
                 for c in Category.objects
             ]
-            rs = {'categories': categories}
+            rs = {'categories': categories, 'status': 200}
         else:
-            category = Category.objects(name=name)
+            category = Category.objects(name=name).first()
             if category is None:
-                rs = {'status': '204', 'detail': 'not found'}
+                rs = {'status': 404, 'detail': 'not found'}
             else:
                 rs = {
-                    'id': category.id,
-                    'name': category.name,
-                    'description': category.description
+                    'status': 200,
+                    'category':
+                        category.to_json(only=['id', 'name', 'description'])
                 }
         return jsonify(rs)
 
