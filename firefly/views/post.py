@@ -27,6 +27,8 @@ class DetailView(MethodView):
 
     def get(self, id):
         context = self.get_context(id)
+        Post.objects(id=id).update_one(inc__views=1)
+        context['post'].reload()
         return render_template('posts/detail.html', **context)
 
     def post(self, id):
