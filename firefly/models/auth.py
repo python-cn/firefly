@@ -9,11 +9,15 @@ from flask_security import (UserMixin, RoleMixin, Security,
                             MongoEngineUserDatastore)
 
 from firefly import db
+from firefly.six import unicode
 
 
 class Role(db.Document, RoleMixin):
     name = db.StringField(required=True, unique=True, max_length=80)
     description = db.StringField(max_length=255)
+
+    def __str__(self):
+        return str(self).encode('utf-8')
 
     def __unicode__(self):
         return self.name

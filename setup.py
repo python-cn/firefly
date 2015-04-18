@@ -1,13 +1,23 @@
 # coding=utf-8
 import os
+import sys
 from setuptools import find_packages
 from setuptools import setup
 
 here = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(here, 'requirements.txt')) as f:
-    lines = f.readlines()
-    install_requires = [p.strip() for p in lines if ' ' not in p]
-    dependency_links = [p.split()[-1].strip() for p in lines if ' ' in p]
+PY3 = sys.version_info[0] == 3
+install_requires = []
+dependency_links = []
+req_files = ['requirements.txt']
+
+if not PY3:
+    req_files.append('py2-requirements.txt')
+for file in req_files:
+    with open(os.path.join(here, file)) as f:
+        lines = f.readlines()
+        install_requires.extend([p.strip() for p in lines if ' ' not in p])
+        dependency_links.extend([p.split()[-1].strip() for p in lines
+                                 if ' ' in p])
 
 setup(
     name='pythoncn',
