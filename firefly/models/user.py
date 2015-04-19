@@ -79,7 +79,7 @@ class User(db.Document, UserMixin, JsonMixin):
         mail.send(msg)
 
     def verify_reset_password_token(self, token):
-        if redis_store.get(self.name + 'token') is None:
+        if token != redis_store.get(self.name + 'token'):
             return False, 'token expired or wrong'
         else:
             return True, 'success'
