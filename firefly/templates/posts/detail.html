@@ -80,3 +80,6 @@
     ${forms.render(form)}
     div.actions
     input.btn.btn-primary type='submit' value='comment'
+
+-def head_script()
+  link href="${url_for('static', filename='stylesheets/post.css')}" rel="stylesheet" media="all"
