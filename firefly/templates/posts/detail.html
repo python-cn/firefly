@@ -2,24 +2,78 @@
   from firefly.libs.markdown import Markdown
 -inherit /base.html
 - namespace name='forms' /_forms.html
-- block list_controls
-  - if post.content
-    -py
-      content = Markdown.render(post.content)
-    - if post.post_type == 'Quote'
-      blockquote
-        ${content|n}
-      p
-        ${post.author}
-    - else
-      ${content|n}
-  - if hasattr(post, 'embed_code') and post.embed_code
-    ${post.embed_code}
-  - if hasattr(post, 'image_url') and post.image_url
-    p
-      img src="${post.image_url}"
-  p
-    ${post.created_at.strftime('%H:%M %Y-%m-%d')}
+
+- block container
+  div#topic-title
+    div.container
+      div.title-wrapper
+        h1
+          a.fancy-title href="${post.url()}"
+            ${post.title}
+        - if post.category
+          div.category-title
+            a.badge-wrapper.bullet href="/c/${post.category.id}"
+              span.badge-category-bg style="background-color: #0E76BD;"
+              span.badge-category.clear-badge style="color: #FFFFFF;" title="${post.category.description}"
+                ${post.category.name}
+  div.container.posts
+    div.row
+      section#topic.topic-area data-topic-id="${post.id}"
+        div.posts-wrapper
+          - for index, p in enumerate([post] + post.comments)
+            -py
+              cloak_id = 'post-cloak-{}'.format(index)
+              class c(object):
+                id = 100001
+                name = 'test1'
+                avatar = 'https://meta-discourse.global.ssl.fastly.net/user_avatar/meta.discourse.org/codinghorror/90/5297.png'
+                cn = 'Test'
+                def url(self):
+                  return '/user/1000001'
+              # author = p.author
+              author = c()
+            div#${cloak_id}.post-cloak
+              div.topic-post.clearfix.regular
+                article.boxed data-user-id="${author.id}" data-post-id="${p.id}"
+                  div.row
+                    div.topic-avatar
+                      div.contents
+                      a href="${author.url()}"  data-user-card="${author.name}"
+                        img.avatar alt="" width="45" height="45" src="${author.avatar}" title="${author.name}"
+                    div.topic-body
+                      div.topic-meta-data
+                        div.names.trigger-user-card
+                          span.username.staff
+                            a href="${author.url()}" data-user-card="${author.name}"
+                              codinghorro${author.name}
+                            i.fa.fa-shield title="This user is a moderator" alt="This user is a moderator"
+                          span.full-name
+                            a href="${author.url()}" data-user-card="${author.name}"
+                              ${author.cn}
+                          span.user-title
+                            a.user-group href="/groups/discourse"
+                              co-founder
+                        div.post-info
+                          a.post-date href="/t/quickly-tell-someone-why-they-should-look-at-a-topic/27503/2" data-bindattr-1516="1516"
+                            span.relative-date title="April 13, 2015 8:43am" data-time="1428885788713" data-format="tiny"
+                              7d
+                      div.contents.regular
+                        div.cooked
+                          - if p.content
+                            -py
+                              content = Markdown.render(p.content)
+                            - if p.post_type == 'Quote'
+                              blockquote
+                                ${content|n}
+                            - else
+                              ${content|n}
+                          - if hasattr(p, 'embed_code') and p.embed_code
+                            ${p.embed_code}
+                          - if hasattr(p, 'image_url') and p.image_url
+                            p
+                              img" src=${p.image_url}"
+                            p
+                              ${p.created_at.strftime('%H:%M %Y-%m-%d')}
   h2
     Add a comment
   form action="." method="post"

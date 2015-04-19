@@ -58,6 +58,8 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 用户可以设置github/stackoverflow的地址
 - [x] 用户model, oauth2方案 - [dongweiming]
 - [x] 使用sweetalert替代alert - [dongweiming]
+- [ ] 对主题和评论可以like和取消like. 没有unlike
+- [ ] 主题和平台太多的分页设计
 - [ ] follow用户的功能
 - [ ] 站内信模型
 - [ ] 提醒模型(类似豆瓣的提醒)
@@ -95,6 +97,8 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 社区的消息push, 我目前想的是一个websocket. 通过js获得数据后渲染(有相关工作经验的最好)
 - [ ] 社区的issue系统. 主要和我们的slack关联, 可以给我提交bug, 意见和建议
 - [ ] 有意见建议, 就需要一个和提交者的通道. 借用提醒,站内信等让用户得到最新的反馈
+- [ ] 主题可微博分享
+- [ ] 主题可豆瓣分享
 
 
 贡献者列表可以看这里: [CONTRIBUTORS.txt](https://github.com/python-cn/firefly/blob/master/CONTRIBUTORS.txt)

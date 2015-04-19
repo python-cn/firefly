@@ -53,7 +53,7 @@ class User(db.Document, UserMixin, JsonMixin):
     roles = fields.ListField(
         fields.ReferenceField(Role, reverse_delete_rule=DENY), default=[])
 
-    def get_absolute_url(self):
+    def url(self):
         return url_for('user', kwargs={'name': self.name})
 
     def avatar(self, size=48):

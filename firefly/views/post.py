@@ -13,7 +13,7 @@ bp = Blueprint("post", __name__, url_prefix="/post")
 
 class DetailView(MethodView):
 
-    form = model_form(Comment, exclude=['created_at'])
+    form = model_form(Comment, exclude=['created_at', 'author', 'id'])
 
     def get_context(self, id):
         post = Post.objects.get_or_404(id=id)
@@ -38,6 +38,7 @@ class DetailView(MethodView):
         if form.validate():
             comment = Comment()
             form.populate_obj(comment)
+            comment.save()
 
             post = context.get('post')
             post.comments.append(comment)
