@@ -8,7 +8,7 @@ Work In Process
 
 这里只包含等待开发的Todo List. 会尽量更新到最新状态.
 
-有兴趣参与者请使用: [trello](https://trello.com/b/amhH9swr/python-china)去获取最新的任务列表. 防止任务已被认领造成重复.
+有兴趣参与者请使用: [trello](https://trello.com/b/JM2OEXPA/firefly)去获取最新的任务列表. 防止任务已被认领造成重复.
 
 沟通请使用: [pythoncn-slack](https://pythoncn.slack.com)(需要邀请, 请发邮件到ciici123@gmail.com, 或者联系组内其他成员),
 参与开发者才会被通过(slack没有灌水区)，请谨慎加入
@@ -42,12 +42,12 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 4. 单个主题 = 类似/post/post_id/这样的链接. 包含文章正文, 对应评论等
 
 - [x] 主题的分类model, 早期可以是先插入的一些固定数据,比如devops, web开发, 爬虫..(选项不重要, 要有后台的支持) - [halfcrazy]
-- [ ] 主题的分类model的接口. 前端可以通过ajax调用这个url 获得全部的分类信息: 分类id, 分类名, 分类描述
+- [ ] 主题的分类model的接口. 前端可以通过ajax调用这个url 获得全部的分类信息: 分类id, 分类名, 分类描述 - [halfcrazy]
 - [ ] 创建主题时候可以通过select2选择分类, 效果类似meta.discourse.org创建主题的分类下拉框效果(可以只是功能, 没有css样式)
 - [ ] 创建请求中会带上分类的参数, 后端save的时候会生成含有分类的主题(Post)
 - [ ] 首页渲染时, 能获得某主题对应的分类.
 - [ ] 用户创建新主题后会使用[Effeckt.css](https://github.com/h5bp/Effeckt.css), 闪到主题列表的最上面
-- [ ] 设计阅读量的实现, 就是刷新一下页面, 阅读量就会+1
+- [ ] 设计阅读量的实现, 就是刷新一下页面, 阅读量就会+1 - [mozillazg]
 - [ ] 让每个主题页面(http://web:port/post/post_id/)里面显示出评论的内容.
 - [ ] 首页注册和登陆页面的浏览器兼容性(chrome下正常, FF下不正常)
 - [x] 注册页面当用户名/密码/邮箱都有正确输入的时候让`注册`按钮变成enable - [dongweiming]
@@ -78,6 +78,10 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 个人发表的主题页
 - [ ] 徽章系统, 但是不能种类多, 我想目前只包含开发者
 - [ ] 设计一个好看的logo
+- [ ] 微博oauth2登录
+- [ ] QQoauth2登录
+- [ ] 豆瓣oauth2登录
+- [ ] 本站注册登录
 - [ ] 设计管理员系统(可能是一个子url, 也可能是一个其他的项目),就是可以开发者的权限, 有对应权限的开发者可以删帖, 修改标题等. 但是一切操作都要被系统记录(flask-admin好丑)
 - [ ] 设计站内检索，全文本检索方案
 - [ ] 社区事件系统, 无论做什么操作, 都是一个事件, 能够容易的单个人获得操作记录, 单种类型的操作记录, 比如可以列出来创建主题的时间列表
