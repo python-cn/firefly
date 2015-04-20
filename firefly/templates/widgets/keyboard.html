@@ -1,0 +1,32 @@
+div.shortcuts
+  div.instapaper_ignore.readability-extra
+    h2.facebox-header
+      Keyboard shortcuts
+    small
+      button.btn-link.js-see-all-keyboard-shortcuts type="button"
+       (Show all)
+    div.columns
+      -py
+        columns = zip(*[iter(keyboards)] * 3)
+      -for index, column in enumerate(columns)
+        div.column.one-third
+          table.keyboard-mappings
+            -for block_info, keyboard in column
+              -if index
+                tbody.js-hidden-pane style='display: none;'
+              -else
+                tbody
+              tr
+                th
+                th
+                  ${block_info}
+              tr
+                -for dbds, key_info in keyboard
+                  -py
+                    keys = dbds.split()
+                  -for key in keys
+                    td.keys
+                      kbd
+                        ${key}
+                  td
+                    ${key_info}
