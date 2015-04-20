@@ -8,3 +8,7 @@ require.config({
     shim: {
     }
 });
+
+require(['login', 'keyboard'], function($){
+
+});
