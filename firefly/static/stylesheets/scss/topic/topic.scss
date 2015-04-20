@@ -1,0 +1,293 @@
+#topic-title {
+
+  .title-wrapper {
+    float: left;
+    width: 90%;
+    .btn-small {
+      margin: 0 6px 0 0;
+    }
+  }
+
+  a.badge-category {
+    margin-top: 5px;
+  }
+
+  a.edit-topic i { font-size: 0.8em; }
+}
+
+.topic-title-outlet {
+  clear: both;
+}
+
+.topic-body {
+  sup sup {
+    top: 0;
+  }
+}
+.post-actions {
+  @include unselectable;
+  clear: both;
+  text-align: right;
+  .post-action {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+}
+.post-menu-area {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.edits {margin-right: 5px;}
+
+#topic-title {
+  z-index: 1000;
+  padding-top: 14px;
+  margin-bottom: 10px;
+  .star {
+    font-size: 1.429em;
+    margin-top: 6px;
+    margin-right: 6px;
+  }
+  #edit-title { width: 500px; }
+  .category-combobox {
+    width: 350px;
+    .select2-drop {
+      left: -9000px;
+      width: 248px;
+    }
+    .select2-search input {
+      width: 198px;
+    }
+  }
+  h1 {
+    font-size: 1.8em;
+    margin: 0;
+    line-height: 1.2em;
+    overflow: hidden;
+    a {color: $primary;}
+  }
+
+
+  .topic-statuses {
+    margin-top: -2px;
+  }
+  .select2-container {
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 2px;
+  }
+  .private-message-glyph { display: none; }
+
+
+}
+
+.private-message-glyph {
+  color: scale-color($primary, $lightness: 75%);
+  float: left;
+  margin: 0 5px 0 0;
+}
+.private_message #topic-title .private-message-glyph { display: inline; }
+
+a.reply-new {
+  margin-top: 3px;
+  color: scale-color($primary, $lightness: 50%);
+  i {
+    margin-right: 3px;
+    background: $secondary;
+    padding: 1.5px 3px;
+    border-radius: 20px;
+    transition: all linear .15s;
+    margin-left: -20px;
+  }
+}
+
+a:hover.reply-new {
+  color: $tertiary;
+  i {
+    background: dark-light-diff($tertiary, $secondary, 90%, -65%);
+  }
+}
+
+.topic-error {
+  padding: 18px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.714em;
+  text-align: center;
+  line-height: 1.1em;
+
+  .topic-retry {
+    display: block;
+    margin-top: 28px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+#topic-closing-info {
+  border-top: 1px solid dark-light-diff($primary, $secondary, 90%, -75%);
+  padding-top: 10px;
+  height: 20px;
+}
+
+#topic-progress-wrapper {
+  position: fixed;
+  right: 50%;
+  width: 0;
+  bottom: 0;
+  z-index: 500;
+  outline: 1px solid transparent;
+  &.docked {
+    position: absolute;
+    bottom: -70px;
+  }
+}
+
+#topic-progress-expanded {
+  border: 1px solid scale-color-diff();
+  padding: 5px;
+  background: $secondary;
+  @include box-shadow(0 0px 2px rgba(0,0,0, .2));
+
+  position: relative;
+  left: 345px;
+  width: 133px;
+  padding: 5px;
+
+  button.full {
+    width: 100%;
+    margin-bottom: 5px;
+    i {
+      display: block;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      font-size: 1.286em;
+    }
+  }
+  .jump-form {
+    input[type="text"] {
+      float: left;
+      width: 45px;
+      height: 20px;
+      text-align: center;
+      margin-bottom: 0;
+      font-size: 1.143em;
+    }
+    button.btn {
+      float: right;
+      width: 55px;
+    }
+  }
+  button.btn.jump-bottom {
+    margin: 5px 0 0 0;
+  }
+}
+
+#topic-progress {
+  position: relative;
+  left: 345px;
+  &.hidden {
+    display: none;
+  }
+  border: none;
+  background-color: scale-color-diff();
+  color: scale-color($primary, $lightness: 50%);
+  width: 145px;
+  height: 34px;
+
+  /* as a big ol' click target, don't let text inside be selected */
+  @include unselectable;
+
+  &:hover {
+    cursor: pointer;
+  }
+  .nums {
+    position: relative;
+    top: 9px;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+  }
+  i.fa {
+    position: absolute;
+    right: 8px;
+    bottom: 9px;
+    z-index: 1;
+  }
+  h4 {
+    display: inline;
+    font-size: 1.286em;
+    line-height: 15px;
+  }
+  .bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    border-right: 1px solid  scale-color-diff();
+    background-color:  desaturate(dark-light-diff($success, $secondary, 60%, -35%), 30%);
+    transition: width .75s;
+
+  }
+}
+
+.heatmap-high {color: #fe7a15 !important;}
+.heatmap-med {color: #cf7721 !important;}
+.heatmap-low {color: #9b764f !important;}
+.heatmap-high a {color: #fe7a15 !important;}
+.heatmap-med a {color: #cf7721 !important;}
+.heatmap-low a {color: #9b764f !important;}
+
+
+
+#topic-filter {
+  background-color: scale-color($highlight, $lightness: 25%);
+  padding: 8px;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  font-size: 1.071em;
+  z-index: 495
+}
+
+@media all
+and (max-width : 940px) {
+
+  #topic-progress, #topic-progress-expanded {
+    left: 295px;
+    }
+}
+
+
+@media all
+and (max-width : 870px) {
+
+  #topic-progress, #topic-progress-expanded {
+    left: 210px;
+    }
+
+}
+
+
+@media all
+and (max-width : 724px) {
+
+  #topic-progress-wrapper {
+    right: 0;
+    #topic-progress, #topic-progress-expanded { left: auto; right: 145px;  }
+  }
+
+}
+
+@media all
+and (max-width : 485px) {
+
+  #topic-progress-wrapper.docked {
+    display: none;
+    }
+
+
+}

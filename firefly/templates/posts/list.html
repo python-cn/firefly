@@ -2,7 +2,7 @@
 - block content
   - for post in posts
     h2
-      a href="${url_for('post.detail', id=post.id)}"
+      a href="${post.get_absolute_url()}"
         ${post.title}
       - if post.body
         - if post.post_type == 'Quote'

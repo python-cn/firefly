@@ -1,6 +1,5 @@
 -inherit base.html
 -namespace name="widgets_editor" widgets/markdown_editor.html
--namespace name="login_form" login.html
 
 -def title()
   首页
@@ -82,13 +81,10 @@
 - def others()
   ${widgets_editor.main()}
 
-- def login()
-  ${login_form.signin()}
-  ${login_form.signup()}
-
 -def head_script()
   link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
   link href="${url_for('static', filename='stylesheets/codemirror.css')}" rel="stylesheet"
+  link href="${url_for('static', filename='stylesheets/index.css')}" rel="stylesheet" media="all"
 
 -def footer_script()
   script

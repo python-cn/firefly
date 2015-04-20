@@ -32,6 +32,8 @@ module.exports = function (grunt) {
             sass: {
                 files: {
                     'stylesheets/scss/common.scss': 'stylesheets/scss/common/*.scss',
+                    'stylesheets/scss/topic.scss': 'stylesheets/scss/topic/*.scss',
+                    'stylesheets/scss/home.scss': 'stylesheets/scss/home/*.scss',
                 },
                 options: {
                     useSingleQuoates: false
@@ -41,7 +43,8 @@ module.exports = function (grunt) {
         sass: {
             dev: {
                 files: {
-                    'stylesheets/style.css': 'stylesheets/scss/main.scss'
+                    'stylesheets/index.css': 'stylesheets/scss/index.scss',
+                    'stylesheets/post.css': 'stylesheets/scss/post.scss',
                 }
             }
         }
