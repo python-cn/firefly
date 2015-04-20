@@ -27,7 +27,7 @@ define(['jquery'], function($) {
 
             this.$modal.find('.close').click(function(e) {
                 $('#login-modal').addClass('hide');
-                this.$signup.off('keyup');
+                self.$signup.off('keyup');
             });
         },
 
