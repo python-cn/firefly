@@ -10,7 +10,7 @@ class CategoryView(MethodView):
     def get(self, name):
         if name is None:
             categories = [
-                c.to_json(only=['id', 'name', 'description'])
+                c.to_dict(only=['id', 'name', 'description'])
                 for c in Category.objects
             ]
             rs = {'categories': categories, 'status': 200}
@@ -22,7 +22,7 @@ class CategoryView(MethodView):
                 rs = {
                     'status': 200,
                     'category':
-                        category.to_json(only=['id', 'name', 'description'])
+                        category.to_dict(only=['id', 'name', 'description'])
                 }
         return jsonify(rs)
 
