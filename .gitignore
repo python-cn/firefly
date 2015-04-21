@@ -114,3 +114,7 @@ firefly/static/.sass-cache
 firefly/local_settings.py
 firefly/static/stylesheets/style.css
 firefly/static/stylesheets/style.css.map
+firefly/static/stylesheets/index.css
+firefly/static/stylesheets/index.css.map
+firefly/static/stylesheets/post.css
+firefly/static/stylesheets/post.css.map

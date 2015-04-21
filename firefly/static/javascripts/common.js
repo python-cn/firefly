@@ -3,6 +3,7 @@ require.config({
     paths: {
         'jquery': '../libs/jquery-2.1.3.min',
         'sweetAlert': '../libs/sweet-alert.min',
+        'select2': '../libs/select2.min',
     },
     shim: {
     }

@@ -1,4 +1,4 @@
-define(['jquery', 'sweetAlert'], function($, sweetAlert) {
+define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
     function createTopic() {
         if (!(this instanceof createTopic)) {
             return new createTopic();
@@ -35,6 +35,45 @@ define(['jquery', 'sweetAlert'], function($, sweetAlert) {
             this.$createButton.click(function(e) {
                 self.create();
             });
+
+            self.initCategories();
+        },
+
+        initCategories: function() {
+          $("select.category-combobox").select2({
+            placeholder: 'Categories...',
+            ajax: {
+              url: '/api/category/',
+              dataType: 'json',
+              delay: 0,
+              data: function (params) {
+                return {name: params.term}
+              },
+              processResults: function (data, params) {
+                result = {results: []}
+                if (data.status == 200) {
+                  result.results = data.categories;
+                }
+                return result;
+              },
+              cache: true
+            },
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 0,
+            templateResult: function (category) {
+              if (!category.name) { return 'Loading...'; }
+              var markup = '<div>' + category.name;
+              if (category.description) {
+                markup += '<br>' + category.description;
+              }
+              markup += '</div>';
+              return $(markup)
+            },
+            templateSelection: function (category) {
+              return category.name;
+            }
+          }
+        );
         },
 
         closeModal: function(){
