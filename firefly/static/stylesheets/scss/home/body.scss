@@ -1,0 +1,136 @@
+#main-outlet {
+    padding-top: 82px;
+    padding-bottom: 0px;
+}
+
+ol.category-breadcrumb {
+    display: block;
+    float: left;
+    list-style: none;
+    margin: 0 10px 0 0;
+    padding: 0;
+    li {
+        float: left;
+        margin-right: 5px;
+    }
+}
+
+.list-controls {
+    .nav {
+        float: left;
+        margin-bottom: 18px;
+    }
+    #navigation-bar {
+        .has-icon span:before {
+            margin-right: 4px;
+            font: 1.071em/0.9 "FontAwesome";
+        }
+    }
+}
+
+.list-controls {
+    .category-breadcrumb {
+        a.badge-category {
+            display: inline-block;
+            padding: 5px 8px;
+            line-height: 20px;
+            &.category-dropdown-button {
+                margin-left: -4px;
+                padding: 5px;
+                width: 13px;
+
+                .fa-caret-right {
+                    margin-left: 2px;
+                }
+            }
+        }
+
+        li.bar>.badge-category:not(.home):first-child {
+            border-left: 5px solid;
+        }
+
+        li.bar>.badge-category {
+            background: dark-light-diff($primary, $secondary, 95%, -65%) !important;
+            color: $primary !important;
+        }
+
+        li.bullet>.badge-category {
+            background: dark-light-diff($primary, $secondary, 95%, -65%) !important;
+            color: $primary !important;
+
+            .badge-category-bg {
+                width: 10px;
+                height: 10px;
+                display: inline-block;
+                margin: 0 2px;
+            }
+        }
+    }
+
+    .category-dropdown-menu {
+        .badge-category {
+            &.home {
+                margin-left: 4px;
+                padding-left: 0;
+            }
+        }
+        .cat {
+            line-height: 0;
+        }
+        .badge-wrapper {
+            &.bar {
+                margin: 5px 0;
+                .badge-category {
+                    max-width: 100px;
+                }
+            }
+            &.bullet {
+                margin: 5px;
+                .badge-category {
+                    max-width: 100px;
+                }
+            }
+            &.box {
+                margin-top: 0;
+                width: 100%;
+                line-height: 1;
+                span.badge-category {
+                    padding: 5px;
+                }
+            }
+        }
+    }
+}
+
+.list-controls .category-dropdown-menu {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    border: 1px solid scale-color-diff();
+    background-color: $secondary;
+    z-index: 100;
+
+    a.badge-category, a.badge-category-parent {
+        line-height: 19px;
+        overflow:hidden;
+        margin-bottom: 0;
+    }
+    a.badge-category {
+        font-size: 0.929em;
+        font-weight: bold;
+        float: none;
+        text-transform: none;
+        max-width:200px;
+        text-overflow:ellipsis;
+    }
+}
+
+// 功能没出, 先隐藏了
+ol.category-breadcrumb {
+    visibility: hidden;
+}
+
+#navigation-bar {
+    visibility: hidden;
+}
+// end
