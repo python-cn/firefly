@@ -35,7 +35,7 @@ class User(db.Document, UserMixin, JsonMixin):
     id = db.SequenceField(primary_key=True)
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     name = db.StringField(max_length=25)
-    email = db.StringField(max_length=255, required=True, unique=True)
+    email = db.StringField(max_length=255)
     encrypted_password = db.StringField(max_length=255)
     current_sign_in_at = db.DateTimeField(default=datetime.utcnow,
                                           required=True)
@@ -153,10 +153,17 @@ class SocialConnection(db.Document):
             user = None
         if not user or user.is_anonymous():
             email = profile.data.get('email')
-            if not email:
+            provider = profile.data.get('provider')
+            first_name = profile.data.get('first_name')
+            last_name = profile.data.get('last_name')
+            if provider not in ('Twitter', 'Douban') and not email:
                 msg = 'Cannot create new user, authentication provider need provide email'  # noqa
                 raise Exception(_(msg))
-            conflict = User.objects(email=email).first()
+            if email is None:
+                conflict = User.objects(first_name=first_name,
+                                        last_name=last_name).first()
+            else:
+                conflict = User.objects(email=email).first()
             if conflict:
                 msg = 'Cannot create new user, email {} is already used. Login and then connect external profile.'  # noqa
                 msg = _(msg).format(email)
@@ -165,8 +172,8 @@ class SocialConnection(db.Document):
             now = datetime.now()
             user = User(
                 email=email,
-                first_name=profile.data.get('first_name'),
-                last_name=profile.data.get('last_name'),
+                first_name=first_name,
+                last_name=last_name,
                 confirmed_at=now,
                 active=True,
             )
