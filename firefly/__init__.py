@@ -7,6 +7,7 @@ from flask_cache import Cache
 from flask_mongoengine import MongoEngine
 from flask_redis import FlaskRedis
 from flask_mail import Mail
+from flask_restful import Api
 
 from firefly import config
 
@@ -18,6 +19,7 @@ mako = MakoTemplates(app)
 cache = Cache(app)
 babel = Babel(app)
 mail = Mail(app)
+api = Api(app)
 
 if app.config['DEBUG']:
     from werkzeug.debug import DebuggedApplication
