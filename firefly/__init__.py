@@ -38,8 +38,8 @@ def configure_error_handles(app):
 def register_blueprints(app):
     from firefly.models import auth
     auth.init_app(app)
-    from firefly.views import (home, post, api)
-    for i in (home, post, api):
+    from firefly.views import (home, post, api, keyboard)
+    for i in (home, post, api, keyboard):
         app.register_blueprint(i.bp)
     configure_error_handles(app)
 
