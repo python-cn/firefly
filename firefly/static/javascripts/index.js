@@ -8,8 +8,7 @@ require(['jquery', 'markdown-it', 'markdown-it-footnote', 'highlight.pack', 'emo
          'codemirror/mode/css/css', 'codemirror/mode/django/django', 'codemirror/mode/jinja2/jinja2',
          'codemirror/mode/python/python', 'codemirror/mode/sass/sass', 'codemirror/mode/ruby/ruby',
          'codemirror/mode/shell/shell', 'codemirror/mode/tornado/tornado', 'codemirror/mode/sql/sql',
-         'codemirror/mode/yaml/yaml', 'codemirror/mode/yaml/yaml', 'codemirror/mode/htmlmixed/htmlmixed',
-         '../login'],
+         'codemirror/mode/yaml/yaml', 'codemirror/mode/yaml/yaml', 'codemirror/mode/htmlmixed/htmlmixed'],
         function($, markdownit, markdownitFootnote, hljs, emojify, createTopic, CodeMirror){
             var languageOverrides = {
                 js: 'javascript',

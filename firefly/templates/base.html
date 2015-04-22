@@ -78,12 +78,12 @@ html
           -block container
         div#login-modal.modal.hide
           ${self.login()}
-        div.facebox
+        div.facebox.hide
           div.facebox-popup
             div.shortcuts
-            button.facebox-close.js-facebox-close type="button"
-              span.octicon octicon-remove-close
-        div.facebox-overlay.hide style="display: none"></div>
+            a.facebox-close.js-facebox-close
+              i.fa.fa-times
+        div.facebox-overlay.hide
 
         ${self.others()}
     ${self.footer_script()}

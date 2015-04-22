@@ -26,9 +26,14 @@ define(['jquery'], function($) {
             });
 
             this.$modal.find('.close').click(function(e) {
-                $('#login-modal').addClass('hide');
-                self.$signup.off('keyup');
+                self.close();
             });
+        },
+
+        close: function(){
+            var self = this;
+            $('#login-modal').addClass('hide');
+            self.$signup.off('keyup');
         },
 
         signinShow: function(){
@@ -57,6 +62,5 @@ define(['jquery'], function($) {
             }
         },
     };
-    Login();
-    //    return Login;
+    return Login;
 });
