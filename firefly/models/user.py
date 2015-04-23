@@ -12,7 +12,6 @@ from flask_login import login_user
 from flask_security import UserMixin, RoleMixin
 
 from firefly import app, db, mail, redis_store
-from ._base import JsonMixin
 
 
 class Role(db.Document, RoleMixin):
@@ -31,7 +30,7 @@ class Role(db.Document, RoleMixin):
     }
 
 
-class User(db.Document, UserMixin, JsonMixin):
+class User(db.Document, UserMixin):
     id = db.SequenceField(primary_key=True)
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     name = db.StringField(max_length=25)

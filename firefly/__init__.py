@@ -26,6 +26,17 @@ if app.config['DEBUG']:
     app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
 
 
+def plug_to_db(db):
+    from firefly.models.utils import dict_filter
+
+    def to_dict(self, *args, **kwargs):
+        return dict_filter(self.to_mongo(), *args, **kwargs)
+    setattr(db.Document, 'to_dict', to_dict)
+
+
+plug_to_db(db)
+
+
 def configure_error_handles(app):
 
     @app.errorhandler(403)
