@@ -43,7 +43,6 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 3. 首页 = 首页显示了文章的列表, 默认按活跃时间排序
 4. 单个主题 = 类似/post/post_id/这样的链接. 包含文章正文, 对应评论等
 
-- [x] 主题的分类model, 早期可以是先插入的一些固定数据,比如devops, web开发, 爬虫..(选项不重要, 要有后台的支持) - [halfcrazy]
 - [ ] 主题的分类model的接口. 前端可以通过ajax调用这个url 获得全部的分类信息: 分类id, 分类名, 分类描述 - [halfcrazy]
 - [ ] 创建主题时候可以通过select2选择分类, 效果类似meta.discourse.org创建主题的分类下拉框效果(可以只是功能, 没有css样式) - [mozillazg]
 - [ ] 创建请求中会带上分类的参数, 后端save的时候会生成含有分类的主题(Post)
@@ -52,14 +51,10 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 设计阅读量的实现, 就是刷新一下页面, 阅读量就会+1 - [mozillazg]
 - [ ] 让每个主题页面(http://web:port/post/post_id/)里面显示出评论的内容. - [dongweiming]
 - [ ] 首页注册和登陆页面的浏览器兼容性(chrome下正常, FF下不正常)
-- [x] 注册页面当用户名/密码/邮箱都有正确输入的时候让`注册`按钮变成enable - [dongweiming]
 - [ ] 设计用户个人页面, 只需要包含对应的view, 个人基本信息: 注册源(微博/github/google), 昵称, 头像(使用Gravatar)等，加入时间, 用户id
 - [ ] 设计用户设置密码页面, 对应的view, 简陋的模板
-- [x] 设计用户密码找回方案 - [halfcrazy]
 - [ ] 用户可以设置自己介绍, 坐标(比如北京), 以及个人的站点
 - [ ] 用户可以设置github/stackoverflow的地址
-- [x] 用户model, oauth2方案 - [dongweiming]
-- [x] 使用sweetalert替代alert - [dongweiming]
 - [ ] 对主题和评论可以like和取消like. 没有unlike
 - [ ] 主题和平台太多的分页设计
 - [ ] follow用户的功能
@@ -109,7 +104,30 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 用户可以删除自己发布的主题. 主题默认指向失效用户, 其中的内容和评论不变. 但和用户无关了(这个模式大家讨论)
 - [ ] 用户可以删除自己发布的评论. 评论会被去掉. 这个评论被其他人评论得数据还在. 只是源评论会显示`已失效`(这个模式大家讨论)
 - [ ] 数据库备份. 用户所有的删除后的数据都有副本. 方便用户导出和恢复.
-
+- [ ] SEO - 结构化信息(针对google). 为了让我们上线后对搜索引擎更友好, 在搜索出来的时候有更好的点击量需要优化[schema](http://schema.org/Article). 使用microdata格式.
+- [ ] 可以直接引用github的gist的代码片段到主题
+- [ ] 可以直接引用github的gist的代码片段到评论
+- [ ] 可以把用户在社区发布的内容同步到微博
+- [ ] 可以把用户在社区发布的内容同步到twitter
+- [ ] 我们能不能做一个像[花瓣采集工具](http://huaban.com/about/goodies/)的东西直接采集代码/视频等
+- [ ] 在web端实现[vim-easymotion](https://github.com/Lokaltog/vim-easymotion)
+- [ ] 支持使用[颜字体](https://github.com/turingou/o3o)
+- [ ] 禁用用户功能.
+- [ ] 增加用户举报功能, 比如用词不友善, 诋毁, 营销, 广告等.
+- [ ] 举报后台. 管理员可以删主题/评论. 给用户发警告提醒, 禁用用户
+- [ ] 算法 - 匿名用户首页的timeline的安排
+- [ ] 忽略主题的设计 - 不想看到某个主题/含有某些关键词的主题
+- [ ] 忽略用户的设计 - 不想看到某个用户的主题/相关的动态.
+- [ ] 算法 - 用户兴趣社交第一步 - 我关注的人也关注
+- [ ] 算法 - 用户兴趣社交第二步 - 和我分类/关键词相近的人还有那些
+- [ ] 算法 - 我对某些内容没有兴趣, 请不要在timeline让我看见, 或者尽量少的看见
+- [ ] 定期给离线用户发送未查收的收到的提醒/站内信(可以选择取消订阅)
+- [x] 主题的分类model, 早期可以是先插入的一些固定数据,比如devops, web开发, 爬虫..(选项不重要, 要有后台的支持) - [halfcrazy]
+- [x] 用户model, oauth2方案 - [dongweiming]
+- [x] 使用sweetalert替代alert - [dongweiming]
+- [x] 设计用户密码找回方案 - [halfcrazy]
+- [x] 注册页面当用户名/密码/邮箱都有正确输入的时候让`注册`按钮变成enable - [dongweiming]
+>>>>>>> update todo list
 
 贡献者列表可以看这里: [CONTRIBUTORS.txt](https://github.com/python-cn/firefly/blob/master/CONTRIBUTORS.txt)
 
