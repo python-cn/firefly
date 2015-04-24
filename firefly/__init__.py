@@ -7,6 +7,7 @@ from flask_cache import Cache
 from flask_mongoengine import MongoEngine
 from flask_redis import FlaskRedis
 from flask_mail import Mail
+from flask_login import LoginManager
 
 from firefly import config
 
@@ -18,21 +19,19 @@ mako = MakoTemplates(app)
 cache = Cache(app)
 babel = Babel(app)
 mail = Mail(app)
+login_manager = LoginManager(app)
 
 if app.config['DEBUG']:
     from werkzeug.debug import DebuggedApplication
     app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
 
 
-def plug_to_db(db):
+def register_plug_to_db(db):
     from firefly.models.utils import dict_filter
 
     def to_dict(self, *args, **kwargs):
         return dict_filter(self.to_mongo(), *args, **kwargs)
     setattr(db.Document, 'to_dict', to_dict)
-
-
-plug_to_db(db)
 
 
 def configure_error_handles(app):
@@ -55,4 +54,15 @@ def register_blueprints(app):
     configure_error_handles(app)
 
 
+def register_login_manager(app):
+    login_manager.login_view = '/login'
+
+    @login_manager.user_loader
+    def load_user(userid):
+        from firefly.models import User
+        return User.objects(id=userid).first()
+
+
 register_blueprints(app)
+register_login_manager(app)
+register_plug_to_db(db)
