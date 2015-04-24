@@ -13,30 +13,30 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
   createTopic.prototype = {
     constructor: createTopic,
     _init: function() {
-      var self = this;
+      var _this = this;
       this.$toggleDiv = $('.toggle-preview');
       this.$cancel = $('.cancel');
       this.$toggler = $('.toggler');
       this.$createButton = $('.create');
 
       this.$toggleDiv.click(function(e) {
-        self.previewToggle();
+        _this.previewToggle();
       });
 
       this.$toggler.click(function(e) {
         e.preventDefault();
-        self.closeModal();
+        _this.closeModal();
       });
 
       this.$cancel.click(function(e) {
-        self.closeModal();
+        _this.closeModal();
       });
 
       this.$createButton.click(function(e) {
-        self.create();
+        _this.create();
       });
 
-      self.initCategories();
+      _this.initCategories();
     },
 
     initCategories: function() {
@@ -72,8 +72,7 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
         templateSelection: function (category) {
           return category.name;
         }
-      }
-                                           );
+      });
     },
 
     closeModal: function(){
@@ -97,9 +96,10 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
     },
 
     create : function(){
-      var title = $('#reply-title').val(),
-          self = this,
-          params, content = [];
+      var title = $('#reply-title').val();
+      var _this = this;
+      var params, content = [];
+      var category = $('#reply-category').val();
       $('.CodeMirror-code pre span[style]').each(
         function () {
           text = $(this).text();
@@ -114,6 +114,13 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
         });
         return
       }
+      if (!(category && category.length)) {
+        sweetAlert({
+          title: "请选择分类",
+          type: "error"
+        });
+        return
+      }
       if (!content.length) {
         sweetAlert({
           title: "正文内容太少",
@@ -123,7 +130,8 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
       }
       params = {
         'title': title,
-        'content': content.join('\n')
+        'content': content.join('\n'),
+        'category': category
       };
       $.ajax({
         type: 'POST',
@@ -134,7 +142,8 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
         success: function(res) {
           if (!res.ok) {
             alert('发表成功');
-            self.closeModal();
+            _this.closeModal();
+            location.reload();
           }
         }
       });

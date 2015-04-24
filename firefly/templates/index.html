@@ -51,6 +51,10 @@
               -py
                 id = post.id
                 # author = post.author
+                category = post.category
+                category_name = ''
+                if category is not None:
+                  category_name = category.name
                 title = post.title
                 replies = len(post.comments)
                 views = post.views
@@ -63,9 +67,9 @@
                   span.topic-post-badges
 
                 td.category
-                  a.badge-wrapper.bullet href="/category/uncategorized"
+                  a.badge-wrapper.bullet href="/category/${category_name}"
                     span.badge-category-parent-bg
-                    span.badge-category.clear-badge 未分类
+                    span.badge-category.clear-badge ${category_name}
 
                 td.num.posts-map.post
                   a.posts-map.badge-posts href=''

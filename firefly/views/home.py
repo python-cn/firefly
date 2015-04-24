@@ -5,7 +5,7 @@ from flask.blueprints import Blueprint
 from flask_mako import render_template
 from flask_login import current_user, logout_user
 
-from firefly.models.topic import Post
+from firefly.models.topic import Category, Post
 
 
 bp = Blueprint("home", __name__, url_prefix="/")
@@ -21,9 +21,11 @@ class CreateView(MethodView):
     def post(self):
         title = request.form.get('title')
         content = request.form.get('content')
-        post = Post(
-            title=title,
-            content=content)
+        category_id = request.form.get('category', '')
+        if category_id.isdigit():
+            category_id = int(category_id)
+        category = Category.objects.filter(id=category_id).first()
+        post = Post(title=title, content=content, category=category)
         post.save()
         return jsonify(ok=0)
 
