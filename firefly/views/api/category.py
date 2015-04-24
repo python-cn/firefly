@@ -14,19 +14,16 @@ category_fields = {
 }
 
 
-category_list_fields = {
-    'categories': fields.List(fields.Nested(category_fields))
-}
-
-
 class CategoryListApi(Resource):
     def get(self):
         categories = [
             c for c in Category.objects
         ]
         status_fields = generate_status_fields(200, 'ok')
-        return OrderedDict(marshal(categories, category_list_fields),
-                           **status_fields)
+        return OrderedDict(
+            {'categories': marshal(categories, category_fields)},
+            **status_fields
+        )
 
 
 class CategoryApi(Resource):

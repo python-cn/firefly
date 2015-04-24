@@ -1,8 +1,10 @@
 # coding=utf-8
-from firefly import api
+from flask import Blueprint
+from flask_restful import Api
 
 from .category import CategoryApi, CategoryListApi
 
-
+bp = Blueprint('api', __name__, url_prefix='/api')
+api = Api(bp)
 api.add_resource(CategoryListApi, '/categories')
-api.add_resource(CategoryApi, '/category/<name>')
+api.add_resource(CategoryApi, '/categories/<name>')

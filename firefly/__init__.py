@@ -7,7 +7,6 @@ from flask_cache import Cache
 from flask_mongoengine import MongoEngine
 from flask_redis import FlaskRedis
 from flask_mail import Mail
-from flask_restful import Api
 
 from firefly import config
 
@@ -19,7 +18,6 @@ mako = MakoTemplates(app)
 cache = Cache(app)
 babel = Babel(app)
 mail = Mail(app)
-api = Api(app)
 
 if app.config['DEBUG']:
     from werkzeug.debug import DebuggedApplication
@@ -51,8 +49,8 @@ def configure_error_handles(app):
 def register_blueprints(app):
     from firefly.models import auth
     auth.init_app(app)
-    from firefly.views import (home, post, keyboard)
-    for i in (home, post, keyboard):
+    from firefly.views import home, post, keyboard, api
+    for i in (home, post, keyboard, api):
         app.register_blueprint(i.bp)
     configure_error_handles(app)
 

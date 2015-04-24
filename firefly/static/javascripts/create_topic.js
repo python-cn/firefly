@@ -43,7 +43,7 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
       $("select.category-combobox").select2({
         placeholder: 'Categories...',
         ajax: {
-          url: '/api/category/',
+          url: '/api/categories',
           dataType: 'json',
           delay: 0,
           data: function (params) {
