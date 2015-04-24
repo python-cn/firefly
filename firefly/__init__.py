@@ -24,15 +24,12 @@ if app.config['DEBUG']:
     app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
 
 
-def plug_to_db(db):
+def register_plug_to_db(db):
     from firefly.models.utils import dict_filter
 
     def to_dict(self, *args, **kwargs):
         return dict_filter(self.to_mongo(), *args, **kwargs)
     setattr(db.Document, 'to_dict', to_dict)
-
-
-plug_to_db(db)
 
 
 def configure_error_handles(app):
@@ -55,4 +52,17 @@ def register_blueprints(app):
     configure_error_handles(app)
 
 
+def register_login_manager(app):
+    from flask_login import LoginManager
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(userid):
+        from firefly.models import User
+        return User.objects(id=userid).first()
+
+
 register_blueprints(app)
+register_login_manager(app)
+register_plug_to_db(db)
