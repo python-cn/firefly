@@ -26,6 +26,17 @@ if app.config['DEBUG']:
     app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
 
 
+def plug_to_db(db):
+    from firefly.models.utils import dict_filter
+
+    def to_dict(self, *args, **kwargs):
+        return dict_filter(self.to_mongo(), *args, **kwargs)
+    setattr(db.Document, 'to_dict', to_dict)
+
+
+plug_to_db(db)
+
+
 def configure_error_handles(app):
 
     @app.errorhandler(403)
@@ -40,8 +51,8 @@ def configure_error_handles(app):
 def register_blueprints(app):
     from firefly.models import auth
     auth.init_app(app)
-    from firefly.views import (home, post, api, keyboard)
-    for i in (home, post, api, keyboard):
+    from firefly.views import (home, post, keyboard)
+    for i in (home, post, keyboard):
         app.register_blueprint(i.bp)
     configure_error_handles(app)
 
