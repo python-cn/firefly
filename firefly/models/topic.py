@@ -5,7 +5,7 @@ from datetime import datetime
 
 from flask import url_for, g
 
-from firefly import db
+from firefly.ext import db
 from firefly.views.utils import timesince
 from .user import User
 
