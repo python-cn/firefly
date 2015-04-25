@@ -1,9 +1,15 @@
 # coding=utf-8
 from functools import wraps
 
-from werkzeug.utils import secure_filename  # noqa
 from flask import request
 from flask_mako import render_template
+from werkzeug.utils import secure_filename  # noqa
+
+from firefly.ext import mail
+
+
+def send_mail(msg):
+    mail.send(msg)
 
 
 def templated(template=None):

@@ -3,7 +3,7 @@
 
 from datetime import datetime
 
-from flask import url_for
+from flask import url_for, current_app
 from mongoengine import fields, DENY
 from werkzeug import security
 from flask_babel import gettext as _
@@ -11,7 +11,7 @@ from flask_mail import Message
 from flask_login import login_user
 from flask_security import UserMixin, RoleMixin
 
-from firefly import app, db, mail, redis_store
+from firefly.ext import db, mail, redis_store
 
 
 class Role(db.Document, RoleMixin):
@@ -56,13 +56,15 @@ class User(db.Document, UserMixin):
         return url_for('user', kwargs={'name': self.name})
 
     def avatar(self, size=48):
-        return "%s%s.jpg?size=%s".format(app.config['GRAVATAR_BASE_URL'],
-                                         self.email_md5, size)
+        return "%s%s.jpg?size=%s".format(
+            current_app.config['GRAVATAR_BASE_URL'], self.email_md5, size
+        )
 
     @staticmethod
     def generate_encrypted_password(password):
-        return security.generate_password_hash(app.config['SECRET_KEY'] +
-                                               password)
+        return security.generate_password_hash(
+            current_app.config['SECRET_KEY'] + password
+        )
 
     @staticmethod
     def create_token(length=16):
@@ -72,7 +74,7 @@ class User(db.Document, UserMixin):
         redis_store.set(self.name + 'token', self.create_token())
         redis_store.expire(self.name + 'token', 3600)
         msg = Message("Reset your password",
-                      sender=app.config['MAIL_DEFAULT_SENDER'],
+                      sender=current_app.config['MAIL_DEFAULT_SENDER'],
                       recipients=[self.email])
         msg.body = "link to check token callback"
         mail.send(msg)
