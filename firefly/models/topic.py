@@ -16,15 +16,24 @@ class Category(db.Document):
     id = db.SequenceField(primary_key=True)
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     name = db.StringField(max_length=50, required=True, unique=True)
+    _slug = db.StringField(max_length=50, unique=True)
     description = db.StringField(max_length=120, required=True)
     priority = db.IntField(default=0)
     posts = db.ListField(db.ReferenceField('Post'))
 
     def url(self):
-        return url_for('category', kwargs={'name': self.name})
+        return url_for('category', kwargs={'slug': self.slug})
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def slug(self):
+        return self._slug
+
+    @slug.setter
+    def slug(self, value):
+        self._slug = '-'.join(filter(lambda x: x, self._slug.split(' ')))
 
     meta = {
         'indexes': ['-priority', 'name', 'id'],
