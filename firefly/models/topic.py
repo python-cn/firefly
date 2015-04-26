@@ -22,7 +22,7 @@ class Category(db.Document):
     posts = db.ListField(db.ReferenceField('Post'))
 
     def url(self):
-        return url_for('category', kwargs={'slug': self.slug})
+        return url_for('category.detail', kwargs={'slug': self.slug})
 
     def __unicode__(self):
         return self.name
