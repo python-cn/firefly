@@ -27,8 +27,8 @@ class CategoryListApi(Resource):
 
 
 class CategoryApi(Resource):
-    def get(self, name):
-        category = Category.objects(name=name).first()
+    def get(self, slug):
+        category = Category.objects(_slug=slug).first()
         if category is None:
             status_fields = generate_status_fields(404, 'not_found')
             return status_fields

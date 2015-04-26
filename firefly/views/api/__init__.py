@@ -7,4 +7,4 @@ from .category import CategoryApi, CategoryListApi
 bp = Blueprint('api', __name__, url_prefix='/api')
 api = Api(bp)
 api.add_resource(CategoryListApi, '/categories')
-api.add_resource(CategoryApi, '/categories/<name>')
+api.add_resource(CategoryApi, '/categories/<slug>')

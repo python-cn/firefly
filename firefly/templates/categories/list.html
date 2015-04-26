@@ -1,5 +1,7 @@
 -inherit /base.html
 - block content
+  h1
+  ${category}
   - for post in posts
     h2
       a href="${post.url()}"
