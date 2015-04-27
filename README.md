@@ -43,12 +43,7 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 3. 首页 = 首页显示了文章的列表, 默认按活跃时间排序
 4. 单个主题 = 类似/post/post_id/这样的链接. 包含文章正文, 对应评论等
 
-- [ ] 主题的分类model的接口. 前端可以通过ajax调用这个url 获得全部的分类信息: 分类id, 分类名, 分类描述 - [halfcrazy]
-- [ ] 创建主题时候可以通过select2选择分类, 效果类似meta.discourse.org创建主题的分类下拉框效果(可以只是功能, 没有css样式) - [mozillazg]
-- [ ] 创建请求中会带上分类的参数, 后端save的时候会生成含有分类的主题(Post)
-- [ ] 首页渲染时, 能获得某主题对应的分类.
 - [ ] 用户创建新主题后会使用[Effeckt.css](https://github.com/h5bp/Effeckt.css), 闪到主题列表的最上面
-- [ ] 设计阅读量的实现, 就是刷新一下页面, 阅读量就会+1 - [mozillazg]
 - [ ] 让每个主题页面(http://web:port/post/post_id/)里面显示出评论的内容. - [dongweiming]
 - [ ] 首页注册和登陆页面的浏览器兼容性(chrome下正常, FF下不正常)
 - [ ] 设计用户个人页面, 只需要包含对应的view, 个人基本信息: 注册源(微博/github/google), 昵称, 头像(使用Gravatar)等，加入时间, 用户id
@@ -57,7 +52,6 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 用户可以设置github/stackoverflow的地址
 - [ ] 对主题和评论可以like和取消like. 没有unlike
 - [ ] 主题和平台太多的分页设计
-- [ ] follow用户的功能
 - [ ] 站内信模型
 - [ ] 提醒模型(类似豆瓣的提醒)
 - [ ] @ 能弹出被@用户
@@ -77,9 +71,7 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 个人发表的主题页
 - [ ] 徽章系统, 但是不能种类多, 我想目前只包含开发者
 - [ ] 设计一个好看的logo
-- [ ] 微博oauth2登录
 - [ ] QQoauth2登录
-- [ ] 豆瓣oauth2登录 - [halfcrazy]
 - [ ] 本站注册登录
 - [ ] 设计管理员系统(可能是一个子url, 也可能是一个其他的项目),就是可以开发者的权限, 有对应权限的开发者可以删帖, 修改标题等. 但是一切操作都要被系统记录(flask-admin好丑)
 - [ ] 设计站内检索，全文本检索方案
@@ -122,15 +114,23 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 算法 - 用户兴趣社交第二步 - 和我分类/关键词相近的人还有那些
 - [ ] 算法 - 我对某些内容没有兴趣, 请不要在timeline让我看见, 或者尽量少的看见
 - [ ] 定期给离线用户发送未查收的收到的提醒/站内信(可以选择取消订阅)
+- [x] 首页渲染时, 能获得某主题对应的分类. - [mozillazg]
+- [x] 微博oauth2登录 - [ce]
+- [x] 设计阅读量的实现, 就是刷新一下页面, 阅读量就会+1 - [mozillazg]
+- [x] follow用户的功能 - [halfcrazy]
+- [x] 豆瓣oauth2登录 - [halfcrazy]
+- [x] 主题的分类model的接口. 前端可以通过ajax调用这个url 获得全部的分类信息: 分类id, 分类名, 分类描述 - [halfcrazy]
+- [x] 创建主题时候可以通过select2选择分类, 效果类似meta.discourse.org创建主题的分类下拉框效果(可以只是功能, 没有css样式) - [mozillazg]
+- [x] 创建请求中会带上分类的参数, 后端save的时候会生成含有分类的主题(Post) - [mozillazg]
 - [x] 主题的分类model, 早期可以是先插入的一些固定数据,比如devops, web开发, 爬虫..(选项不重要, 要有后台的支持) - [halfcrazy]
 - [x] 用户model, oauth2方案 - [dongweiming]
 - [x] 使用sweetalert替代alert - [dongweiming]
 - [x] 设计用户密码找回方案 - [halfcrazy]
 - [x] 注册页面当用户名/密码/邮箱都有正确输入的时候让`注册`按钮变成enable - [dongweiming]
->>>>>>> update todo list
 
 贡献者列表可以看这里: [CONTRIBUTORS.txt](https://github.com/python-cn/firefly/blob/master/CONTRIBUTORS.txt)
 
 [dongweiming]: https://github.com/dongweiming
 [halfcrazy]: https://github.com/halfcrazy
 [mozillazg]: https://github.com/mozillazg
+[ce]: https://github.com/zbing3
