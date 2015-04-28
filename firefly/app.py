@@ -85,7 +85,7 @@ def register_hooks(app):
     def get_locale():
         return request.accept_languages.best_match(
             app.config['LANGUAGES'].keys()
-        )
+        ) or app.config['BABEL_DEFAULT_LOCALE']
 
     @app.before_request
     def before_request():
