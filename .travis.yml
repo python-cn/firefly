@@ -1,17 +1,26 @@
 language: python
 python:
-  - "2.6"
-  - "2.7"
-  - "3.3"
   - "3.4"
-  - "pypy"
+
+services:
+  - mongodb
+  - redis-server
+
+env:
+  - TOX_ENV=py27
+  - TOX_ENV=pypy
+
 # command to install dependencies
 install:
-  - if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; then pip install -r py2-requirements.txt; fi
-  - pip install -r requirements.txt
-  - pip install -r dev-requirements.txt
+  - pip install flake8
+  - pip install coveralls
+  - pip install tox
+
 # command to run checkers
 script:
   - flake8 .
+  - touch firefly/local_settings.py
+  - tox -e $TOX_ENV
+
 after_success:
   - coveralls

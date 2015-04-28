@@ -1,5 +1,8 @@
 ipython
 flake8
 autopep8
+coverage>=3.7.1,<4.0a1
 coveralls
+pytest-flask
+pytest-cov
 pre-commit
