@@ -16,7 +16,7 @@ class FollowUserApi(Resource):
         if user not in current_user.following:
             current_user.update_one(push_follwing=user)
             user.update_one(push_follwer=current_user)
-            status_fields = generate_status_fields(200, 'ok')
+            status_fields = generate_status_fields(201, 'ok')
         else:
             status_fields = generate_status_fields(404, 'error')
         return status_fields
