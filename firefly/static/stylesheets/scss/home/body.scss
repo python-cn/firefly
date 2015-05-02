@@ -125,12 +125,16 @@ ol.category-breadcrumb {
     }
 }
 
+.submit-panel {
+  bottom: 14px;
+}
+
 // 功能没出, 先隐藏了
 ol.category-breadcrumb {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 #navigation-bar {
-    visibility: hidden;
+  visibility: hidden;
 }
 // end

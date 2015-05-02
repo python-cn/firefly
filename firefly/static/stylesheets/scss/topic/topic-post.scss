@@ -1052,6 +1052,22 @@ and (max-width : 870px) {
   }
 }
 
+.reply-to {
+  img {
+    vertical-align: middle;
+  }
+  * {
+    margin-right: 5px;
+  }
+}
+
+.submit-panel {
+  bottom: 8px;
+}
+
+#reply-control.open {
+  height: 320px;
+}
 
 /* below standard tablet portrait ----------- */
 

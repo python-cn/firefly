@@ -2,6 +2,7 @@
   from firefly.libs.markdown import Markdown
 -inherit /base.html
 - namespace name='forms' /_forms.html
+-namespace name="widgets_editor" /widgets/markdown_editor.html
 
 -def outlet()
   div#topic-title
@@ -32,20 +33,20 @@
                   return '/user/1000001'
               # author = p.author
               author = c()
-            div#${cloak_id}.post-cloak
+            div#${cloak_id}.post-cloak data-comment-id=${p.id} data-order-id=${index}
               div.topic-post.clearfix.regular
                 article.boxed data-user-id="${author.id}" data-post-id="${p.id}"
                   div.row
                     div.topic-avatar
                       div.contents
-                      a href="${author.url()}"  data-user-card="${author.name}"
+                      a href="${author.url()}" data-user-card="${author.name}"
                         img.avatar alt="" width="45" height="45" src="${author.avatar}" title="${author.name}"
                     div.topic-body
                       div.topic-meta-data
                         div.names.trigger-user-card
                           span.username.staff
                             a href="${author.url()}" data-user-card="${author.name}"
-                              codinghorro${author.name}
+                              ${author.name}
                             i.fa.fa-shield title="This user is a moderator" alt="This user is a moderator"
                           span.full-name
                             a href="${author.url()}" data-user-card="${author.name}"
@@ -98,8 +99,15 @@
     input.btn.btn-primary type='submit' value='comment'
 
 -def head_script()
+  link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
+  link href="${url_for('static', filename='stylesheets/codemirror.css')}" rel="stylesheet"
   link href="${url_for('static', filename='stylesheets/post.css')}" rel="stylesheet" media="all"
 
 -def footer_script()
   script
-    require(['../../static/javascripts/common']);
+    require(['../../static/javascripts/common'], function (common) {
+      require(['post']);
+    });
+
+- def others()
+  ${widgets_editor.topic()}

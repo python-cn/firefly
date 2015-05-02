@@ -1,4 +1,4 @@
-- def main()
+- def index()
   div#reply-control.open.edit-title.hide
     div.contents
       div.edit-control
@@ -41,5 +41,41 @@
             button.btn.btn-primary.create tabindex="5" title="Or press Ctrl+Enter"
               i.fa.fa-plus
               创建主题
+            a.cancel href="#" tabindex="6"
+              取消
+
+- def topic()
+  div#reply-control.open.hide
+    div.grippie
+    div.contents
+      div.control
+        a.toggler href=''
+        div.control-row.reply-area
+          div.composer-fields
+            div.reply-to data-comment-id=''
+              span
+                回应
+              a.avatar href="/t/6"
+              img.avatar alt="" width="20" height="20"
+              span
+          div.wmd-controls style="top: 56px; bottom: 45px;"
+            div.textarea-wrapper
+              textarea#wmd-input tabindex="4"
+
+            div.preview-wrapper.regular
+              div#wmd-preview.cooked
+            div.composer-bottom-right
+              a.toggle-preview href="#"
+                « 关闭预览
+              div#file-uploading.hidden
+                div.spinner.small
+                Uploading %
+                a#cancel-file-upload
+                  cancel
+
+          div.submit-panel
+            button.btn.btn-primary.reply tabindex="5" title="Or press Ctrl+Enter"
+              i.fa.fa-plus
+              发布评论
             a.cancel href="#" tabindex="6"
               取消
