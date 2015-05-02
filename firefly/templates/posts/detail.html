@@ -3,7 +3,7 @@
 -inherit /base.html
 - namespace name='forms' /_forms.html
 
-- block container
+-def outlet()
   div#topic-title
     div.container
       div.title-wrapper
@@ -74,7 +74,23 @@
                               img" src=${p.image_url}"
                             p
                               ${p.created_at.strftime('%H:%M %Y-%m-%d')}
-  h2
+                        section.post-menu-area.clearfix
+                          nav.post-controls
+                            button.show-replies
+                              span.badge-posts
+                                2
+                              Replies
+                            div.actions
+                              button.like title='喜欢这个主题?'
+                                i.fa.fa-heart
+                              button title='分享' data-share-url="/t/dd"
+                                i.fa.fa-link
+                              button.bookmark title='标记'
+                                div.read-icon
+                              button.create title='评论'
+                                i.fa.fa-reply
+                                评论
+
     Add a comment
   form action="." method="post"
     ${forms.render(form)}

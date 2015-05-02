@@ -72,8 +72,7 @@ html
                     i.fa
                     登录
         div#main-outlet
-          -block list_controls
-          -block container
+          ${self.outlet()}
         div#login-modal.modal.hide
           ${self.login()}
         div.facebox.hide
@@ -83,7 +82,6 @@ html
               i.fa.fa-times
         div.facebox-overlay.hide
 
-        ${self.others()}
     ${self.footer_script()}
 
 -def title()
@@ -92,7 +90,7 @@ html
 
 -def footer_script()
 
--def others()
+-def outlet()
 
 -def login()
   ${login_form.signin()}
