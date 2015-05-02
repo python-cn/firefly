@@ -3,10 +3,11 @@ from flask import Blueprint
 from flask_restful import Api
 
 from .category import CategoryApi, CategoryListApi
-from .user import FollowUserApi
+from .user import FollowUserApi, BlockUserApi
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 api = Api(bp)
 api.add_resource(CategoryListApi, '/categories')
 api.add_resource(CategoryApi, '/categories/<slug>')
 api.add_resource(FollowUserApi, '/users/<int:id>/follow')
+api.add_resource(BlockUserApi, '/users/<int:id>/block')
