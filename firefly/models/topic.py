@@ -101,7 +101,12 @@ class Comment(db.Document):
     created_at = db.DateTimeField(default=datetime.now, required=True)
     content = db.StringField(verbose_name='Comment', required=True)
     author = db.ReferenceField(User)
+    ref_id = db.IntField(default=0)
 
     @property
     def post_type(self):
         return self.__class__.__name__
+
+    @classmethod
+    def get_replies(cls):
+        cls.objects.filter(ref_id=cls.ref_id)

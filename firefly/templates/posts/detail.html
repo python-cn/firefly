@@ -78,10 +78,14 @@
                               ${p.created_at.strftime('%H:%M %Y-%m-%d')}
                         section.post-menu-area.clearfix
                           nav.post-controls
-                            button.show-replies
-                              span.badge-posts
-                                2
-                              Replies
+                            -py
+                              coments = p.get_replies() if p.post_type == 'Coment' else []
+                            -if coments:
+                              button.show-replies
+                                span.badge-posts
+                                  ${len(coments)}
+                                Replies
+                                i.fa.fa-chevron-down
                             div.actions
                               button.like title='喜欢这个主题?'
                                 i.fa.fa-heart
@@ -92,12 +96,6 @@
                               button.create title='评论'
                                 i.fa.fa-reply
                                 评论
-
-    Add a comment
-  form action="." method="post"
-    ${forms.render(form)}
-    div.actions
-    input.btn.btn-primary type='submit' value='comment'
 
 -def head_script()
   link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
