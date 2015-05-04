@@ -13,7 +13,10 @@ class FollowUserApi(Resource):
     method_decorators = [login_required]
 
     def put(self, id):
-        user = User.objects.get_or_404(id=id)
+        user = User.objects.get(id=id)
+        if user is None:
+            status_fields = generate_status_fields(NOTFOUND)
+            return status_fields, 404
         if user not in current_user.following:
             current_user.update_one(push_follwing=user)
             user.update_one(push_follwer=current_user)
@@ -23,7 +26,10 @@ class FollowUserApi(Resource):
         return status_fields, 202
 
     def delete(self, id):
-        user = User.objects.get_or_404(id=id)
+        user = User.objects.get(id=id)
+        if user is None:
+            status_fields = generate_status_fields(NOTFOUND)
+            return status_fields, 404
         if user in current_user.following:
             current_user.update_one(pull_follwing=user)
             user.update_one(pull_follwer=current_user)
@@ -38,7 +44,10 @@ class BlockUserApi(Resource):
     method_decorators = [login_required]
 
     def put(self, id):
-        User.objects.get_or_404(id=id)
+        user = User.objects.get(id=id)
+        if user is None:
+            status_fields = generate_status_fields(NOTFOUND)
+            return status_fields, 404
         if id not in current_user.blocked_user_id:
             current_user.update_one(push_blocked_user_id=id)
             status_fields = generate_status_fields(OK)
@@ -47,7 +56,10 @@ class BlockUserApi(Resource):
         return status_fields, 202
 
     def delete(self, id):
-        User.objects.get_or_404(id=id)
+        user = User.objects.get(id=id)
+        if user is None:
+            status_fields = generate_status_fields(NOTFOUND)
+            return status_fields, 404
         if id in current_user.blocked_user_id:
             current_user.update_one(pull_blocked_used_id=id)
             status_fields = generate_status_fields(OK)
