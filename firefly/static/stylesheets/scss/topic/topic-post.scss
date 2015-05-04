@@ -5,6 +5,10 @@
   margin-left: auto;
 }
 
+#main-outlet {
+  padding-top: 82px;
+}
+
 .full-width {
   margin-left: 0;
 }
@@ -20,7 +24,7 @@ h1 .topic-statuses .topic-status i {
   max-width: 80px;
   height: auto;
   max-height: 40px;
-  }
+}
 
 .post-cloak {
   padding: 0;
@@ -29,25 +33,25 @@ h1 .topic-statuses .topic-status i {
     border-top: none;
   }
 
-.reply-to-tab {
-  z-index: 400;
-  font-size: 0.929em;
-  float: right;
-  margin: 1px 25px 0 0;
-  color: scale-color($primary, $lightness: 50%);
-}
-
-.gutter {
-  .reply-new {
-    .discourse-no-touch & {
-      opacity:0;
-      transition: opacity 0.7s ease-in-out;
-    }
-    .discourse-touch & {opacity: 1;}
+  .reply-to-tab {
+    z-index: 400;
+    font-size: 0.929em;
+    float: right;
+    margin: 1px 25px 0 0;
+    color: scale-color($primary, $lightness: 50%);
   }
-}
 
-div.actions, .post-actions {
+  .gutter {
+    .reply-new {
+      .discourse-no-touch & {
+        opacity:0;
+        transition: opacity 0.7s ease-in-out;
+      }
+      .discourse-touch & {opacity: 1;}
+    }
+  }
+
+  div.actions, .post-actions {
     .discourse-no-touch & {
       opacity: 0.2;
       transition: opacity 0.7s ease-in-out;
@@ -61,11 +65,11 @@ div.actions, .post-actions {
   }
 
   &:hover .gutter {
-      .reply-new,
-      .track-link {
-        opacity:1;
-      }
+    .reply-new,
+    .track-link {
+      opacity:1;
     }
+  }
 }
 
 section.post-menu-area {
@@ -73,8 +77,8 @@ section.post-menu-area {
 }
 
 nav.post-controls {
-    padding: 0;
-    button {
+  padding: 0;
+  button {
     color: scale-color($primary, $lightness: 60%);
     margin-right: 2px;
   }
@@ -117,12 +121,12 @@ nav.post-controls {
     margin-left: 10px;
 
     &:hover {  color: $secondary;
-      background: dark-light-diff($tertiary, $secondary, 0%, -20%)
-    }
+               background: dark-light-diff($tertiary, $secondary, 0%, -20%)
+            }
 
     &:active {
       background: dark-light-diff($tertiary, $secondary, 50%, -35%);
-    box-shadow: inset 0 1px 3px rgba(0,0,0, .3);
+      box-shadow: inset 0 1px 3px rgba(0,0,0, .3);
 
     }
 
@@ -141,56 +145,56 @@ nav.post-controls {
     margin-left: 3px;
     transition: all linear 0.15s;
 
-         &:hover {
-          background: scale-color-diff();
-          color: $primary;
-        }
+    &:hover {
+      background: scale-color-diff();
+      color: $primary;
+    }
 
-        &:active {
-            box-shadow: inset 0 1px 3px rgba(0,0,0, .4);
-        }
+    &:active {
+      box-shadow: inset 0 1px 3px rgba(0,0,0, .4);
+    }
 
-        &.hidden {
-          display: none;
-        }
-        &.admin {
-          position: relative;
-        }
+    &.hidden {
+      display: none;
+    }
+    &.admin {
+      position: relative;
+    }
 
-        &.delete:hover {
-          background: $danger;
-          color: $secondary;
-        }
+    &.delete:hover {
+      background: $danger;
+      color: $secondary;
+    }
 
-        &.like:hover {
-          color: $love;
-          background: dark-light-diff($love, $secondary, 85%, -60%)
-        }
+    &.like:hover {
+      color: $love;
+      background: dark-light-diff($love, $secondary, 85%, -60%)
+    }
 
-        &.has-like {color: $love;}
-        &.has-like[disabled]:hover {
-          background: transparent;
-        }
+    &.has-like {color: $love;}
+    &.has-like[disabled]:hover {
+      background: transparent;
+    }
 
-        &.bookmark {padding: 8px 11px; }
+    &.bookmark {padding: 8px 11px; }
 
-        .read-icon {
-          &:before {
-            font-family: "FontAwesome";
-            content: "\f02e";
-          }
-          &.unseen {
-            &:before {
-              content: "\f097";
-            }
-          }
-          &.bookmarked {
-            &:before {
-              color: $tertiary;
-            }
-          }
+    .read-icon {
+      &:before {
+        font-family: "FontAwesome";
+        content: "\f02e";
+      }
+      &.unseen {
+        &:before {
+          content: "\f097";
         }
       }
+      &.bookmarked {
+        &:before {
+          color: $tertiary;
+        }
+      }
+    }
+  }
 
   .post-admin-menu {
     background-color: $secondary;
@@ -401,8 +405,8 @@ a.star {
   }
 
   .participants { // PMs //
-    .user {float: left; margin: 7px 20px 7px 0;}
-  }
+                  .user {float: left; margin: 7px 20px 7px 0;}
+                }
 
   .topic-links {
     .badge-notification {
@@ -464,10 +468,10 @@ a.star {
   .topic-list {
     > tbody > tr {
       &:nth-child(odd) {
-          background-color: darken($secondary, 3%);
+        background-color: darken($secondary, 3%);
       }
       &:nth-child(even) {
-          background-color: $secondary;
+        background-color: $secondary;
       }
     }
   }
@@ -520,8 +524,8 @@ video {
 }
 
 @keyframes fadein {
-    from {opacity: 0;}
-    to {opacity: 1;}
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 .extra-info-wrapper {
@@ -686,7 +690,7 @@ blockquote {
     padding-left: 10px;
     display: block;
     overflow: hidden;
-    }
+  }
 
   .post-links {
     list-style-type: none;
@@ -931,37 +935,37 @@ a.attachment:before {
 }
 
 .private_message .gutter, .deleted-topic .gutter,.read_restricted .gutter {
-    position: relative;
+  position: relative;
 }
 
 .deleted-topic .gutter:before {
-    display: block;
-    position: absolute;
-    left: 767px;
-    color: rgba(dark-light-diff($primary, $secondary, 90%, -65%) , .8);
-    font: 6.429em/1 FontAwesome;
-    content: "\f014";
-    z-index: -5;
+  display: block;
+  position: absolute;
+  left: 767px;
+  color: rgba(dark-light-diff($primary, $secondary, 90%, -65%) , .8);
+  font: 6.429em/1 FontAwesome;
+  content: "\f014";
+  z-index: -5;
 }
 
 .topic-meta-data {
 
- &:after {
+  &:after {
     visibility: hidden;
     display: block;
     font-size: 0;
     content: " ";
     clear: both;
     height: 0;
- }
+  }
 
- .post-info  {
-   display: inline-block;
-   float: right;
-   font-size: 0.929em;
-   margin-top: 1px;
-   a {color: scale-color($primary, $lightness: 50%);}
- }
+  .post-info  {
+    display: inline-block;
+    float: right;
+    font-size: 0.929em;
+    margin-top: 1px;
+    a {color: scale-color($primary, $lightness: 50%);}
+  }
 
 }
 
@@ -995,22 +999,22 @@ and (max-width : 870px) {
 
   .gutter {
     display: none;
-    }
+  }
 
   .topic-avatar {
     width: 45px;
   }
 
   .post-cloak .reply-to-tab {
-      right: 15%;
-    }
+    right: 15%;
+  }
 
   .topic-body {
-      box-sizing: border-box;
-      width: calc(100% - 47px); //100% - [width of .topic-avatar + 2px]
+    box-sizing: border-box;
+    width: calc(100% - 47px); //100% - [width of .topic-avatar + 2px]
 
-      padding-left: 2%;
-    }
+    padding-left: 2%;
+  }
 
   .embedded-posts {
     // top means "in reply to expansion" above a post
@@ -1019,6 +1023,50 @@ and (max-width : 870px) {
     }
   }
 
+}
+
+.names {
+  float: left;
+  .username {
+    font-weight: bold;
+  }
+  span {
+    font-size: 0.929em;
+    padding-right: 8px;
+    display: inline-block;
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    a {
+      color: scale-color($primary, $lightness: 30%);
+    }
+  }
+  .fa {
+    font-size: 11px;
+    margin-left: 3px;
+    color: scale-color($primary, $lightness: 40%);
+  }
+  .new_user a, .user-title, .user-title a {
+    color: scale-color($primary, $lightness: 50%);
+  }
+}
+
+.reply-to {
+  img {
+    vertical-align: middle;
+  }
+  * {
+    margin-right: 5px;
+  }
+}
+
+.submit-panel {
+  bottom: 8px;
+}
+
+#reply-control.open {
+  height: 320px;
 }
 
 /* below standard tablet portrait ----------- */

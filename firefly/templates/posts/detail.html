@@ -2,8 +2,9 @@
   from firefly.libs.markdown import Markdown
 -inherit /base.html
 - namespace name='forms' /_forms.html
+-namespace name="widgets_editor" /widgets/markdown_editor.html
 
-- block container
+-def outlet()
   div#topic-title
     div.container
       div.title-wrapper
@@ -32,20 +33,20 @@
                   return '/user/1000001'
               # author = p.author
               author = c()
-            div#${cloak_id}.post-cloak
+            div#${cloak_id}.post-cloak data-comment-id=${p.id} data-order-id=${index}
               div.topic-post.clearfix.regular
                 article.boxed data-user-id="${author.id}" data-post-id="${p.id}"
                   div.row
                     div.topic-avatar
                       div.contents
-                      a href="${author.url()}"  data-user-card="${author.name}"
+                      a href="${author.url()}" data-user-card="${author.name}"
                         img.avatar alt="" width="45" height="45" src="${author.avatar}" title="${author.name}"
                     div.topic-body
                       div.topic-meta-data
                         div.names.trigger-user-card
                           span.username.staff
                             a href="${author.url()}" data-user-card="${author.name}"
-                              codinghorro${author.name}
+                              ${author.name}
                             i.fa.fa-shield title="This user is a moderator" alt="This user is a moderator"
                           span.full-name
                             a href="${author.url()}" data-user-card="${author.name}"
@@ -74,7 +75,23 @@
                               img" src=${p.image_url}"
                             p
                               ${p.created_at.strftime('%H:%M %Y-%m-%d')}
-  h2
+                        section.post-menu-area.clearfix
+                          nav.post-controls
+                            button.show-replies
+                              span.badge-posts
+                                2
+                              Replies
+                            div.actions
+                              button.like title='喜欢这个主题?'
+                                i.fa.fa-heart
+                              button title='分享' data-share-url="/t/dd"
+                                i.fa.fa-link
+                              button.bookmark title='标记'
+                                div.read-icon
+                              button.create title='评论'
+                                i.fa.fa-reply
+                                评论
+
     Add a comment
   form action="." method="post"
     ${forms.render(form)}
@@ -82,8 +99,15 @@
     input.btn.btn-primary type='submit' value='comment'
 
 -def head_script()
+  link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
+  link href="${url_for('static', filename='stylesheets/codemirror.css')}" rel="stylesheet"
   link href="${url_for('static', filename='stylesheets/post.css')}" rel="stylesheet" media="all"
 
 -def footer_script()
   script
-    require(['../../static/javascripts/common']);
+    require(['../../static/javascripts/common'], function (common) {
+      require(['post']);
+    });
+
+- def others()
+  ${widgets_editor.topic()}

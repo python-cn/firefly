@@ -4,7 +4,7 @@
 -def title()
   首页
 
--block list_controls
+-def outlet()
   div.list-controls
     div.container.list-control
       ol.category-breadcrumb
@@ -27,8 +27,6 @@
       button#create-topic.btn.btn-default.right
         i.fa.fa-plus
         New Topic
-
--block container
   div.container.list-container
     div#list-area
       div.contents
@@ -83,7 +81,7 @@
                       ${activity}
 
 - def others()
-  ${widgets_editor.main()}
+  ${widgets_editor.index()}
 
 -def head_script()
   link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
