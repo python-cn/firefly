@@ -1,0 +1,34 @@
+-def main(post, is_new=False)
+  -py
+    id = post.id
+    # author = post.author
+    category = post.category
+    category_name = ''
+    if category is not None:
+      category_name = category.name
+    title = post.title
+    replies = len(post.comments)
+    views = post.views
+    created_at = post.created_at
+    activity = post.recent_activity_time
+  tr class=${"topic-list-item new-item" if is_new else "topic-list-item"}
+    td.main-link.clearfix
+      a.title href="${url_for('post.detail', id=id)}"
+        ${title}
+      span.topic-post-badges
+
+    td.category
+      a.badge-wrapper.bullet href="/category/${category_name}"
+        span.badge-category-parent-bg
+        span.badge-category.clear-badge ${category_name}
+
+    td.num.posts-map.post
+      a.posts-map.badge-posts href=''
+        ${replies}
+    td.num.views
+      span.number
+        ${views}
+    td.num.age.activity
+      a
+        span class="relative-date" title="${activity}"
+          ${activity}

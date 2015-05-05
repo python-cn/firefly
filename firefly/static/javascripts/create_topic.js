@@ -1,14 +1,15 @@
-define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
-    function createTopic() {
-      if (!(this instanceof createTopic)) {
-        return new createTopic();
-      }
-      this.$inner = $('.textarea-wrapper');
-      this.$outer = $('.preview-wrapper');
-      this.$modal = $('#reply-control');
-
-      this._init();
+define(['jquery', 'sweetAlert', 'select2', 'listItems'], function(
+  $, sweetAlert, select2, EffecktListItems) {
+  function createTopic() {
+    if (!(this instanceof createTopic)) {
+      return new createTopic();
     }
+    this.$inner = $('.textarea-wrapper');
+    this.$outer = $('.preview-wrapper');
+    this.$modal = $('#reply-control');
+
+    this._init();
+  }
 
   createTopic.prototype = {
     constructor: createTopic,
@@ -50,8 +51,8 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
             return {name: params.term}
           },
           processResults: function (data, params) {
-            result = {results: []}
-            if (data.status == 200) {
+            var result = {results: []};
+            if (!data.status) {
               result.results = data.categories;
             }
             return result;
@@ -100,9 +101,11 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
       var _this = this;
       var params, content = [];
       var category = $('#reply-category').val();
+      var items = EffecktListItems();
+
       $('.CodeMirror-code pre span[style]').each(
         function () {
-          text = $(this).text();
+          var text = $(this).text();
           content.push(text);
         }
       );
@@ -141,14 +144,12 @@ define(['jquery', 'sweetAlert', 'select2'], function($, sweetAlert, select2) {
         dataType: "json",
         success: function(res) {
           if (!res.ok) {
-            alert('发表成功');
             _this.closeModal();
-            location.reload();
+            items.addListItem(res.html, $('.topic-list-item:first'));
           }
         }
       });
     }
   };
-
   return createTopic;
 });
