@@ -13,7 +13,7 @@ class FollowUserApi(Resource):
     method_decorators = [login_required]
 
     def put(self, id):
-        user = User.objects.get(id=id)
+        user = User.objects(id=id).first()
         if user is None:
             status_fields = generate_status_fields(NOTFOUND)
             return status_fields, 404
@@ -26,7 +26,7 @@ class FollowUserApi(Resource):
         return status_fields, 202
 
     def delete(self, id):
-        user = User.objects.get(id=id)
+        user = User.objects(id=id).first()
         if user is None:
             status_fields = generate_status_fields(NOTFOUND)
             return status_fields, 404
@@ -44,7 +44,7 @@ class BlockUserApi(Resource):
     method_decorators = [login_required]
 
     def put(self, id):
-        user = User.objects.get(id=id)
+        user = User.objects(id=id).first()
         if user is None:
             status_fields = generate_status_fields(NOTFOUND)
             return status_fields, 404
@@ -56,7 +56,7 @@ class BlockUserApi(Resource):
         return status_fields, 202
 
     def delete(self, id):
-        user = User.objects.get(id=id)
+        user = User.objects(id=id).first()
         if user is None:
             status_fields = generate_status_fields(NOTFOUND)
             return status_fields, 404
