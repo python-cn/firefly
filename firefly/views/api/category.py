@@ -1,7 +1,7 @@
 # coding=utf-8
 from collections import OrderedDict
 
-from flask_restful import Resource, fields, marshal
+from flask_restful import Resource, fields, marshal, reqparse
 
 from firefly.models.topic import Category
 from .consts import OK, NOTFOUND
@@ -14,12 +14,20 @@ category_fields = {
     'description': fields.String,
 }
 
+parser = reqparse.RequestParser()
+parser.add_argument('name', type=str)
+
 
 class CategoryListApi(Resource):
     def get(self):
-        categories = [
-            c for c in Category.objects
-        ]
+        args = parser.parse_args()
+        name = args['name']
+        if name is None:
+            categories = Category.objects
+        else:
+            categories = Category.objects.filter(name__icontains=name)
+        categories = list(categories)
+
         status_fields = generate_status_fields(OK)
         return OrderedDict(
             {'categories': marshal(categories, category_fields)},

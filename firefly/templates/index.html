@@ -1,5 +1,6 @@
 -inherit base.html
--namespace name="widgets_editor" widgets/markdown_editor.html
+-namespace name="widgets_editor" /widgets/markdown_editor.html
+-namespace name="topic_item" /widgets/topic_item.html
 
 -def title()
   首页
@@ -44,49 +45,18 @@
                 阅读量
               th.activity.num
                 最近活跃时间
-          tbody
+          tbody.effeckt-list data-effeckt-type="pop-in"
             -for post in posts
-              -py
-                id = post.id
-                # author = post.author
-                category = post.category
-                category_name = ''
-                if category is not None:
-                  category_name = category.name
-                title = post.title
-                replies = len(post.comments)
-                views = post.views
-                created_at = post.created_at
-                activity = post.recent_activity_time
-              tr.topic-list-item
-                td.main-link.clearfix
-                  a.title href="${url_for('post.detail', id=id)}"
-                    ${title}
-                  span.topic-post-badges
+              ${topic_item.main(post)}
 
-                td.category
-                  a.badge-wrapper.bullet href="/category/${category_name}"
-                    span.badge-category-parent-bg
-                    span.badge-category.clear-badge ${category_name}
-
-                td.num.posts-map.post
-                  a.posts-map.badge-posts href=''
-                    ${replies}
-                td.num.views
-                  span.number
-                    ${views}
-                td.num.age.activity
-                  a
-                    span class="relative-date" title="${activity}"
-                      ${activity}
-
-- def others()
+-def others()
   ${widgets_editor.index()}
 
 -def head_script()
   link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
   link href="${url_for('static', filename='stylesheets/codemirror.css')}" rel="stylesheet"
   link href="${url_for('static', filename='stylesheets/select2.min.css')}" rel="stylesheet"
+  link href="${url_for('static', filename='stylesheets/effeckt/list-items.css')}" rel="stylesheet"
   link href="${url_for('static', filename='stylesheets/index.css')}" rel="stylesheet" media="all"
 
 -def footer_script()

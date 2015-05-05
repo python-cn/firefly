@@ -10,7 +10,8 @@ require(['jquery', 'components/markdown-it', 'components/markdown-it-footnote',
          'components/codemirror/mode/tornado/tornado', 'components/codemirror/mode/sql/sql',
          'components/codemirror/mode/yaml/yaml', 'components/codemirror/mode/yaml/yaml',
          'components/codemirror/mode/htmlmixed/htmlmixed'],
-        function($, markdownit, markdownitFootnote, hljs, emojify, createTopic, CodeMirror){
+        function($, markdownit, markdownitFootnote, hljs, emojify,
+                 createTopic, CodeMirror){
           var languageOverrides = {
             js: 'javascript',
             html: 'xml',

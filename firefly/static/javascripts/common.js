@@ -5,6 +5,7 @@ require.config({
     'sweetAlert': 'libs/sweet-alert.min',
     'select2': 'libs/select2.min',
     'mousetrap': 'libs/mousetrap.min',
+    'listItems': 'libs/effeckt/list-items',
   },
   shim: {
   }
