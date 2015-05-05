@@ -4,8 +4,10 @@
     # author = post.author
     category = post.category
     category_name = ''
+    category_slug = ''
     if category is not None:
       category_name = category.name
+      category_slug = category.slug
     title = post.title
     replies = len(post.comments)
     views = post.views
@@ -18,7 +20,7 @@
       span.topic-post-badges
 
     td.category
-      a.badge-wrapper.bullet href="/category/${category_name}"
+      a.badge-wrapper.bullet href="/category/${category_slug}"
         span.badge-category-parent-bg
         span.badge-category.clear-badge ${category_name}
 

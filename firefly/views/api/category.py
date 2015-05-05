@@ -15,14 +15,14 @@ category_fields = {
 }
 
 parser = reqparse.RequestParser()
-parser.add_argument('name', type=str)
+parser.add_argument('name', default='')
 
 
 class CategoryListApi(Resource):
     def get(self):
         args = parser.parse_args()
-        name = args['name']
-        if name is None:
+        name = args['name'].strip()
+        if not name:
             categories = Category.objects
         else:
             categories = Category.objects.filter(name__icontains=name)
