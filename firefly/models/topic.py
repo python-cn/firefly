@@ -8,6 +8,7 @@ from flask import url_for, g
 
 from firefly.ext import db
 from firefly.views.utils import timesince
+from firefly.models.consts import CATEGORY_COLORS
 from .user import User
 
 __all__ = ["Category", "Post", "Video", "Image", "Comment"]
@@ -35,6 +36,10 @@ class Category(db.Document):
     @slug.setter
     def slug(self, value):
         self._slug = '-'.join(filter(lambda x: x, self._slug.split(' ')))
+
+    @property
+    def color(self):
+        return CATEGORY_COLORS[self.id - 1]
 
     meta = {
         'indexes': ['-priority', 'name', 'id'],

@@ -79,13 +79,12 @@
     line-height: 1.25;
 
     .badge-category-parent-bg, .badge-category-bg {
-        background-color: #258af1;
-        display: inline-block;
-        padding: 1px;
+      display: inline-block;
+      padding: 1px;
 
-        &:before {
-            content: "\a0";
-        }
+      &:before {
+        content: "\a0";
+      }
     }
 
     .badge-category {
