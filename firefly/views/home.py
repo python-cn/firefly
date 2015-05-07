@@ -48,5 +48,5 @@ class LogoutView(MethodView):
 
 bp.add_url_rule('/', view_func=HomeView.as_view('index'))
 bp.add_url_rule('create', view_func=CreateView.as_view('create'))
-bp.add_url_rule('login', view_func=LogoutView.as_view('login'))
+bp.add_url_rule('login', view_func=LoginView.as_view('login'))
 bp.add_url_rule('logout', view_func=LogoutView.as_view('logout'))
