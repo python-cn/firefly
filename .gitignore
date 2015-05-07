@@ -118,3 +118,5 @@ firefly/static/stylesheets/index.css
 firefly/static/stylesheets/index.css.map
 firefly/static/stylesheets/post.css
 firefly/static/stylesheets/post.css.map
+!firefly/static/javascripts/components/lib
+!firefly/static/javascripts/components/codemirror/lib
