@@ -3,6 +3,7 @@
 firefly settings
 '''
 from __future__ import print_function
+from __future__ import absolute_import
 from plim import preprocessor
 
 SECRET_KEY = 'you need modify this into local_settings.py'
@@ -36,7 +37,7 @@ SECURITY_DEFAULT_REMEMBER_ME = True
 CSRF_ENABLED = True
 
 try:
-    from local_settings import *  # noqa
+    from .local_settings import *  # noqa
 except ImportError:
     print('You need rename local_config.py.example to local_config.py, '
           'then update your settings')

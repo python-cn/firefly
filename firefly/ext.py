@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # coding=utf-8
 from flask import current_app
 from flask_babel import Babel

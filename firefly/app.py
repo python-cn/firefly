@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # coding=utf-8
 import os
 
@@ -84,7 +85,7 @@ def register_hooks(app):
     @babel.localeselector
     def get_locale():
         return request.accept_languages.best_match(
-            app.config['LANGUAGES'].keys()
+            list(app.config['LANGUAGES'].keys())
         ) or app.config['BABEL_DEFAULT_LOCALE']
 
     @app.before_request
