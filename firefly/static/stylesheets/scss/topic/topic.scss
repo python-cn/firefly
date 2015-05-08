@@ -253,12 +253,18 @@ a:hover.reply-new {
   z-index: 495
 }
 
+.badge-category-bg {
+  width: 9px;
+  height: 9px;
+  line-height: 1;
+}
+
 @media all
 and (max-width : 940px) {
 
   #topic-progress, #topic-progress-expanded {
     left: 295px;
-    }
+  }
 }
 
 
@@ -279,7 +285,6 @@ and (max-width : 724px) {
     right: 0;
     #topic-progress, #topic-progress-expanded { left: auto; right: 145px;  }
   }
-
 }
 
 @media all
@@ -288,6 +293,4 @@ and (max-width : 485px) {
   #topic-progress-wrapper.docked {
     display: none;
     }
-
-
 }

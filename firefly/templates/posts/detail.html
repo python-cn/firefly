@@ -1,5 +1,6 @@
 -py!
   from firefly.libs.markdown import Markdown
+  from firefly.views.utils import short_timesince
 -inherit /base.html
 - namespace name='forms' /_forms.html
 -namespace name="widgets_editor" /widgets/markdown_editor.html
@@ -15,7 +16,7 @@
           div.category-title
             a.badge-wrapper.bullet href="/c/${post.category.id}"
               span.badge-category-bg style="background-color: ${post.category.color if post.category else '#999'}"
-              span.badge-category.clear-badge style="color: #FFFFFF;" title="${post.category.description}"
+              span.badge-category.clear-badge style="vertical-align: middle;" title="${post.category.description}"
                 ${post.category.name}
   div.container.posts
     div.row
@@ -56,8 +57,8 @@
                               co-founder
                         div.post-info
                           a.post-date href="/t/quickly-tell-someone-why-they-should-look-at-a-topic/27503/2" data-bindattr-1516="1516"
-                            span.relative-date title="April 13, 2015 8:43am" data-time="1428885788713" data-format="tiny"
-                              7d
+                            span.relative-date title="${post.created_at.strftime('%c %p')}" data-time="1428885788713" data-format="tiny"
+                              ${short_timesince(post.created_at)}
                       div.contents.regular
                         div.cooked
                           - if p.content
