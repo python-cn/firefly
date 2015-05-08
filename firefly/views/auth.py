@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # coding=utf-8
 from flask.blueprints import Blueprint
 from flask_mako import render_template

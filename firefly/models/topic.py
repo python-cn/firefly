@@ -1,5 +1,6 @@
 # coding=utf-8
 '''Define Schema'''
+from __future__ import absolute_import
 
 from datetime import datetime
 
