@@ -5,9 +5,11 @@
     category = post.category
     category_name = ''
     category_slug = ''
+    category_color = '#999'
     if category is not None:
       category_name = category.name
       category_slug = category.slug
+      category_color = category.color
     title = post.title
     replies = len(post.comments)
     views = post.views
@@ -21,7 +23,7 @@
 
     td.category
       a.badge-wrapper.bullet href="/category/${category_slug}"
-        span.badge-category-parent-bg
+        span.badge-category-parent-bg style="background-color: ${category_color}"
         span.badge-category.clear-badge ${category_name}
 
     td.num.posts-map.post

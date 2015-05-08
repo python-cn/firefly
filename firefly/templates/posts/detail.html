@@ -14,7 +14,7 @@
         - if post.category
           div.category-title
             a.badge-wrapper.bullet href="/c/${post.category.id}"
-              span.badge-category-bg style="background-color: #0E76BD;"
+              span.badge-category-bg style="background-color: ${post.category.color if post.category else '#999'}"
               span.badge-category.clear-badge style="color: #FFFFFF;" title="${post.category.description}"
                 ${post.category.name}
   div.container.posts
