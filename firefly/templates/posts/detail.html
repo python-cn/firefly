@@ -32,25 +32,25 @@
                 cn = 'Test'
                 def url(self):
                   return '/user/1000001'
-              # author = p.author
-              author = c()
+              author = p.author if p.author else c()
+              author_name = author.name if author.name else author.cn
             div#${cloak_id}.post-cloak data-comment-id=${p.id} data-order-id=${index}
               div.topic-post.clearfix.regular
                 article.boxed data-user-id="${author.id}" data-post-id="${p.id}"
                   div.row
                     div.topic-avatar
                       div.contents
-                      a href="${author.url()}" data-user-card="${author.name}"
+                      a href="${author.url()}" data-user-card="${author_name}"
                         img.avatar alt="" width="45" height="45" src="${author.avatar}" title="${author.name}"
                     div.topic-body
                       div.topic-meta-data
                         div.names.trigger-user-card
                           span.username.staff
-                            a href="${author.url()}" data-user-card="${author.name}"
-                              ${author.name}
+                            a href="${author.url()}" data-user-card="${author_name}"
+                              ${author_name}
                             i.fa.fa-shield title="This user is a moderator" alt="This user is a moderator"
                           span.full-name
-                            a href="${author.url()}" data-user-card="${author.name}"
+                            a href="${author.url()}" data-user-card="${author_name}"
                               ${author.cn}
                           span.user-title
                             a.user-group href="/groups/discourse"
@@ -79,7 +79,7 @@
                         section.post-menu-area.clearfix
                           nav.post-controls
                             -py
-                              coments = p.get_replies() if p.post_type == 'Coment' else []
+                              coments = p.get_replies() if p.post_type == 'Comment' else []
                             -if coments:
                               button.show-replies
                                 span.badge-posts

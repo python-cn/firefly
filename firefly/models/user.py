@@ -54,6 +54,11 @@ class User(db.Document, UserMixin):
     roles = fields.ListField(
         fields.ReferenceField(Role, reverse_delete_rule=DENY), default=[])
 
+    def __str__(self):
+        return self.cn
+
+    __unicode__ = __str__
+
     def url(self):
         return url_for('user', kwargs={'username': self.username})
 
@@ -113,14 +118,17 @@ class User(db.Document, UserMixin):
         else:
             return result
 
+<<<<<<< HEAD
     def __unicode__(self):
         return self.username
 
+=======
+>>>>>>> Create topic with user
     @property
     def cn(self):
-        if not self.first_name or not self.last_name:
-            return self.email
-        return '{} {}'.format(self.first_name, self.last_name)
+        return ' '.join([name.encode('utf-8')
+                         for name in (self.first_name,  self.last_name)
+                         if name])
 
     @property
     def id(self):

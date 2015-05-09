@@ -8,6 +8,7 @@ from flask_login import login_user
 
 from firefly.forms.user import LoginForm, RegisterForm
 from firefly.models.topic import Category, Post
+from firefly.models.user import User
 
 
 bp = Blueprint("home", __name__, url_prefix="/")
@@ -27,7 +28,8 @@ class CreateView(MethodView):
         if category_id.isdigit():
             category_id = int(category_id)
         category = Category.objects.filter(id=category_id).first()
-        post = Post(title=title, content=content, category=category)
+        post = Post(title=title, content=content, category=category,
+                    author=User.objects.get_or_404(id=current_user.id))
         post.save()
         html = render_template_def(
             '/widgets/topic_item.html', 'main', post=post, is_new=True)

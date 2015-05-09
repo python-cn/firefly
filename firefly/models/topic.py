@@ -107,6 +107,5 @@ class Comment(db.Document):
     def post_type(self):
         return self.__class__.__name__
 
-    @classmethod
-    def get_replies(cls):
-        cls.objects.filter(ref_id=cls.ref_id)
+    def get_replies(self):
+        return Comment.objects.filter(ref_id=self.id)
