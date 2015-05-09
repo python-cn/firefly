@@ -7,7 +7,7 @@
         登录
       div.clearfix
 
-    form#signinform.login-form" role="form"
+    form#signinform.login-form" role="form" method="post" action="${url_for('home.login')}"
       div.form-group
         label.control-label for=""
           第三方登录
@@ -45,7 +45,7 @@
         注册
       div.clearfix
 
-    form#signupform.login-form" role="form"
+    form#signupform.login-form" role="form" method="post" action="${url_for('home.register')}"
       div.form-group
         label.control-label for=""
           第三方注册
