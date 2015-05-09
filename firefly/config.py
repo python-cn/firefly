@@ -35,6 +35,8 @@ SECURITY_RECOVERABLE = True
 SECURITY_CHANGEABLE = True
 SECURITY_DEFAULT_REMEMBER_ME = True
 CSRF_ENABLED = True
+SECURITY_LOGIN_URL = '/security/login'
+SECURITY_REGISTER_URL = '/security/register'
 
 try:
     from .local_settings import *  # noqa

@@ -34,9 +34,9 @@ class Role(db.Document, RoleMixin):
 class User(db.Document, UserMixin):
     id = db.SequenceField(primary_key=True)
     created_at = db.DateTimeField(default=datetime.utcnow, required=True)
-    name = db.StringField(max_length=25)
+    username = db.StringField(max_length=25)
     email = db.StringField(max_length=255)
-    encrypted_password = db.StringField(max_length=255)
+    password = db.StringField(max_length=255)
     current_sign_in_at = db.DateTimeField(default=datetime.utcnow,
                                           required=True)
     last_sign_in_at = db.DateTimeField(default=datetime.utcnow)
@@ -55,7 +55,7 @@ class User(db.Document, UserMixin):
         fields.ReferenceField(Role, reverse_delete_rule=DENY), default=[])
 
     def url(self):
-        return url_for('user', kwargs={'name': self.name})
+        return url_for('user', kwargs={'username': self.username})
 
     def avatar(self, size=48):
         return "%s%s.jpg?size=%s".format(
@@ -63,7 +63,7 @@ class User(db.Document, UserMixin):
         )
 
     @staticmethod
-    def generate_encrypted_password(password):
+    def generate_password(password):
         return security.generate_password_hash(
             current_app.config['SECRET_KEY'] + password
         )
@@ -72,9 +72,22 @@ class User(db.Document, UserMixin):
     def create_token(length=16):
         return security.gen_salt(length)
 
+    @classmethod
+    def create_user(cls, username, email, password, **kwargs):
+        password = cls.generate_password(password)
+        return cls.objects.create(
+            username=username, email=email, password=password, **kwargs
+        )
+
+    def check_password(self, password):
+        return security.check_password_hash(
+            self.password,
+            current_app.config['SECRET_KEY'] + password
+        )
+
     def reset_password(self):
-        redis_store.set(self.name + 'token', self.create_token())
-        redis_store.expire(self.name + 'token', 3600)
+        redis_store.set(self.username + 'token', self.create_token())
+        redis_store.expire(self.username + 'token', 3600)
         msg = Message("Reset your password",
                       sender=current_app.config['MAIL_DEFAULT_SENDER'],
                       recipients=[self.email])
@@ -82,7 +95,7 @@ class User(db.Document, UserMixin):
         mail.send(msg)
 
     def verify_reset_password_token(self, token):
-        if token != redis_store.get(self.name + 'token'):
+        if token != redis_store.get(self.username + 'token'):
             return False, 'token expired or wrong'
         else:
             return True, 'success'
@@ -90,20 +103,18 @@ class User(db.Document, UserMixin):
     def change_password(self, password, token):
         result = self.verify_reset_password_token(token)
         if result[0]:
-            if self.encrypted_password == User.generate_encrypted_password(
-                    password):
+            if self.password == User.generate_password(password):
                 return False, 'duplicate password'
             else:
-                self.encrypted_password = User.generate_encrypted_password(
-                    password)
+                self.password = User.generate_password(password)
                 self.save()
-                redis_store.remove(self.name + 'token')
+                redis_store.remove(self.username + 'token')
                 return True, 'success'
         else:
             return result
 
     def __unicode__(self):
-        return self.name
+        return self.username
 
     @property
     def cn(self):
@@ -136,9 +147,9 @@ class SocialConnection(db.Document):
     email = db.StringField(max_length=255)
     access_token = db.StringField(max_length=255)
     secret = db.StringField(max_length=255)
-    first_name = db.StringField(max_length=255, help_text=_(u'First Name'))
-    last_name = db.StringField(max_length=255, help_text=_(u'Last Name'))
-    cn = db.StringField(max_length=255, help_text=_(u'Common Name'))
+    first_name = db.StringField(max_length=255, help_text=_('First Name'))
+    last_name = db.StringField(max_length=255, help_text=_('Last Name'))
+    cn = db.StringField(max_length=255, help_text=_('Common Name'))
     profile_url = db.StringField(max_length=512)
     image_url = db.StringField(max_length=512)
 
