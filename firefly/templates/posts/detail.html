@@ -28,12 +28,12 @@
               class c(object):
                 id = 100001
                 name = 'test1'
-                avatar = 'https://meta-discourse.global.ssl.fastly.net/user_avatar/meta.discourse.org/codinghorror/90/5297.png'
+                avatar = lambda x:'https://meta-discourse.global.ssl.fastly.net/user_avatar/meta.discourse.org/codinghorror/90/5297.png'
                 cn = 'Test'
                 def url(self):
                   return '/user/1000001'
               author = p.author if p.author else c()
-              author_name = author.username if author.username else author.cn
+              author_name = author.username if hasattr(author, 'username') and author.username else author.cn
             div#${cloak_id}.post-cloak data-comment-id=${p.id} data-order-id=${index}
               div.topic-post.clearfix.regular
                 article.boxed data-user-id="${author.id}" data-post-id="${p.id}"

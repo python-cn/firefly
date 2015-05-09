@@ -12,6 +12,7 @@ from flask_mail import Message
 from flask_login import login_user
 from flask_security import UserMixin, RoleMixin
 
+from firefly.six import unicode
 from firefly.ext import db, mail, redis_store
 
 

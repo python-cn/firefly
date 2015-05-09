@@ -25,11 +25,14 @@ class CreateView(MethodView):
         title = request.form.get('title')
         content = request.form.get('content')
         category_id = request.form.get('category', '')
+        author_id = request.form.get('author', '')
         if category_id.isdigit():
             category_id = int(category_id)
+        if not author_id:
+            author_id = current_user.id
         category = Category.objects.filter(id=category_id).first()
         post = Post(title=title, content=content, category=category,
-                    author=User.objects.get_or_404(id=current_user.id))
+                    author=User.objects.get_or_404(id=author_id))
         post.save()
         html = render_template_def(
             '/widgets/topic_item.html', 'main', post=post, is_new=True)
