@@ -58,7 +58,7 @@ class User(db.Document, UserMixin):
         return self.cn
 
     def url(self):
-        return url_for('user', kwargs={'username': self.username})
+        return url_for('user.detail', id=str(self.id))
 
     @property
     def email_md5(self):

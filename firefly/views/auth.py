@@ -1,5 +1,5 @@
-from __future__ import absolute_import
 # coding=utf-8
+from __future__ import absolute_import
 from flask.blueprints import Blueprint
 from flask_mako import render_template
 from flask_security import login_required

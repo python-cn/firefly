@@ -61,7 +61,7 @@ html
                   img.site-logo.logo-big src="${url_for('static', filename='pics/dongxi.jpg')}" alt='pythoncn'
               div.panel
                 - if current_user.is_authenticated()
-                  Hi ${current_user.username}
+                  Hi ${current_user.username if current_user.username else current_user.cn}
                   a.btn-primary.btn-small.btn.sign-out-button title='退出' href="${url_for('security.logout')}"
                     i.fa.fa-sign-out
                     退出

@@ -33,7 +33,7 @@
                 def url(self):
                   return '/user/1000001'
               author = p.author if p.author else c()
-              author_name = author.name if author.name else author.cn
+              author_name = author.username if author.username else author.cn
             div#${cloak_id}.post-cloak data-comment-id=${p.id} data-order-id=${index}
               div.topic-post.clearfix.regular
                 article.boxed data-user-id="${author.id}" data-post-id="${p.id}"
@@ -41,7 +41,7 @@
                     div.topic-avatar
                       div.contents
                       a href="${author.url()}" data-user-card="${author_name}"
-                        img.avatar alt="" width="45" height="45" src="${author.avatar()}" title="${author.name}"
+                        img.avatar alt="" width="45" height="45" src="${author.avatar()}" title="${author_name}"
                     div.topic-body
                       div.topic-meta-data
                         div.names.trigger-user-card
