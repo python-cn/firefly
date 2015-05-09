@@ -79,8 +79,6 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 提醒模型(类似豆瓣的提醒)
 - [ ] 社区的消息push, 我目前想的是一个websocket. 通过js获得数据渲染(有相关工作经验的最好)
 
-
-
 #### 全局相关
 
 - [ ] 全局的log系统, 用于debug. 产生应用的log等. 有点tornado的效果. 可配置的 类似fabric
@@ -91,19 +89,18 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] [additional]社区事件系统, 无论做什么操作, 都是一个事件, 能够容易的单个人获得操作记录, 单种类型的操作记录, 比如可以列出来创建主题的时间列表
 - [ ] [additional]把现有的代码都补上事件
 
-
 ### 纯前端
 
 - [ ] 首页注册和登陆页面的浏览器兼容性(chrome下正常, FF下不正常)
 - [ ] @ 能弹出被@用户
 - [ ] 站内信未读 给标志标示
 - [ ] 主题内容在首页就可以预览, 可以选择`阅读更多`点到单个主题页
+- [ ] 单独评论页面
 - [x] 使用sweetalert替代alert - [dongweiming]
 - [x] 让每个主题页面(http://web:port/post/post_id/)里面显示出评论的内容. - [dongweiming]
 - [x] 注册页面当用户名/密码/邮箱都有正确输入的时候让`注册`按钮变成enable - [dongweiming]
 - [x] 用户创建新主题后会使用[Effeckt.css](https://github.com/h5bp/Effeckt.css), 闪到主题列表的最上面 - [dongweiming]
 - [x] 每当用户发表新的评论, 应该把该主题提到最前(最近活跃) - [dongweiming]
-
 
 ### 测试
 
@@ -118,6 +115,7 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] @ 的消息能被该用户收到提醒
 - [ ] 个人页面可以拉取用户的对应网站的数据. 比如github的源列表, star数, following数.
 - [ ] 拉取用户对应网站数据的设计, 可以使用celery, rq等.
+- [ ] 每个评论都可以单独打开, 模板和主题页一样, 但是下面的列表是对这个评论的评论
 - [ ] [additional]使用站内信和其他人私聊
 - [x] 首页渲染时, 能获得某主题对应的分类. - [mozillazg]
 - [x] 豆瓣oauth2登录 - [halfcrazy]
@@ -125,7 +123,6 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [x] 设计阅读量的实现, 就是刷新一下页面, 阅读量就会+1 - [mozillazg]
 - [x] 主题的分类model的接口. 前端可以通过ajax调用这个url 获得全部的分类信息: 分类id, 分类名, 分类描述 - [halfcrazy]
 - [x] 主题的分类model, 早期可以是先插入的一些固定数据,比如devops, web开发, 爬虫..(选项不重要, 要有后台的支持) - [halfcrazy]
-
 
 ### 前+后端
 
@@ -161,9 +158,12 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] 用户可以在个人页面看到自己收藏的内容列表
 - [ ] 一个分类explore页面, 包含目前所有的分类列表, 最好有一定排序 https://meta.discourse.org/categories
 - [ ] 模仿discourse, 对于回应数/喜欢数/访问数/最近活跃时间等根据数量的差别显示不同的颜色
+- [ ] 发表的主题可以选择多个分类
+- [ ] 发表的主题可以选择标签
 - [x] 创建主题时候可以通过select2选择分类, 效果类似meta.discourse.org创建主题的分类下拉框效果(可以只是功能, 没有css样式) - [mozillazg]
 - [x] 创建请求中会带上分类的参数, 后端save的时候会生成含有分类的主题(Post) - [mozillazg]
 - [x] 和github一样. 有页面的键盘快捷键, 给这种类型的geek最好的体验 - [dongweiming]
+- [x] 不同分类有不同的标示颜色 - [dongweiming]
 
 
 ### 算法
@@ -209,7 +209,6 @@ PS: 其他的firefly的依赖的列表在这里: http://python-cn.github.io/#/po
 - [ ] QQoauth2登录
 - [ ] 本站注册登录
 - [ ] 禁用用户功能
-- [ ] 不同分类有不同的标示颜色
 
 贡献者列表可以看这里: [CONTRIBUTORS.txt](https://github.com/python-cn/firefly/blob/master/CONTRIBUTORS.txt)
 
