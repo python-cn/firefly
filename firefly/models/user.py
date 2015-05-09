@@ -1,7 +1,7 @@
 # coding=utf-8
 '''Define Schema'''
 from __future__ import absolute_import
-
+import hashlib
 from datetime import datetime
 
 from flask import url_for, current_app
@@ -57,13 +57,18 @@ class User(db.Document, UserMixin):
     def __str__(self):
         return self.cn
 
-    __unicode__ = __str__
-
     def url(self):
         return url_for('user', kwargs={'username': self.username})
 
+    @property
+    def email_md5(self):
+        email = self.email.strip()
+        if isinstance(email, unicode):
+            email = email.encode('utf-8')
+        return hashlib.md5(email).hexdigest()
+
     def avatar(self, size=48):
-        return "%s%s.jpg?size=%s".format(
+        return "{0}{1}.jpg?size={2}".format(
             current_app.config['GRAVATAR_BASE_URL'], self.email_md5, size
         )
 
@@ -118,16 +123,13 @@ class User(db.Document, UserMixin):
         else:
             return result
 
-<<<<<<< HEAD
     def __unicode__(self):
         return self.username
 
-=======
->>>>>>> Create topic with user
     @property
     def cn(self):
         return ' '.join([name.encode('utf-8')
-                         for name in (self.first_name,  self.last_name)
+                         for name in (self.first_name, self.last_name)
                          if name])
 
     @property

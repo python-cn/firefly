@@ -4,7 +4,7 @@ from flask import request, jsonify, redirect, url_for
 from flask.views import MethodView
 from flask.blueprints import Blueprint
 from flask_mako import render_template, render_template_def
-from flask_login import login_user
+from flask_login import login_user, current_user
 
 from firefly.forms.user import LoginForm, RegisterForm
 from firefly.models.topic import Category, Post

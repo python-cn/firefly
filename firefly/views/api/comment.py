@@ -20,12 +20,12 @@ class ReplyApi(Resource):
             res.append({
                 'id': reply.id,
                 'author_name': author.name,
-                'author_avatar': author.avatar,
-                'author_url': author.url,
+                'author_avatar': author.avatar(),
+                'author_url': author.url(),
                 'author_title': '',
                 'content': reply.content,
                 'short_create_at': short_timesince(reply.created_at),
-                'short_create_at': reply.created_at
+                'create_at': reply.created_at.strftime('%H:%M %Y-%m-%d')
             })
         status_fields.update({'result': res})
         return status_fields

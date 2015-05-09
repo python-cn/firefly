@@ -41,7 +41,7 @@
                     div.topic-avatar
                       div.contents
                       a href="${author.url()}" data-user-card="${author_name}"
-                        img.avatar alt="" width="45" height="45" src="${author.avatar}" title="${author.name}"
+                        img.avatar alt="" width="45" height="45" src="${author.avatar()}" title="${author.name}"
                     div.topic-body
                       div.topic-meta-data
                         div.names.trigger-user-card
@@ -96,6 +96,7 @@
                               button.create title='评论'
                                 i.fa.fa-reply
                                 评论
+                      section.embedded-posts.bottom.hide
 
 -def head_script()
   link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
