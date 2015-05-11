@@ -43,9 +43,9 @@ class User(db.Document, UserMixin):
     last_sign_in_at = db.DateTimeField(default=datetime.utcnow)
     current_sign_in_ip = db.StringField(max_length=255)
     last_sign_in_ip = db.StringField(max_length=255)
-    following = db.ListField(db.ReferenceField('User'))
-    follower = db.ListField(db.ReferenceField('User'))
-    blocked_user_id = db.ListField(db.IntField(), default=[])
+    following = db.ListField(db.ReferenceField('User', dbref=True))
+    follower = db.ListField(db.ReferenceField('User', dbref=True))
+    blocked_user_id = db.ListField(db.StringField(), default=[])
 
     active = db.BooleanField(default=True)  # we can deactive spammer.
     confirmed_at = fields.DateTimeField()  # use social provider register at
