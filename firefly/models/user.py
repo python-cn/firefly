@@ -1,7 +1,7 @@
 # coding=utf-8
 '''Define Schema'''
 from __future__ import absolute_import
-
+import hashlib
 from datetime import datetime
 
 from flask import url_for, current_app
@@ -12,6 +12,7 @@ from flask_mail import Message
 from flask_login import login_user
 from flask_security import UserMixin, RoleMixin
 
+from firefly.six import unicode
 from firefly.ext import db, mail, redis_store
 
 
@@ -54,11 +55,21 @@ class User(db.Document, UserMixin):
     roles = fields.ListField(
         fields.ReferenceField(Role, reverse_delete_rule=DENY), default=[])
 
+    def __str__(self):
+        return self.cn
+
     def url(self):
-        return url_for('user', kwargs={'username': self.username})
+        return url_for('user.detail', id=str(self.id))
+
+    @property
+    def email_md5(self):
+        email = self.email.strip()
+        if isinstance(email, unicode):
+            email = email.encode('utf-8')
+        return hashlib.md5(email).hexdigest()
 
     def avatar(self, size=48):
-        return "%s%s.jpg?size=%s".format(
+        return "{0}{1}.jpg?size={2}".format(
             current_app.config['GRAVATAR_BASE_URL'], self.email_md5, size
         )
 
@@ -118,9 +129,9 @@ class User(db.Document, UserMixin):
 
     @property
     def cn(self):
-        if not self.first_name or not self.last_name:
-            return self.email
-        return '{} {}'.format(self.first_name, self.last_name)
+        return ' '.join([name.encode('utf-8')
+                         for name in (self.first_name, self.last_name)
+                         if name])
 
     @property
     def id(self):
