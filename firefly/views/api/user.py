@@ -19,8 +19,10 @@ class FollowUserApi(Resource):
             status_fields = generate_status_fields(NOTFOUND)
             return status_fields, 404
         if user not in current_user.following:
-            current_user.update_one(push_follwing=user)
-            user.update_one(push_follwer=current_user)
+            User.objects(id=current_user.id) \
+                .update_one(push__following=user.to_dbref())
+            User.objects(id=id) \
+                .update_one(push__follower=current_user.to_dbref())
             status_fields = generate_status_fields(OK)
         else:
             status_fields = generate_status_fields(EXISTING)
@@ -32,12 +34,14 @@ class FollowUserApi(Resource):
             status_fields = generate_status_fields(NOTFOUND)
             return status_fields, 404
         if user in current_user.following:
-            current_user.update_one(pull_follwing=user)
-            user.update_one(pull_follwer=current_user)
+            User.objects(id=current_user.id) \
+                .update_one(pull__following=user.to_dbref())
+            User.objects(id=id) \
+                .update_one(pull__follower=current_user.to_dbref())
             status_fields = generate_status_fields(OK)
         else:
             status_fields = generate_status_fields(NOTFOUND)
-        return status_fields, 204
+        return status_fields, 200
 
 
 class BlockUserApi(Resource):
@@ -50,7 +54,8 @@ class BlockUserApi(Resource):
             status_fields = generate_status_fields(NOTFOUND)
             return status_fields, 404
         if id not in current_user.blocked_user_id:
-            current_user.update_one(push_blocked_user_id=id)
+            User.objects(id=current_user.id) \
+                .update_one(push__blocked_user_id=id)
             status_fields = generate_status_fields(OK)
         else:
             status_fields = generate_status_fields(EXISTING)
@@ -62,8 +67,9 @@ class BlockUserApi(Resource):
             status_fields = generate_status_fields(NOTFOUND)
             return status_fields, 404
         if id in current_user.blocked_user_id:
-            current_user.update_one(pull_blocked_used_id=id)
+            User.objects(id=current_user.id) \
+                .update_one(pull__blocked_user_id=id)
             status_fields = generate_status_fields(OK)
         else:
             status_fields = generate_status_fields(NOTFOUND)
-        return status_fields, 204
+        return status_fields, 200
