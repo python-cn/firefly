@@ -1,5 +1,5 @@
-from __future__ import absolute_import
 # coding=utf-8
+from __future__ import absolute_import
 from flask import url_for
 from flask_login import current_user
 import pytest
@@ -51,8 +51,7 @@ class TestUser:
         # test unfollow
         url = url_for('api.followuserapi', id=self.users[1].id)
         rv = self.client.delete(url, buffered=True)
-        assert rv.status_code == 200
-        assert rv.json['status'] == OK
+        assert rv.status_code == 204
         self.users[0].reload()
         self.users[1].reload()
         assert self.users[0].following == []
@@ -72,7 +71,6 @@ class TestUser:
         # test unblock
         url = url_for('api.blockuserapi', id=self.users[1].id)
         rv = self.client.delete(url, buffered=True)
-        assert rv.status_code == 200
-        assert rv.json['status'] == OK
+        assert rv.status_code == 204
         self.users[0].reload()
         assert self.users[0].following == []

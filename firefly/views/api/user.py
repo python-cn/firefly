@@ -38,10 +38,7 @@ class FollowUserApi(Resource):
                 .update_one(pull__following=user.to_dbref())
             User.objects(id=id) \
                 .update_one(pull__follower=current_user.to_dbref())
-            status_fields = generate_status_fields(OK)
-        else:
-            status_fields = generate_status_fields(NOTFOUND)
-        return status_fields, 200
+        return '', 204
 
 
 class BlockUserApi(Resource):
@@ -69,7 +66,4 @@ class BlockUserApi(Resource):
         if id in current_user.blocked_user_id:
             User.objects(id=current_user.id) \
                 .update_one(pull__blocked_user_id=id)
-            status_fields = generate_status_fields(OK)
-        else:
-            status_fields = generate_status_fields(NOTFOUND)
-        return status_fields, 200
+        return '', 204
