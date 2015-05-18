@@ -87,15 +87,17 @@
                                 Replies
                                 i.fa.fa-chevron-down
                             div.actions
-                              button.like title='喜欢这个主题?'
-                                i.fa.fa-heart
+                              - if current_user.is_authenticated()
+                                button.like title='喜欢这个主题?'
+                                  i.fa.fa-heart
                               button title='分享' data-share-url="/t/dd"
                                 i.fa.fa-link
-                              button.bookmark title='标记'
-                                div.read-icon
-                              button.create title='评论'
-                                i.fa.fa-reply
-                                评论
+                              - if current_user.is_authenticated()
+                                button.bookmark title='标记'
+                                  div.read-icon
+                                button.create title='评论'
+                                  i.fa.fa-reply
+                                  评论
                       section.embedded-posts.bottom.hide
 
 -def head_script()
@@ -109,5 +111,6 @@
       require(['post']);
     });
 
-- def others()
-  ${widgets_editor.topic()}
+- if current_user.is_authenticated()
+  - def others()
+    ${widgets_editor.topic()}

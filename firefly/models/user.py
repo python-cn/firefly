@@ -90,6 +90,9 @@ class User(db.Document, UserMixin):
             username=username, email=email, password=password, **kwargs
         )
 
+    def set_password(self, password):
+        self.password = self.generate_password(password)
+
     def check_password(self, password):
         return security.check_password_hash(
             self.password,
