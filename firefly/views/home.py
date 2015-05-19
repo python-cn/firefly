@@ -4,7 +4,7 @@ from flask import request, jsonify, redirect, url_for
 from flask.views import MethodView
 from flask.blueprints import Blueprint
 from flask_mako import render_template, render_template_def
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, login_required
 
 from firefly.forms.user import LoginForm, RegisterForm
 from firefly.models.topic import Category, Post
@@ -21,15 +21,15 @@ class HomeView(MethodView):
 
 
 class CreateView(MethodView):
+    decorators = [login_required]
+
     def post(self):
         title = request.form.get('title')
         content = request.form.get('content')
         category_id = request.form.get('category', '')
-        author_id = request.form.get('author', '')
         if category_id.isdigit():
             category_id = int(category_id)
-        if not author_id:
-            author_id = current_user.id
+        author_id = current_user.id
         category = Category.objects.filter(id=category_id).first()
         post = Post(title=title, content=content, category=category,
                     author=User.objects.get_or_404(id=author_id))

@@ -25,9 +25,10 @@
         li title="all topics grouped by category"
           a href="/categories"
             Categories
-      button#create-topic.btn.btn-default.right
-        i.fa.fa-plus
-        New Topic
+      - if current_user.is_authenticated()
+        button#create-topic.btn.btn-default.right
+          i.fa.fa-plus
+          New Topic
   div.container.list-container
     div#list-area
       div.contents
@@ -49,8 +50,9 @@
             -for post in posts
               ${topic_item.main(post)}
 
--def others()
-  ${widgets_editor.index()}
+- if current_user.is_authenticated()
+  -def others()
+    ${widgets_editor.index()}
 
 -def head_script()
   link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"

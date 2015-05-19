@@ -1,11 +1,13 @@
-from __future__ import absolute_import
 # coding=utf-8
-from flask import request, redirect, url_for
+from __future__ import absolute_import
+from flask import request, redirect, url_for, abort
 from flask.views import MethodView
 from flask.blueprints import Blueprint
 from flask_mako import render_template
 from flask_mongoengine.wtf import model_form
+from flask_login import current_user
 
+from firefly.models.user import User
 from firefly.models.topic import Post, Comment
 
 
@@ -32,12 +34,16 @@ class DetailView(MethodView):
         return render_template('posts/detail.html', **context)
 
     def post(self, id):
+        if not current_user.is_authenticated():
+            abort(403)
+
         context = self.get_context(id)
         form = context.get('form')
 
         if form.validate():
             comment = Comment()
             form.populate_obj(comment)
+            comment.author = User.objects.get_or_404(id=current_user.id)
             comment.save()
 
             post = context.get('post')
