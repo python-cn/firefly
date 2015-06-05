@@ -58,10 +58,8 @@ define(['jquery', 'sweetAlert'], function($, sweetAlert) {
     },
 
     reply : function(){
-      var title = $('#reply-title').val();
       var _this = this;
-      var params, content = [];
-      var category = $('#reply-category').val();
+      var params, text, content = [];
       $('.CodeMirror-code pre span[style]').each(
         function () {
           text = $(this).text();
@@ -69,13 +67,6 @@ define(['jquery', 'sweetAlert'], function($, sweetAlert) {
         }
       );
 
-      if (!title.length) {
-        sweetAlert({
-          title: "标题没有内容",
-          type: "error"
-        });
-        return
-      }
       if (!content.length) {
         sweetAlert({
           title: "正文内容太少",
@@ -84,19 +75,20 @@ define(['jquery', 'sweetAlert'], function($, sweetAlert) {
         return
       }
       params = {
-        'title': title,
-        'content': content.join('\n'),
-        'category': category
+        'ref_id': $('.reply-to').data('comment-id'),
+        'content': content.join('\n')
       };
       $.ajax({
         type: 'POST',
-        url: '/create',
+        url: '/create/comment',
         traditional: true,
         data: params,
         dataType: "json",
         success: function(res) {
           if (!res.ok) {
-            alert('发表成功');
+            sweetAlert({
+              title: "发表成功"
+            });
             _this.closeModal();
             location.reload();
           }

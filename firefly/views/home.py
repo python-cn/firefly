@@ -7,7 +7,7 @@ from flask_mako import render_template, render_template_def
 from flask_login import login_user, current_user, login_required
 
 from firefly.forms.user import LoginForm, RegisterForm
-from firefly.models.topic import Category, Post
+from firefly.models.topic import Category, Post, Comment
 from firefly.models.user import User
 
 
@@ -20,7 +20,7 @@ class HomeView(MethodView):
         return render_template('index.html', posts=posts)
 
 
-class CreateView(MethodView):
+class CreateTopicView(MethodView):
     decorators = [login_required]
 
     def post(self):
@@ -38,6 +38,28 @@ class CreateView(MethodView):
             '/widgets/topic_item.html', 'main', post=post, is_new=True)
 
         return jsonify(ok=0, html=html)
+
+
+class CreateCommentView(MethodView):
+    decorators = [login_required]
+
+    def post(self):
+        ref_id = request.form.get('ref_id', 0)
+        content = request.form.get('content')
+        author = User.objects.get_or_404(id=current_user.id)
+        c = Comment(ref_id=ref_id, content=content, author=author)
+        c.save()
+        context = Post.objects(id=int(ref_id))
+        if not context:
+            context = Comment.objects(id=int(ref_id))
+            if not context:
+                return jsonify(ok=1, msg='not exists')
+        else:
+            context = context[0]
+            context.comments.append(c)
+            context.save()
+
+        return jsonify(ok=0)
 
 
 class LoginView(MethodView):
@@ -65,6 +87,9 @@ class RegisterView(MethodView):
 
 
 bp.add_url_rule('/', view_func=HomeView.as_view('index'))
-bp.add_url_rule('create', view_func=CreateView.as_view('create'))
+bp.add_url_rule('create/topic',
+                view_func=CreateTopicView.as_view('create_topic'))
+bp.add_url_rule('create/comment',
+                view_func=CreateCommentView.as_view('create_comment'))
 bp.add_url_rule('login', view_func=LoginView.as_view('login'))
 bp.add_url_rule('register', view_func=RegisterView.as_view('register'))
