@@ -138,7 +138,7 @@ define(['jquery', 'sweetAlert', 'select2', 'listItems'], function(
       };
       $.ajax({
         type: 'POST',
-        url: '/create',
+        url: '/create/topic',
         traditional: true,
         data: params,
         dataType: "json",
