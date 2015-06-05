@@ -22,7 +22,7 @@ class TestPost:
     def test_create(self):
 
         category = Category.objects.first()
-        url = url_for('home.create')
+        url = url_for('home.create_topic')
         form = {
             'title': '标题',
             'content': '内容喜喜喜喜喜喜',
@@ -43,10 +43,10 @@ class TestPost:
 
     def test_comment(self):
         post = Post.objects.first()
-        url = url_for('post.detail', id=post.id)
+        url = url_for('home.create_comment')
         form = {
             'content': '评论测试',
-            'ref_id': 0,
+            'ref_id': post.id,
         }
         self.client.post(url, data=form, follow_redirects=False)
         post.reload()
