@@ -62,6 +62,9 @@ html
               div.panel
                 - if current_user.is_authenticated()
                   Hi ${current_user.username if current_user.username else current_user.cn}
+                  a.btn-primary.btn-small.btn.sign-out-button title='站内信' href="${url_for('message.index')}"
+                    i.fa.fa-envelope
+                    站内信
                   a.btn-primary.btn-small.btn.sign-out-button title='退出' href="${url_for('security.logout')}"
                     i.fa.fa-sign-out
                     退出
