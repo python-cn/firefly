@@ -98,7 +98,7 @@ class Quote(Post):
 
 class Comment(db.Document):
     id = db.SequenceField(primary_key=True)
-    created_at = db.DateTimeField(default=datetime.now, required=True)
+    created_at = db.DateTimeField(default=datetime.utcnow, required=True)
     content = db.StringField(verbose_name='Comment', required=True)
     author = db.ReferenceField(User)
     ref_id = db.IntField(default=0)
