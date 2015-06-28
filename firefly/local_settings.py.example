@@ -1,6 +1,12 @@
 # coding=utf-8
+from firefly.six import unicode
 
-SECRET_KEY = '\x97\xfa%\xab\xd2\xc2\xf8\xfc\xef\xaeTKDk\xc0\xe1//($\xc7\xc0'
+
+_secret_key = '\x97\xfa%\xab\xd2\xc2\xf8\xfc\xef\xaeTKDk\xc0\xe1//($\xc7\xc0'
+if isinstance(_secret_key, unicode):
+    SECRET_KEY = _secret_key
+else:
+    SECRET_KEY = unicode(_secret_key)
 
 # mongodb
 MONGODB_SETTINGS = {
