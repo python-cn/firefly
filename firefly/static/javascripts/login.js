@@ -54,8 +54,9 @@ define(['jquery'], function($) {
         registerEnable: function(){
             var EmptyInut = $(this).find('input').filter(
                 function() { return $(this).val() == ""; }),
+                InputPassword = $(this).find('#inputPassword').val(),
                 $registerBtn = $('#signupBtn');
-            if (EmptyInut.length) {
+            if (EmptyInut.length || InputPassword.length < 8) {
                 $registerBtn.attr('disabled', 'disabled');
             } else {
                 $registerBtn.removeAttr('disabled');
