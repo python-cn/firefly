@@ -1,30 +1,24 @@
--py
-  from flask import url_for
-  from flask_login import current_user
-
--namespace name="login_form" login.html
-
-doctype html
-html
-  head
-    meta charset="UTF-8"
-    meta http-equiv="cache-control" content="max-age=0"
-    meta http-equiv="cache-control" content="no-cache"
-    meta http-equiv="pragma" content="no-cache"
-    meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"
-
-    title
-        ${self.title()}
-    link rel="icon" type="image/png" href="${url_for('static', filename='icon.png')}"
-    link href="${url_for('static', filename='stylesheets/hljs.css')}" rel="stylesheet"
-    link href="${url_for('static', filename='stylesheets/themes/zenburn.css')}" rel="stylesheet"
-    script src="${url_for('static', filename='javascripts/libs/require.min.js')}"
-    script
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="cache-control" content="max-age=0"/>
+  <meta http-equiv="cache-control" content="no-cache"/>
+  <meta http-equiv="pragma" content="no-cache"/>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  {% block title %}
+  首页
+  {% endblock %}
+  <link rel="icon" type="image/png" href="${url_for('static', filename='icon.png')}"/>
+  <link href="${url_for('static', filename='stylesheets/hljs.css')}" rel="stylesheet"/>
+  <link href="${url_for('static', filename='stylesheets/themes/zenburn.css')}" rel="stylesheet"/>
+  <script src="${url_for('static', filename='javascripts/libs/require.min.js')}"></script>
+  <script>
       document.write('<script src="http://'
         + (location.host || 'localhost').split(':')[0]
         + ':35729/livereload.js"></'
         + 'script>')
-    style
+  </script>
+  <style>
       @font-face {
         font-family: 'FontAwesome';
         src: url("${url_for('static', filename='fonts/fontawesome-webfont.eot')}");
@@ -35,33 +29,28 @@ html
         font-weight: normal;
         font-style: normal;
       }
-      @font-face {
-        font-family: 'Ionicons';
-        src: url("${url_for('static', filename='fonts/ionicons.eot')}");
-        src: url("${url_for('static', filename='fonts/ionicons.eot#iefix')}") format('embedded-opentype$
-             url("${url_for('static', filename='fonts/ionicons.woff2')}") format('woff2'),
-             url("${url_for('static', filename='fonts/ionicons.woff')}") format('woff'),
-             url("${url_for('static', filename='fonts/ionicons.ttf')}") format('truetype');
-        font-weight: normal;
-        font-style: normal;
-      }
-
-    ${self.head_script()}
-    -block extra_head
-
-  body
-    section#main
-      div.articles
-        header.header
-          .container
-            .contents
-              div.title
-                a href='/'
-                  span class='.valign-helper'
-                  img.site-logo.logo-big src="${url_for('static', filename='pics/firefly.jpg')}" alt='pythoncn'
-              div.panel
-                - if current_user.is_authenticated()
-                  Hi ${current_user.username if current_user.username else current_user.cn}
+  </style>
+  {% block head_script %}
+  {% endblock %}
+  {% block extra_head %}
+  {% endblock %}
+</head>
+<body>
+    <section id="main">
+        <div class="articles">
+            <header class="header">
+                <div class="container">
+                    <div class="contents">
+                        <div class="title">
+                            <a href="/">
+                                <span class=".valign-helper"></span>
+                                <img src="${url_for('static', filename='pics/firefly.jpg')}" alt="pythoncn" class="site-logo logo-big"/>
+                            </a>
+                        </div>
+                        <div class="panel">
+                        {% if current_user.is_authenticated() %}
+                          Hi {{current_user.username if current_user.username else current_user.cn}}
+                        {% endif %}
                   a.btn-primary.btn-small.btn.sign-out-button title='退出' href="${url_for('security.logout')}"
                     i.fa.fa-sign-out
                     退出
