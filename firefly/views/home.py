@@ -1,7 +1,6 @@
 # coding=utf-8
 from __future__ import absolute_import
-from flask import (request, jsonify, redirect, url_for, send_from_directory,
-                   render_template)
+from flask import request, jsonify, redirect, url_for, render_template
 from flask.views import MethodView
 from flask.blueprints import Blueprint
 from flask_mako import render_template_def
@@ -16,6 +15,7 @@ bp = Blueprint("home", __name__, url_prefix="/")
 
 
 class HomeView(MethodView):
+
     def get(self):
         posts = Post.objects.all()
         return render_template('index.html', posts=posts)
@@ -64,6 +64,7 @@ class CreateCommentView(MethodView):
 
 
 class LoginView(MethodView):
+
     def get(self):
         return redirect(url_for('home.index'))
 
@@ -76,6 +77,7 @@ class LoginView(MethodView):
 
 
 class RegisterView(MethodView):
+
     def get(self):
         return redirect(url_for('home.index'))
 
