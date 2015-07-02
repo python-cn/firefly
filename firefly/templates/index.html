@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import 'widgets/markdown_editor.html' as markdown_editor %}
 
 {% block title %}
   首页
@@ -95,6 +96,10 @@
 <link href="{{url_for('static', filename='stylesheets/select2.min.css')}}" rel="stylesheet"/>
 <link href="{{url_for('static', filename='stylesheets/effeckt/list-items.css')}}" rel="stylesheet"/>
 <link href="{{url_for('static', filename='stylesheets/index.css')}}" rel="stylesheet" media="all"/>
+{% endblock %}
+
+{% block others %}
+  {{ markdown_editor.index() }}
 {% endblock %}
 
 {% block footer_script %}
