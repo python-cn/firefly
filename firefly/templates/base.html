@@ -1,100 +1,90 @@
--py
-  from flask import url_for
-  from flask_login import current_user
-
--namespace name="login_form" login.html
-
-doctype html
-html
-  head
-    meta charset="UTF-8"
-    meta http-equiv="cache-control" content="max-age=0"
-    meta http-equiv="cache-control" content="no-cache"
-    meta http-equiv="pragma" content="no-cache"
-    meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"
-
-    title
-        ${self.title()}
-    link rel="icon" type="image/png" href="${url_for('static', filename='icon.png')}"
-    link href="${url_for('static', filename='stylesheets/hljs.css')}" rel="stylesheet"
-    link href="${url_for('static', filename='stylesheets/themes/zenburn.css')}" rel="stylesheet"
-    script src="${url_for('static', filename='javascripts/libs/require.min.js')}"
-    script
+{% import 'login.html' as login_form %}
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="cache-control" content="max-age=0"/>
+  <meta http-equiv="cache-control" content="no-cache"/>
+  <meta http-equiv="pragma" content="no-cache"/>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  {% block title %}
+  {% endblock %}
+  <link rel="icon" type="image/png" href="${url_for('static', filename='icon.png')}"/>
+  <link href="{{url_for('static', filename='stylesheets/hljs.css')}}" rel="stylesheet"/>
+  <link href="{{url_for('static', filename='stylesheets/themes/zenburn.css')}}" rel="stylesheet"/>
+  <script src="{{url_for('static', filename='javascripts/libs/require.min.js')}}"></script>
+  <script>
       document.write('<script src="http://'
         + (location.host || 'localhost').split(':')[0]
         + ':35729/livereload.js"></'
         + 'script>')
-    style
+  </script>
+  <style>
       @font-face {
         font-family: 'FontAwesome';
-        src: url("${url_for('static', filename='fonts/fontawesome-webfont.eot')}");
-        src: url("${url_for('static', filename='fonts/fontawesome-webfont.eot#iefix')}") format('embedded-opentype'),
-             url("${url_for('static', filename='fonts/fontawesome-webfont.woff2')}") format('woff2'),
-             url("${url_for('static', filename='fonts/fontawesome-webfont.woff')}") format('woff'),
-             url("${url_for('static', filename='fonts/fontawesome-webfont.ttf')}") format('truetype');
+        src: url("{{url_for('static', filename='fonts/fontawesome-webfont.eot')}}");
+        src: url("{{url_for('static', filename='fonts/fontawesome-webfont.eot#iefix')}}") format('embedded-opentype'),
+             url("{{url_for('static', filename='fonts/fontawesome-webfont.woff2')}}") format('woff2'),
+             url("{{url_for('static', filename='fonts/fontawesome-webfont.woff')}}") format('woff'),
+             url("{{url_for('static', filename='fonts/fontawesome-webfont.ttf')}}") format('truetype');
         font-weight: normal;
         font-style: normal;
       }
-      @font-face {
-        font-family: 'Ionicons';
-        src: url("${url_for('static', filename='fonts/ionicons.eot')}");
-        src: url("${url_for('static', filename='fonts/ionicons.eot#iefix')}") format('embedded-opentype$
-             url("${url_for('static', filename='fonts/ionicons.woff2')}") format('woff2'),
-             url("${url_for('static', filename='fonts/ionicons.woff')}") format('woff'),
-             url("${url_for('static', filename='fonts/ionicons.ttf')}") format('truetype');
-        font-weight: normal;
-        font-style: normal;
-      }
-
-    ${self.head_script()}
-    -block extra_head
-
-  body
-    section#main
-      div.articles
-        header.header
-          .container
-            .contents
-              div.title
-                a href='/'
-                  span class='.valign-helper'
-                  img.site-logo.logo-big src="${url_for('static', filename='pics/firefly.jpg')}" alt='pythoncn'
-              div.panel
-                - if current_user.is_authenticated()
-                  Hi ${current_user.username if current_user.username else current_user.cn}
-                  a.btn-primary.btn-small.btn.sign-out-button title='退出' href="${url_for('security.logout')}"
-                    i.fa.fa-sign-out
-                    退出
-                - else
-                  button.btn-primary.btn-small.btn.sign-up-button title='注册'
-                    注册
-                  button.btn-primary.btn-small.btn.login-button title='登录'
-                    i.fa
-                    登录
-        div#main-outlet
-          ${self.outlet()}
-        div#login-modal.modal.hide
-          ${self.login()}
-        div.facebox.hide
-          div.facebox-popup
-            div.shortcuts
-            a.facebox-close.js-facebox-close
-              i.fa.fa-times
-        div.facebox-overlay.hide
-
-    ${self.others()}
-    ${self.footer_script()}
-
--def title()
-
--def head_script()
-
--def footer_script()
-
--def others()
-
--def outlet()
-
--def login()
-  ${login_form.signin()}
-  ${login_form.signup()}
+  </style>
+  {% block head_script %}
+  {% endblock %}
+  {% block extra_head %}
+  {% endblock %}
+</head>
+<body>
+    <section id="main">
+        <div class="articles">
+            <header class="header">
+                <div class="container">
+                    <div class="contents">
+                        <div class="title">
+                            <a href="/">
+                                <span class=".valign-helper"></span>
+                                <img src="{{url_for('static', filename='pics/firefly.jpg')}}" alt="pythoncn" class="site-logo logo-big"/>
+                            </a>
+                        </div>
+                        <div class="panel">
+                        {% if current_user.is_authenticated() %}
+                            Hi {{current_user.username if current_user.username else current_user.cn}}
+                            <a title="退出" class="btn-primary btn-small btn sign-out-button" href="${url_for('security.logout')}">
+                            </a>
+                        {% else %}
+                            <button title="注册" class="btn-primary btn-small btn sign-up-button">注册</button>
+                            <button title="登录" class="btn-primary btn-small btn login-button">
+                                <i class="fa"></i>
+                                登录
+                            </button>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div id="main-outlet">
+                {% block outlet %}
+                {% endblock %}
+            </div>
+            <div id="login-modal" class="modal hide">
+                {% block login %}
+                    {{ login_form.signin() }}
+                    {{ login_form.signup() }}
+                {% endblock %}
+            </div>
+            <div class="facebox hide">
+                <div class="facebox-popup">
+                    <div class="shortcuts">
+                        <a class="facebox-close js-facebox-close" href="">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="facebox-overlay hide"></div>
+        </div>
+    {% block others %}
+    {% endblock %}
+    {% block footer_script %}
+    {% endblock %}

@@ -4,16 +4,10 @@ firefly settings
 '''
 from __future__ import print_function
 from __future__ import absolute_import
-from plim import preprocessor
 
 SECRET_KEY = 'you need modify this into local_settings.py'
 
 DEBUG = False
-
-# plim
-MAKO_DEFAULT_FILTERS = ['decode.utf_8', 'h']
-MAKO_PREPROCESSOR = preprocessor
-MAKO_TRANSLATE_EXCEPTIONS = False
 
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 

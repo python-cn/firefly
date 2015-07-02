@@ -109,3 +109,29 @@ class Comment(db.Document):
 
     def get_replies(self):
         return Comment.objects.filter(ref_id=self.id)
+
+
+def get_all_posts():
+    posts = Post.objects.all()
+    for post in posts:
+        yield get_post(post)
+
+
+def get_post(post):
+    id = post.id
+    # author = post.author
+    category = post.category
+    category_name = ''
+    category_slug = ''
+    category_color = '#999'
+    if category is not None:
+        category_name = category.name
+        category_slug = category.slug
+        category_color = category.color
+    title = post.title
+    replies = len(post.comments)
+    views = post.views
+    created_at = post.created_at
+    activity = post.recent_activity_time
+    return (post, id, category, category_name, category_slug, category_color,
+            title, replies, views, created_at, activity)
