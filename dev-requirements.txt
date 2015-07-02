@@ -1,3 +1,4 @@
+-r requirements.txt
 ipython
 flake8
 autopep8
