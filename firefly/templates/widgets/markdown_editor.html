@@ -1,49 +1,45 @@
-- def index()
-  div#reply-control.open.edit-title.hide
-    div.contents
-      div.edit-control
-        a.toggler href="" class="toggler" title="hide or show the composer panel"
-        div.control-row.reply-area
-          div.composer-fields
-            div.reply-to
-              创建新主题:
-            div.form-element.clearfix
-              div.title-input
-                input#reply-title placeholder="What is this discussion about in one brief sentence?" tabindex="2" type="text" maxlength="255"
-              div.category-input
-                  select#reply-category.combobox.category-combobox tabindex="-1" title=""
+{% macro index() -%}
+<div id="reply-control" class="open edit-title hide">
+  <div class="contents">
+    <div class="edit-control">
+      <a href="" title="hide or show the composer panel" class="toggler toggler"></a>
+      <div class="control-row reply-area">
+        <div class="composer-fields">
+          <div class="reply-to">创建新主题:</div>
+          <div class="form-element clearfix">
+            <div class="title-input"><input placeholder="What is this discussion about in one brief sentence?" tabindex="2" type="text" maxlength="255" id="reply-title"/></div>
+            <div class="category-input"><select tabindex="-1" title="" id="reply-category" class="combobox category-combobox"></select></div>
+          </div>
+        </div>
+        <div style="top: 100px; bottom: 89px;" class="wmd-controls">
+          <div class="textarea-wrapper"><textarea tabindex="4" id="wmd-input"></textarea></div>
+          <div class="preview-wrapper regular">
+            <div id="wmd-preview" class="cooked"></div>
+          </div>
+          <div class="composer-bottom-right">
+            <a href="#" class="toggle-preview">« 关闭预览</a>
+            <div id="file-uploading" class="hidden">
+              <div class="spinner small"></div>
+              Uploading %
+              <a id="cancel-file-upload">
+                <cancel></cancel>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="submit-panel">
+          <div class="composer-fields-below-outlet add-tags">
+            <input type="text" tabindex="-1" style="display: none;" class="tag-chooser"/>
+          </div>
+          <button tabindex="5" title="Or press Ctrl+Enter" class="btn btn-primary create"><i class="fa fa-plus"></i>创建主题</button><a href="#" tabindex="6" class="cancel">取消</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endmacro %}
 
-          div.wmd-controls style="top: 100px; bottom: 89px;"
-            div.textarea-wrapper
-              textarea#wmd-input tabindex="4"
-
-            div.preview-wrapper.regular
-              div#wmd-preview.cooked
-            div.composer-bottom-right
-              a.toggle-preview href="#"
-                « 关闭预览
-              div#file-uploading.hidden
-                div.spinner.small
-                Uploading %
-                a#cancel-file-upload
-                  cancel
-
-          div.submit-panel
-            div.composer-fields-below-outlet.add-tags
-              div.select2-container.select2-container-multi.ember-text-field.tag-chooser
-                ul.select2-choices
-                   li.select2-search-field
-                     label.select2-offscreen for="s2id_autogen1"
-                     input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input select2-default" id="s2id_autogen1" tabindex="4" maxlength="20" placeholder="" style="width: 481px;"
-                div.select2-drop.select2-drop-multi.select2-display-none
-                  ul.select2-results
-              input.tag-chooser type="text" tabindex="-1" style="display: none;"
-            button.btn.btn-primary.create tabindex="5" title="Or press Ctrl+Enter"
-              i.fa.fa-plus
-              创建主题
-            a.cancel href="#" tabindex="6"
-              取消
-
+{#
 - def topic()
   div#reply-control.open.hide
     div.grippie
@@ -79,3 +75,4 @@
               发布评论
             a.cancel href="#" tabindex="6"
               取消
+#}
