@@ -4,9 +4,90 @@
   首页
 {% endblock %}
 
-{% if current_user.is_authenticated() %}
-        head_script
-{% endif %}
+{% block outlet %}
+<div class="list-controls">
+    <div class="container list-control">
+        <ol class="category-breadcrumb">
+            <li class="bullet">
+                <a class="badge-category" href="" style="background-color: #eee; color: #333">
+                    all categories
+                </a>
+                <a class="badge-category category-dropdown-button" href="" style="background-color: #eee; color: #333">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+                <section class="category-dropdown-menu hidden">
+                    <div class="cat">
+                        <a class="badge-category" href="/">
+                    all categories
+                        </a>
+                    </div>
+                </section>
+            </li>
+        </ol>
+        <ul id="navigation-bar" class="nav nav-pills">
+            <li class="active" title="topics with recent posts">
+                <a href="/latest">Latest</a>
+            </li>
+            <li title="all topics grouped by category">
+                <a href="/categories">Categories</a>
+            </li>
+        </ul>
+      {% if current_user.is_authenticated() %}
+        <button id="create-topic" class="btn btn-default right">
+            <i class="fa fa-plus">New Topic</i>
+        </button>
+      {% endif %}
+    </div>
+    <div class="container list-container">
+        <div id="list-area">
+            <div class="contents">
+                <table class="topic-list">
+                    <thead>
+                        <tr>
+                            <th class="default">主题</th>
+                            <th class="category">分类
+                                <i class="fa fa-chevron-down"></i>
+                            </th>
+                            <th class="posts num">回应数</th>
+                            <th class="views num">阅读量</th>
+                            <th class="activity num">最近活跃时间</th>
+                        </tr>
+                    </thead>
+                    <tbody class="effeckt-list" data-effeckt-type="pop-in">
+                        {% for post, id, category, category_name, category_slug, category_color, title, replies, views, created_at, activity in posts %}
+                        <tr class={{"topic-list-item new-item" if is_new else "topic-list-item"}}>
+                            <td class="main-link clearfix">
+                                <a class="title" href="{{url_for('post.detail', id=id)}}">
+                                {{title}}
+                                </a>
+                                <span class="topic-post-badges"></span>
+                            </td>
+                            <td class="category">
+                                <a class="badge-wrapper bullet" href="/category/{{category_slug}}">
+                                    <span class="badge-category-parent-bg" style="background-color: {{category_color}}"></span>
+                                    <span class="badge-category clear-badge">{{category_name}}</span>
+                                </a>
+                            </td>
+                            <td class="num posts-map post">
+                                <a class="posts-map badge-posts" href="">{{replies}}</a>
+                            </td>
+                            <td class="num views">
+                                <span class="number">{{views}}</span>
+                            </td>
+                            <td class="num age activity">
+                                <a href="">
+                                    <span class="relative-date" title="{{activity}}">{{activity}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
 {% block head_script %}
 <link href="{{url_for('static', filename='stylesheets/base16-light.css')}}" rel="stylesheet"/>

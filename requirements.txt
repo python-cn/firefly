@@ -11,6 +11,7 @@ flask-restful
 MarkupSafe
 mistune
 pygments
+plim
 arrow
 Flask_Security
 facebook-sdk

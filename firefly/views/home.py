@@ -1,14 +1,15 @@
 # coding=utf-8
 from __future__ import absolute_import
-from flask import request, jsonify, redirect, url_for, render_template
+from flask import request, jsonify, redirect, url_for
 from flask.views import MethodView
 from flask.blueprints import Blueprint
-from flask_mako import render_template_def
 from flask_login import login_user, current_user, login_required
 
 from firefly.forms.user import LoginForm, RegisterForm
-from firefly.models.topic import Category, Post, Comment
+from firefly.models.topic import (Category, Post, Comment, get_all_posts,
+                                  get_post)
 from firefly.models.user import User
+from firefly.libs.template import render_template
 
 
 bp = Blueprint("home", __name__, url_prefix="/")
@@ -17,7 +18,7 @@ bp = Blueprint("home", __name__, url_prefix="/")
 class HomeView(MethodView):
 
     def get(self):
-        posts = Post.objects.all()
+        posts = get_all_posts()
         return render_template('index.html', posts=posts)
 
 
@@ -35,10 +36,8 @@ class CreateTopicView(MethodView):
         post = Post(title=title, content=content, category=category,
                     author=User.objects.get_or_404(id=author_id))
         post.save()
-        html = render_template_def(
-            '/widgets/topic_item.html', 'main', post=post, is_new=True)
-
-        return jsonify(ok=0, html=html)
+        res = get_post(post)
+        return jsonify(ok=0, res=res)
 
 
 class CreateCommentView(MethodView):
