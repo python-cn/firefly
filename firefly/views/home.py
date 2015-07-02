@@ -68,8 +68,7 @@ class LoginView(MethodView):
         return redirect(url_for('home.index'))
 
     def post(self):
-        # TODO 解决在首页登录框中无法获取 csrf_token 的问题
-        form = LoginForm(csrf_enabled=False)
+        form = LoginForm()
         if form.validate_on_submit():
             login_user(form.user)
         return redirect(url_for('home.index'))
@@ -81,7 +80,7 @@ class RegisterView(MethodView):
         return redirect(url_for('home.index'))
 
     def post(self):
-        form = RegisterForm(csrf_enabled=False)
+        form = RegisterForm()
         if form.validate_on_submit():
             user = form.save()
             login_user(user)

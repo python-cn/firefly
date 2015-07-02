@@ -5,6 +5,7 @@ import os
 from flask import Flask, g, request, send_from_directory
 from flask_security import MongoEngineUserDatastore
 from flask_social_blueprint.core import SocialBlueprint
+from flask_wtf.csrf import CsrfProtect
 
 from firefly import config as _config
 from firefly.ext import (
@@ -34,6 +35,7 @@ def create_app(config):
     db.init_app(app)
     mail.init_app(app)
     redis_store.init_app(app)
+    CsrfProtect(app)
 
     register_auth(app)
     register_hooks(app)
