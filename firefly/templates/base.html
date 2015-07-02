@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
   {% block title %}
   {% endblock %}
-  <link rel="icon" type="image/png" href="${url_for('static', filename='icon.png')}"/>
+  <link rel="icon" type="image/png" href="{{url_for('static', filename='icon.png')}}"/>
   <link href="{{url_for('static', filename='stylesheets/hljs.css')}}" rel="stylesheet"/>
   <link href="{{url_for('static', filename='stylesheets/themes/zenburn.css')}}" rel="stylesheet"/>
   <script src="{{url_for('static', filename='javascripts/libs/require.min.js')}}"></script>
@@ -50,7 +50,7 @@
                         <div class="panel">
                         {% if current_user.is_authenticated() %}
                             Hi {{current_user.username if current_user.username else current_user.cn}}
-                            <a title="退出" class="btn-primary btn-small btn sign-out-button" href="${url_for('security.logout')}">
+                            <a title="退出" class="btn-primary btn-small btn sign-out-button" href="{{url_for('security.logout')}}">
                             </a>
                         {% else %}
                             <button title="注册" class="btn-primary btn-small btn sign-up-button">注册</button>
