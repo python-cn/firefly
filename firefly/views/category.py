@@ -1,10 +1,10 @@
-from __future__ import absolute_import
 # coding=utf-8
+from __future__ import absolute_import
 from flask.views import MethodView
 from flask.blueprints import Blueprint
-from flask_mako import render_template
 
 from firefly.models.topic import Category, Post
+from firefly.libs.template import render_template
 
 
 bp = Blueprint("category", __name__, url_prefix="/category")
