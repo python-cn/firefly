@@ -8,6 +8,9 @@ Work In Process
 说明
 --
 
+**WARNING** 我们最近在做plim->jinja2的迁移和嵌入react的工作，其他工作暂停迭代(防止新的代码造冲突).
+具体讨论可见: [Issue92](https://github.com/python-cn/firefly/issues/92),开发详情请关注[trello](https://trello.com/b/JM2OEXPA/firefly)
+
 这里只包含等待开发的Todo List. 会尽量更新到最新状态.
 
 有兴趣参与者请使用: [trello](https://trello.com/b/JM2OEXPA/firefly)去获取最新的任务列表. 防止任务已被认领造成重复.
