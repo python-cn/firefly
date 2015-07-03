@@ -39,40 +39,47 @@
 </div>
 {%- endmacro %}
 
-{#
-- def topic()
-  div#reply-control.open.hide
-    div.grippie
-    div.contents
-      div.control
-        a.toggler href=''
-        div.control-row.reply-area
-          div.composer-fields
-            div.reply-to data-comment-id=''
-              span
-                回应
-              a#reply-topic.avatar href="/t/6"
-              img.avatar.reply-author alt="" width="20" height="20"
-              span
-          div.wmd-controls style="top: 56px; bottom: 45px;"
-            div.textarea-wrapper
-              textarea#wmd-input tabindex="4"
+{% macro topic() -%}
+<div id="reply-control" class="open hide">
+    <div class="grippie"></div>
+    <div class="contents">
+        <div class="control">
+            <a class="toggler" href=""></a>
+            <div class="control-row reply-area">
+                <div class="composer-fields">
+                    <div class="reply-to" data-comment-id=''>
+                        <span>回应</span>
+                        <a id="reply-topic" class="avatar" href="/t/6"></a>
+                        <img class="avatar reply-author" alt="" width="20" height="20" />
+                        <span></span>
+                    </div>
+                </div>
+                <div class="wmd-controls" style="top: 56px; bottom: 45px;" >
+                    <div class="textarea-wrapper">
+                        <textarea id="wmd-input" cols="30" id="" name="" rows="10" tabindex="4"></textarea>
+                    </div>
 
-            div.preview-wrapper.regular
-              div#wmd-preview.cooked
-            div.composer-bottom-right
-              a.toggle-preview href="#"
-                « 关闭预览
-              div#file-uploading.hidden
-                div.spinner.small
-                Uploading %
-                a#cancel-file-upload
-                  cancel
+                    <div class="preview-wrapper regular">
+                        <div id="wmd-preview" class="cooked"></div>
+                    </div>
+                    <div class="composer-bottom-right">
+                        <a class="toggle-preview" href="#">« 关闭预览</a>
+                        <div id="file-uploading" class="hidden">
+                            <div class="spinner small"></div>
+                            Uploading %
+                            <a id="cancel-file-upload" href="">cancel</a>
+                        </div>
+                    </div>
+                </div>
 
-          div.submit-panel
-            button.btn.btn-primary.reply tabindex="5" title="Or press Ctrl+Enter"
-              i.fa.fa-plus
-              发布评论
-            a.cancel href="#" tabindex="6"
-              取消
-#}
+                <div class="submit-panel">
+                    <button class="btn btn-primary reply" tabindex="5" title="Or press Ctrl+Enter" >
+                        <i class="fa fa-plus">发布评论</i>
+                    </button>
+                    <a class="cancel" href="#" tabindex="6">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%- endmacro %}
