@@ -76,8 +76,9 @@ def configure_error_handles(app):
 
 
 def register_blueprints(app):
-    from firefly.views import (home, post, category, api, keyboard, user)
-    for i in (home, post, category, api, keyboard, user):
+    from firefly.views import (home, post, category,
+                               api, keyboard, user, message)
+    for i in (home, post, category, api, keyboard, user, message):
         app.register_blueprint(i.bp)
 
 
