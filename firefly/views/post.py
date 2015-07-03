@@ -2,10 +2,10 @@
 from __future__ import absolute_import
 from flask.views import MethodView
 from flask.blueprints import Blueprint
-from flask_mako import render_template
 from flask_mongoengine.wtf import model_form
 
 from firefly.models.topic import Post, Comment
+from firefly.libs.template import render_template
 
 
 bp = Blueprint("post", __name__, url_prefix="/post")
