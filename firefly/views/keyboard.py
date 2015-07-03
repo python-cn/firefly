@@ -3,9 +3,9 @@ from __future__ import absolute_import
 from flask import request
 from flask.views import MethodView
 from flask.blueprints import Blueprint
-from flask_mako import render_template
 
 from firefly.models.consts import KEYBOARD_URL_MAPS
+from firefly.libs.template import render_template
 
 
 bp = Blueprint('keyboard', __name__, url_prefix='/keyboard')
