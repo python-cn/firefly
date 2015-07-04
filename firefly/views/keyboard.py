@@ -18,7 +18,10 @@ class KeyboardView(MethodView):
         keyboards = KEYBOARD_URL_MAPS['default']
         if url_pattern in KEYBOARD_URL_MAPS:
             keyboards += KEYBOARD_URL_MAPS[url_pattern]
-        return render_template('widgets/keyboard.html', keyboards=keyboards)
+        columns = zip(*[iter(keyboards)] * 2)
+        return render_template(
+            'widgets/keyboard.html', columns=columns
+        )
 
 
 bp.add_url_rule('/', view_func=KeyboardView.as_view('keyboard'))
