@@ -49,8 +49,9 @@
                         </div>
                         <div class="panel">
                         {% if current_user.is_authenticated() %}
-                            Hi {{current_user.username if current_user.username else current_user.cn}}
+                            Hi {{(current_user.username if current_user.username else current_user.cn).decode('utf-8')}}
                             <a title="退出" class="btn-primary btn-small btn sign-out-button" href="{{url_for('security.logout')}}">
+                                <i class="fa fa-sign-out"></i>
                             </a>
                         {% else %}
                             <button title="注册" class="btn-primary btn-small btn sign-up-button">注册</button>
