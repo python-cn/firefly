@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block outlet %}
+<h1>{{category}}</h1>
+  {% for post in posts %}
+<h2>
+    <a href="{{post.url()}}">{{post.title}}</a>
+      {% if post.body %}
+        {% if post.post_type == 'Quote' %}
+    <blockquote>{{post.body}}</blockquote>
+    <p>{{post.author}}</p>
+        {% else %}
+    <p>{{post.body}}</p>
+        {% endif %}
+    {% endif %}
+    {% if hasattr(post, 'embed_code') and post.embed_code %}
+        {{post.embed_code}}
+    {% endif %}
+    {% if hasattr(post, 'image_url') and post.image_url %}
+    <p>
+        <img alt="" src="{{post.image_url}}"/>
+    </p>
+    {% endif %}
+    <p>{{post.created_at.strftime('%H:%M %Y-%m-%d')}}</p>
+    {% set total = len(post.comments) %}
+        {{total}} comment
+</h2>
+{% endfor %}
+{% endblock %}

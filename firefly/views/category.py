@@ -17,7 +17,7 @@ class CategoryView(MethodView):
         posts = Post.objects.filter(
             category=category
         ).order_by("-recent_activity_time")
-        return render_template('categories/list.html',
+        return render_template('categories/detail.html',
                                category=category.name,
                                posts=posts)
 

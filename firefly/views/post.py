@@ -39,7 +39,7 @@ class DetailView(MethodView):
     def get(self, id):
         post = Post.objects.get_or_404(id=id)
         Post.objects(id=id).update_one(inc__views=1)
-        return render_template('posts/detail.html', post=post, hasattr=hasattr,
+        return render_template('posts/detail.html', post=post,
                                Markdown=Markdown, gen_author=gen_author,
                                gen_author_name=gen_author_name,
                                short_timesince=short_timesince)

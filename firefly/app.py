@@ -97,6 +97,13 @@ def register_hooks(app):
     def before_request():
         g.locale = get_locale()
 
+    @app.context_processor
+    def inject_builtin():
+        return {
+            'hasattr': hasattr,
+            'len': len
+        }
+
 
 def plug_to_db(db):
     from firefly.models.utils import dict_filter
