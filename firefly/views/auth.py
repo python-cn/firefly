@@ -11,4 +11,4 @@ bp = Blueprint('auth', __name__, url_prefix="/auth")
 @bp.route('/')
 @login_required
 def profile():
-    return render_template('accounts/profile.html')
+    return render_template('security/accounts/profile.html')

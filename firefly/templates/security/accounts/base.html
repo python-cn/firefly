@@ -1,11 +1,15 @@
--inherit /base.html
+{% extends "base.html" %}
 
--def head_script()
-  link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"
-  link href="${url_for('static', filename='stylesheets/screen.css')}" rel="stylesheet"
+{% block head_script %}
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/screen.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/index.css')}}" rel="stylesheet" media="all"/>
+{% endblock %}
 
--def footer_script()
-  script
-    require(['../static/javascripts/common'], function (common) {
+{% block footer_script %}
+<script>
+  require(['../../static/javascripts/common'], function (common) {
       require(['accounts']);
-    });
+  });
+</script>
+{% endblock %}
