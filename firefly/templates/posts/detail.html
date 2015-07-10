@@ -1,116 +1,145 @@
--py!
-  from firefly.libs.markdown import Markdown
-  from firefly.views.utils import short_timesince
--inherit /base.html
-- namespace name='forms' /_forms.html
--namespace name="widgets_editor" /widgets/markdown_editor.html
+{% extends "base.html" %}
+{% import 'widgets/markdown_editor.html' as markdown_editor %}
 
--def outlet()
-  div#topic-title
-    div.container
+{% block outlet %}
+<div id="topic-title">
+    <div class="container">
       div.title-wrapper
-        h1
-          a.fancy-title href="${post.url()}"
-            ${post.title}
-        - if post.category
-          div.category-title
-            a.badge-wrapper.bullet href="/c/${post.category.id}"
-              span.badge-category-bg style="background-color: ${post.category.color if post.category else '#999'}"
-              span.badge-category.clear-badge style="vertical-align: middle;" title="${post.category.description}"
-                ${post.category.name}
-  div.container.posts
-    div.row
-      section#topic.topic-area data-topic-id="${post.id}"
-        div.posts-wrapper
-          - for index, p in enumerate([post] + post.comments)
-            -py
-              cloak_id = 'post-cloak-{}'.format(index)
-              class c(object):
-                id = 100001
-                name = 'test1'
-                avatar = lambda x:'https://meta-discourse.global.ssl.fastly.net/user_avatar/meta.discourse.org/codinghorror/90/5297.png'
-                cn = 'Test'
-                def url(self):
-                  return '/user/1000001'
-              author = p.author if p.author else c()
-              author_name = author.username if hasattr(author, 'username') and author.username else author.cn
-            div#${cloak_id}.post-cloak data-comment-id=${p.id} data-order-id=${index}
-              div.topic-post.clearfix.regular
-                article.boxed data-user-id="${author.id}" data-post-id="${p.id}"
-                  div.row
-                    div.topic-avatar
-                      div.contents
-                      a href="${author.url()}" data-user-card="${author_name}"
-                        img.avatar alt="" width="45" height="45" src="${author.avatar()}" title="${author_name}"
-                    div.topic-body
-                      div.topic-meta-data
-                        div.names.trigger-user-card
-                          span.username.staff
-                            a href="${author.url()}" data-user-card="${author_name}"
-                              ${author_name}
-                            i.fa.fa-shield title="This user is a moderator" alt="This user is a moderator"
-                          span.full-name
-                            a href="${author.url()}" data-user-card="${author_name}"
-                              ${author.cn}
-                          span.user-title
-                            a.user-group href="/groups/discourse"
-                              co-founder
-                        div.post-info
-                          a.post-date href="/t/quickly-tell-someone-why-they-should-look-at-a-topic/27503/2" data-bindattr-1516="1516"
-                            span.relative-date title="${p.created_at.strftime('%c %p')}" data-time="1428885788713" data-format="tiny"
-                              ${short_timesince(p.created_at)}
-                      div.contents.regular
-                        div.cooked
-                          - if p.content
-                            -py
-                              content = Markdown.render(p.content)
-                            - if p.post_type == 'Quote'
-                              blockquote
-                                ${content|n}
-                            - else
-                              ${content|n}
-                          - if hasattr(p, 'embed_code') and p.embed_code
-                            ${p.embed_code}
-                          - if hasattr(p, 'image_url') and p.image_url
-                            p
-                              img" src=${p.image_url}"
-                            p
-                              ${p.created_at.strftime('%H:%M %Y-%m-%d')}
-                        section.post-menu-area.clearfix
-                          nav.post-controls
-                            -py
-                              coments = p.get_replies() if p.post_type == 'Comment' else []
-                            -if coments:
-                              button.show-replies
-                                span.badge-posts
-                                  ${len(coments)}
-                                Replies
-                                i.fa.fa-chevron-down
-                            div.actions
-                              - if current_user.is_authenticated()
-                                button.like title='喜欢这个主题?'
-                                  i.fa.fa-heart
-                              button title='分享' data-share-url="/t/dd"
-                                i.fa.fa-link
-                              - if current_user.is_authenticated()
-                                button.bookmark title='标记'
-                                  div.read-icon
-                                button.create title='评论'
-                                  i.fa.fa-reply
-                                  评论
-                      section.embedded-posts.bottom.hide
+        <h1>
+            <a class="fancy-title" href="{{post.url()}}">{{post.title}}</a>
+        </h1>
+        {% if post.category %}
+        <div class="category-title">
+            <a class="badge-wrapper bullet" href="/c/{{post.category.id}}">
+                <span class="badge-category-bg" style="background-color: {{post.category.color if post.category else '#999'}}"></span>
+                <span class="badge-category clear-badge" style="vertical-align: middle;" title="{{post.category.description}}">{{post.category.name}}</span>
+            </a>
+        {% endif %}
+        </div>
+    </div>
+</div>
+<div class="container posts">
+    <div class="row">
+        <section id="topic" class="topic-area" data-topic-id="{{post.id}}">
+            <div class="posts-wrapper">
+          {% for p in [post] + post.comments %}
+                {% set author = gen_author(p) %}
+                {% set author_name = gen_author_name(p).decode('utf-8') %}
+                {% set index = loop.index %}
+                <div id="{{'post-cloak-{}'.format(index)}}" class="post-cloak" data-comment-id={{p.id}} data-order-id={{index}}>
+                    <div class="topic-post clearfix regular">
+                        <article class="boxed" data-user-id="{{author.id}}" data-post-id="{{p.id}}">
+                            <div class="row">
+                                <div class="topic-avatar">
+                                    <div class="contents">
+                                        <a href="{{author.url()}}" data-user-card="{{author_name}}" >
+                                            <img class="avatar" alt="" src="{{author.avatar()}}" width="45" height="45" title="{{author_name}}"/>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="topic-body">
+                                    <div class="topic-meta-data">
+                                        <div class="names trigger-user-card">
+                                            <span class="username staff">
+                                                <a href="{{author.url()}}" data-user-card="{{author_name}}">
+                                                    {{author_name}}
+                                                </a>
+                                                <i class="fa fa-shield" title="This user is a moderator" alt="This user is a moderator"></i>
+                                            </span>
+                                            <span class="full-name">
+                                                <a href="{{author.url()}}" data-user-card="{{author_name}}">
+                                                    {{author.cn.decode('utf-8')}}
+                                                </a>
+                                            </span>
+                                            <span class="user-title">
+                                                <a class="user-group" href="/groups/discourse">
+                                                    co-founder
+                                                </a>
+                                            </span>
+                                        </div>
+                                        <div class="post-info">
+                                            <a class="post-date" href="/t/quickly-tell-someone-why-they-should-look-at-a-topic/27503/2" data-bindattr-1516="1516">
+                                                <span class="relative-date" title="{{p.created_at.strftime('%c %p')}}" data-time="1428885788713" data-format="tiny" >
+                                                    {{short_timesince(p.created_at)}}
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div class="contents regular">
+                                            <div class="cooked">
+                                                {% if p.content %}
+                                                {% autoescape false %}
+                                                    {{Markdown.render(p.content)}}
+                                                {% endautoescape %}
+                                                {% endif %}
+                                                {% if hasattr(p, 'embed_code') and p.embed_code %}
+                                                    {{p.embed_code}}
+                                                {% endif %}
+                                                {% if hasattr(p, 'image_url') and p.image_url %}
+                                                <p><img src={{p.image_url}}></p>
+                                                <p>{{p.created_at.strftime('%H:%M %Y-%m-%d')}}</p>
+                                                {% endif %}
+                                            </div>
+                                            <section class="post-menu-area clearfix">
+                                                <nav class="post-controls">
+                                                    {% set coments = p.get_replies() if p.post_type == 'Comment' else [] %}
+                                                    {% if coments %}
+                                                    <button class="show-replies">
+                                                        <span class="badge-posts">{{len(coments)}}</span>
+                                                         Replies
+                                                        <i class="fa fa-chevron-down"></i>
+                                                    </button>
+                                                    {% endif %}
+                                                    <div class="actions">
+                                                        {% if current_user.is_authenticated() %}
+                                                        <button class="like" title='喜欢这个主题?'>
+                                                            <i class="fa fa-heart"></i>
+                                                        </button>
+                                                        {% endif %}
+                                                        <button title='分享' data-share-url="/t/dd">
+                                                            <i class="fa fa-link"></i>
+                                                        </button>
+                                                        {% if current_user.is_authenticated() %}
+                                                        <button class="bookmark" title='标记'>
+                                                            <div class="read-icon"></div>
+                                                        </button>
+                                                        <button class="create" title='评论'>
+                                                            <i class="fa fa-reply">评论</i>
+                                                        </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </nav>
+                                            </section>
+                                            <section class="embedded-posts bottom hide"></section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
 
--def head_script()
-  link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
-  link href="${url_for('static', filename='stylesheets/codemirror.css')}" rel="stylesheet"
-  link href="${url_for('static', filename='stylesheets/post.css')}" rel="stylesheet" media="all"
+{% block head_script %}
+<link href="{{url_for('static', filename='stylesheets/base16-light.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/codemirror.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/post.css')}}" rel="stylesheet" media="all"/>
+{% endblock %}
 
--def footer_script()
-  script
+{% block footer_script %}
+<script>
     require(['../../static/javascripts/common'], function (common) {
       require(['post']);
     });
+</script>
+{% endblock %}
 
-- if current_user.is_authenticated()
-  - def others()
-    ${widgets_editor.topic()}
+{% block others %}
+    {% if current_user.is_authenticated() %}
+        {{ markdown_editor.topic() }}
+    {% endif %}
+{% endblock %}

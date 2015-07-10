@@ -3,9 +3,9 @@ from __future__ import absolute_import
 from flask import request
 from flask.views import MethodView
 from flask.blueprints import Blueprint
-from flask_mako import render_template
 
 from firefly.models.consts import KEYBOARD_URL_MAPS
+from firefly.libs.template import render_template
 
 
 bp = Blueprint('keyboard', __name__, url_prefix='/keyboard')
@@ -18,7 +18,10 @@ class KeyboardView(MethodView):
         keyboards = KEYBOARD_URL_MAPS['default']
         if url_pattern in KEYBOARD_URL_MAPS:
             keyboards += KEYBOARD_URL_MAPS[url_pattern]
-        return render_template('widgets/keyboard.html', keyboards=keyboards)
+        columns = zip(*[iter(keyboards)] * 2)
+        return render_template(
+            'widgets/keyboard.html', columns=columns
+        )
 
 
 bp.add_url_rule('/', view_func=KeyboardView.as_view('keyboard'))

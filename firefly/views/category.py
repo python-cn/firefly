@@ -1,10 +1,10 @@
-from __future__ import absolute_import
 # coding=utf-8
+from __future__ import absolute_import
 from flask.views import MethodView
 from flask.blueprints import Blueprint
-from flask_mako import render_template
 
 from firefly.models.topic import Category, Post
+from firefly.libs.template import render_template
 
 
 bp = Blueprint("category", __name__, url_prefix="/category")
@@ -17,7 +17,7 @@ class CategoryView(MethodView):
         posts = Post.objects.filter(
             category=category
         ).order_by("-recent_activity_time")
-        return render_template('categories/list.html',
+        return render_template('categories/detail.html',
                                category=category.name,
                                posts=posts)
 

@@ -1,37 +1,42 @@
--inherit accounts/base.html
--block container
-  div.container
-    div.row
-      div.page-header
-        h1.text-center
-          Hi ${current_user.cn}
-    div.row
-      div.col-md-3.col-md-offset-3
-        img.img-circle.img-responsive.mg-btm src="${current_user.gravatar}?s=300&d=retro" alt=""
-      div.col-md-3
-        dl
-          dt
-            邮箱
-          dd
-            ${current_user.email}
-          dt
-            First name
-          dd
-            ${current_user.first_name}
-          dt
-            Last name
-          dd
-            ${ current_user.last_name}
-        a.btn.btn-primary.btn-lg href="${url_for_security('logout')}
-          Logout
-
-      -py
-        connections = current_user.social_connections()
-      -if connections
-        div.row
-          div.text-center.mg-btm
-            h2.text-center
-              Connections
-              - for connection in connections
-                a href="${connection.profile_url}"
-                  img.img-circle src="${connection.image_url}" alt="" width="50" height="50"
+{% extends "/security/accounts/base.html" %}
+{% block outlet %}
+<div class="container">
+    <div class="row">
+        <div class="page-header">
+            <h1 class="text-center">
+          Hi {{current_user.cn.decode('utf-8')}}
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+            <img class="img-circle img-responsive mg-btm" alt="" src="{{current_user.gravatar}}?s=300&d=retro"/>
+        </div>
+        <div class="col-md-3">
+            <dl>
+                <dt>邮箱</dt>
+                <dd>{{current_user.email}}</dd>
+                <dt>First name</dt>
+                <dd>{{current_user.first_name}}</dd>
+                <dt>Last name</dt>
+                <dd>{{current_user.last_name}}</dd>
+                <a class="btn btn-primary btn-lg" href="{{url_for_security('logout')}}">Logout</a>
+            </dl>
+        </div>
+        {% set connections = current_user.social_connections() %}
+        {% if connections %}
+        <div class="row">
+            <div class="text-center mg-btm">
+                <h2 class="text-center">Connections
+              {% for connection in connections %}
+                    <a href="{{connection.profile_url}}">
+                        <img class="img-circle" alt="" width="50" height="50" src="{{connection.image_url}}"/>
+                    </a>
+              {% endfor %}
+                </h2>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

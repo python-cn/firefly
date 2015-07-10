@@ -1,68 +1,111 @@
--inherit base.html
--namespace name="widgets_editor" /widgets/markdown_editor.html
--namespace name="topic_item" /widgets/topic_item.html
+{% extends "base.html" %}
+{% import 'widgets/markdown_editor.html' as markdown_editor %}
 
--def title()
+{% block title %}
   首页
+{% endblock %}
 
--def outlet()
-  div.list-controls
-    div.container.list-control
-      ol.category-breadcrumb
-        li.bullet
-          a.badge-category href='' style="background-color: #eee; color: #333"
-            all categories
-          a.badge-category.category-dropdown-button style="background-color: #eee; color: #333"
-            i.fa.fa-caret-right
-          section.category-dropdown-menu.hidden
-            div.cat
-              a.badge-category href='/'
-                all categories
-      ul#navigation-bar.nav.nav-pills
-        li.active title="topics with recent posts"
-          a href="/latest"
-            Latest
-        li title="all topics grouped by category"
-          a href="/categories"
-            Categories
-      - if current_user.is_authenticated()
-        button#create-topic.btn.btn-default.right
-          i.fa.fa-plus
-          New Topic
-  div.container.list-container
-    div#list-area
-      div.contents
-        table.topic-list
-          thead
-            tr
-              th.default
-                主题
-              th.category
-                分类
-                i.fa.fa-chevron-down
-              th.posts.num
-                回应数
-              th.views.num
-                阅读量
-              th.activity.num
-                最近活跃时间
-          tbody.effeckt-list data-effeckt-type="pop-in"
-            -for post in posts
-              ${topic_item.main(post)}
+{% block outlet %}
+<div class="list-controls">
+    <div class="container list-control">
+        <ol class="category-breadcrumb">
+            <li class="bullet">
+                <a class="badge-category" href="" style="background-color: #eee; color: #333">
+                    all categories
+                </a>
+                <a class="badge-category category-dropdown-button" href="" style="background-color: #eee; color: #333">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+                <section class="category-dropdown-menu hidden">
+                    <div class="cat">
+                        <a class="badge-category" href="/">
+                    all categories
+                        </a>
+                    </div>
+                </section>
+            </li>
+        </ol>
+        <ul id="navigation-bar" class="nav nav-pills">
+            <li class="active" title="topics with recent posts">
+                <a href="/latest">Latest</a>
+            </li>
+            <li title="all topics grouped by category">
+                <a href="/categories">Categories</a>
+            </li>
+        </ul>
+      {% if current_user.is_authenticated() %}
+        <button id="create-topic" class="btn btn-default right">
+            <i class="fa fa-plus">New Topic</i>
+        </button>
+      {% endif %}
+    </div>
+    <div class="container list-container">
+        <div id="list-area">
+            <div class="contents">
+                <table class="topic-list">
+                    <thead>
+                        <tr>
+                            <th class="default">主题</th>
+                            <th class="category">分类
+                                <i class="fa fa-chevron-down"></i>
+                            </th>
+                            <th class="posts num">回应数</th>
+                            <th class="views num">阅读量</th>
+                            <th class="activity num">最近活跃时间</th>
+                        </tr>
+                    </thead>
+                    <tbody class="effeckt-list" data-effeckt-type="pop-in">
+                        {% for post, id, category, category_name, category_slug, category_color, title, replies, views, created_at, activity in posts %}
+                        <tr class={{"topic-list-item new-item" if is_new else "topic-list-item"}}>
+                            <td class="main-link clearfix">
+                                <a class="title" href="{{url_for('post.detail', id=id)}}">
+                                {{title}}
+                                </a>
+                                <span class="topic-post-badges"></span>
+                            </td>
+                            <td class="category">
+                                <a class="badge-wrapper bullet" href="/category/{{category_slug}}">
+                                    <span class="badge-category-parent-bg" style="background-color: {{category_color}}"></span>
+                                    <span class="badge-category clear-badge">{{category_name}}</span>
+                                </a>
+                            </td>
+                            <td class="num posts-map post">
+                                <a class="posts-map badge-posts" href="">{{replies}}</a>
+                            </td>
+                            <td class="num views">
+                                <span class="number">{{views}}</span>
+                            </td>
+                            <td class="num age activity">
+                                <a href="">
+                                    <span class="relative-date" title="{{activity}}">{{activity}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-- if current_user.is_authenticated()
-  -def others()
-    ${widgets_editor.index()}
+{% block head_script %}
+<link href="{{url_for('static', filename='stylesheets/base16-light.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/codemirror.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/select2.min.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/effeckt/list-items.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/index.css')}}" rel="stylesheet" media="all"/>
+{% endblock %}
 
--def head_script()
-  link href="${url_for('static', filename='stylesheets/base16-light.css')}" rel="stylesheet"
-  link href="${url_for('static', filename='stylesheets/codemirror.css')}" rel="stylesheet"
-  link href="${url_for('static', filename='stylesheets/select2.min.css')}" rel="stylesheet"
-  link href="${url_for('static', filename='stylesheets/effeckt/list-items.css')}" rel="stylesheet"
-  link href="${url_for('static', filename='stylesheets/index.css')}" rel="stylesheet" media="all"
+{% block others %}
+  {{ markdown_editor.index() }}
+{% endblock %}
 
--def footer_script()
-  script
+{% block footer_script %}
+<script>
     require(['../static/javascripts/common'], function (common) {
       require(['index']);
     });
+</script>
+{% endblock %}

@@ -1,89 +1,109 @@
-- def signin()
-  div.signin.hide
-    div.modal-header
-      a.close
-        i.fa.fa-times
-      h3
-        登录
-      div.clearfix
+{% macro signin() -%}
+<div class="signin hide">
+    <div class="modal-header">
+        <a class="close" href="">
+            <i class="fa fa-times"></i>
+        </a>
+        <h3>登录</h3>
+        <div class="clearfix"></div>
+    </div>
+    <form id="signinform" class="login-form" role="form" method="post" action="{{url_for('home.login')}}">
+        <div class="form-group">
+            <label class="control-label" for="">第三方登录</label>
+            <div class="thirdparty-login-btns">
+                <div class="table-space">
+                    <a class="login-btn btn-github" href="/_social/login/Github">
+                        <i class="fa fa-github">GitHub</i>
+                    </a>
+                </div>
+                <div class="table-space">
+                    <a class="login-btn btn-weibo" href="/_social/login/Weibo">
+                        <i class="fa fa-weibo">微博</i>
+                    </a>
+                </div>
+                <div class="table-space">
+                    <a class="login-btn btn-google" href="/_social/login/Google">
+                        <i class="fa fa-google">Google</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <label class="control-label" for="inputEmail">邮箱</label>
+            <input id="inputEmail" class="form-control" type="text" value="" type="email" required="" tabindex="1" name="email"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="inputPassword">
+                密码（<a tabindex="4" href="/forgotpass">忘记密码</a>）
+            </label>
+            <input id="inputPassword" class="form-control" type="text" value="" type="password" required="" tabindex="2" name="password" />
+        </div>
+        <div class="form-group">
+            <button id="loginBtn" class="login-btn btn-default" tabindex="3" type="submit">
+                登录
+            </button>
+        </div>
+    </form>
+</div>
+{%- endmacro %}
 
-    form#signinform.login-form" role="form" method="post" action="${url_for('home.login')}"
-      div.form-group
-        label.control-label for=""
-          第三方登录
-          div.thirdparty-login-btns
-            div.table-space
-              a.login-btn.btn-github href="/_social/login/Github"
-                i.fa.fa-github
-                  GitHub
-            div.table-space
-              a.login-btn.btn-weibo" href="/_social/login/Weibo"
-                i.fa.fa-weibo
-                  微博
-            div.table-space
-              a.login-btn.btn-google" href="/_social/login/Google"
-                Google
+{% macro signup() -%}
+<div class="signup">
+    <div class="modal-header">
+        <a class="close" href="">
+            <i class="fa fa-times"></i>
+        </a>
+        <h3>注册</h3>
+        <div class="clearfix">
+        </div>
+    </div>
 
-      div.form-group
-        label.control-label for="inputEmail"
-          邮箱
-        input#inputEmail.form-control type="email" required="" tabindex="1" name="email"
-      div.form-group
-        label.control-label for="inputPassword"
-          密码（<a tabindex="4" href="/forgotpass">忘记密码</a>）
-        input#inputPassword.form-control type="password" required="" tabindex="2" name="password"
-      div.form-group
-        button#loginBtn.login-btn.btn-default tabindex="3" type="submit"
-          登录
+    <form id="signupform" class="login-form" role="form" method="post" action="{{url_for('home.register')}}">
+        <div class="form-group">
+            <label class="control-label" for="">
+                第三方注册
+            </label>
+            <div class="thirdparty-login-btns">
+                <div class="table-space">
+                    <a class="login-btn btn-github" href="/_social/login/Github">
+                        <i class="fa fa-github">GitHub</i>
+                    </a>
+                </div>
+                <div class="table-space">
+                    <a class="login-btn btn-weibo" href="/_social/login/Weibo">
+                        <i class="fa fa-weibo">微博</i>
+                    </a>
+                </div>
+                <div class="table-space">
+                    <a class="login-btn btn-google" href="/_social/login/Google">
+                        <i class="fa fa-google">Google</i>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-- def signup()
-  div.signup
-    div.modal-header
-      a.close
-        i.fa.fa-times
-      h3
-        注册
-      div.clearfix
-
-    form#signupform.login-form" role="form" method="post" action="${url_for('home.register')}"
-      div.form-group
-        label.control-label for=""
-          第三方注册
-          div.thirdparty-login-btns
-            div.table-space
-              a.login-btn.btn-github href="/_social/login/Github"
-                i.fa.fa-github
-                  GitHub
-            div.table-space
-              a.login-btn.btn-weibo href="/_social/login/Weibo"
-                i.fa.fa-weibo
-                  微博
-            div.table-space
-              a.login-btn.btn-google href="/_social/login/Google"
-                i.fa.fa-google
-                  Google
-
-      div.form-group
-        label.control-label for="inputUsername"
-          用户名
-          b.has-required data-title="必填"
-            Required
-        input#inputUsername.form-control type="text" name="username" tabindex="1"
-
-      div.form-group
-        label.control-label for="inputEmail"
-          邮箱
-          b.has-required data-title="必填"
-            Required
-        input#inputEmail.form-control type="email" name="email" tabindex="2"
-
-      div.form-group
-        label.control-label for="inputPassword"
-          密码
-          b.has-required data-title="必填，至少 8 位，同时包含数字、小写字母、大写字母"
-            Required
-        input#inputPassword.form-control type="password" name="password" tabindex="3"
-
-      div.form-group
-        button#signupBtn.signup-btn.btn.btn-default type="submit" tabindex="4" disabled="disabled"
-          注册
+        <div class="form-group">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <label class="control-label" for="inputUsername">
+                用户名
+            </label>
+            <b class="has-required" data-title="必填">Required</b>
+            <input id="inputUsername" class="form-control" type="text" value="" type="text" name="username" tabindex="1"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="inputEmail">邮箱</label>
+            <b class="has-required" data-title="必填">Required</b>
+            <input id="inputEmail" class="form-control" type="text" value="" type="email" name="email" tabindex="2"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="inputPassword">密码</label>
+            <b class="has-required" data-title="必填，至少 8 位，同时包含数字、小写字母、大写字母">Required</b>
+            <input id="inputPassword" class="form-control" type="text" value="" type="password" name="password" tabindex="3" />
+        </div>
+        <div class="form-group">
+            <button id="signupBtn" class="signup-btn btn btn-default" type="submit" tabindex="4" disabled="disabled" >注册</button>
+        </div>
+    </form>
+</div>
+{%- endmacro %}

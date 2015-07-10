@@ -8,9 +8,10 @@ Flask-Cache
 Flask-Mail
 Flask-Redis>=0.1.0
 flask-restful
-plim
+MarkupSafe
 mistune
 pygments
+plim
 arrow
 Flask_Security
 facebook-sdk

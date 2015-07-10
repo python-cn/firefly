@@ -1,34 +1,49 @@
 
-  div.instapaper_ignore.readability-extra
-    h2.facebox-header
-      Keyboard shortcuts
-      small
-        button.btn-link.js-see-all-keyboard-shortcuts type="button"
-         (Show all)
-    div.columns
-      -py
-        columns = zip(*[iter(keyboards)] * 2)
-      -for index, column in enumerate(columns)
-        div.column.one-half
-          table.keyboard-mappings
-            -for block_info, keyboard in column
-              -py
-                attrs = {'class': 'js-hidden-pane'} if index else {}
-              tbody**attrs
-                tr
-                  th
-                  th
-                    ${block_info}
-                -for dbds, key_info in keyboard
-                  -py
-                    keys = dbds.split()
-                  tr
-                    td.keys
-                      -for key in keys
-                        - if key != '/':
-                          kbd
-                            ${key}
-                        -else
-                          /
-                    td
-                      ${key_info}
+<div class="instapaper_ignore readability-extra">
+  <h2 class="facebox-header">
+    Keyboard shortcuts
+    <small>
+      <button class="btn-link js-see-all-keyboard-shortcuts" type="button">
+        (Show all)
+      </button>
+    </small>
+  </h2>
+  <div class="columns">
+    {% for column in columns %}
+    <div class="column one-half">
+      <table class="keyboard-mappings">
+      {% for block_info, keyboard in column %}
+        {% if loop.index0 %}
+          {% set class="js-hidden-pane" %}
+        {% else %}
+          {% set class="" %}
+        {% endif %}
+
+        <tbody class="{{ class }}">
+          <tr>
+            <th></th>
+            <th>{{ block_info }}</th>
+            {% for dbds, key_info in keyboard %}
+            <!-- keys = dbds.split() -->
+            <tr>
+              <td class="keys">
+                {% for key in dbds.split() %}
+                  {% if key != '/' %}
+                    <kbd>{{ key }}</kbd>
+                  {% else %}
+                    /
+                  {% endif %}
+                {% endfor %}
+              </td>
+              <td>
+                {{ key_info }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+    {% endfor %}
+  </div>
