@@ -4,5 +4,6 @@
     -   id: autopep8-wrapper
         args: ['-i', '--ignore=E309']
     -   id: trailing-whitespace
+    -   id: check-ast
     -   id: flake8
         args: ['--exclude=node_modules']
