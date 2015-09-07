@@ -55,8 +55,15 @@ class User(db.Document, UserMixin):
     roles = fields.ListField(
         fields.ReferenceField(Role, reverse_delete_rule=DENY), default=[])
 
+    location = db.StringField(max_length=25)
+    website = db.URLField()
+    github_id = db.StringField(max_length=25)
+
     def __str__(self):
         return self.cn
+
+    def __repr__(self):
+        return '<User id={id} cn={cn}>'.format(cn=self.cn, id=str(self.id))
 
     def url(self):
         return url_for('user.detail', id=str(self.id))
