@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+  用户设置
+{% endblock %}
+
+{% block outlet %}
+<div>
+    <form id="settingsform" class="settings-form" role="form" method="post" action="{{url_for('user.settings')}}">
+       <div class="form-group">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <label class="control-label" for="inputLocation">地点</label>
+          <input id="inputLocation" class="form-control" type="text" value="{{ user.location if user.location else ''}}" required="" tabindex="1" name="location"/>
+       </div>
+       <div class="form-group">
+          <label class="control-label" for="inputWebsite">网站</label>
+          <input id="inputWebsite" class="form-control" type="text" value="{{ user.website if user.website else ''}}" required="" tabindex="1" name="website"/>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="inputGithub">Github</label>
+          @<input id="inputGithub" class="form-control" type="text" value="{{ user.github_id if user.github_id else ''}}" required="" tabindex="1" name="github_id"/>
+        </div>
+        <div class="form-group">
+          <button id="loginBtn" class="login-btn btn-default" tabindex="3" type="submit">
+               修改
+          </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block head_script %}
+<link href="{{url_for('static', filename='stylesheets/base16-light.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/codemirror.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/select2.min.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/effeckt/list-items.css')}}" rel="stylesheet"/>
+<link href="{{url_for('static', filename='stylesheets/index.css')}}" rel="stylesheet" media="all"/>
+{% endblock %}
