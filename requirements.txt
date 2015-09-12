@@ -8,11 +8,12 @@ Flask-Cache
 Flask-Mail
 Flask-Redis>=0.1.0
 flask-restful
+flask-login<0.3.0
+Flask-Security<=1.7.4
 MarkupSafe
 mistune
 pygments
 arrow
-Flask_Security
 facebook-sdk
 python-twitter
 google-api-python-client
