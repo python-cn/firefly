@@ -35,6 +35,31 @@ class TestUser:
         assert current_user.is_authenticated()
         assert url_for('security.logout') in rv.data
 
+    def test_user_settings(self):
+        LOCATION = 'Beijing'
+        WEBSITE = 'http://firefly.dev'
+        GITHUB_ID = 'firefly'
+
+        self.login(0)
+        url = url_for('user.settings')
+        assert self.users[0].location is None
+        assert self.users[0].website is None
+        assert self.users[0].github_id is None
+
+        form = {
+            'location': LOCATION,
+            'website': WEBSITE,
+            'github_id': GITHUB_ID
+        }
+        rv = self.client.post(url, data=form)
+        assert rv.status_code == 302
+
+        user = User.objects.filter(id=self.users[0].id).first()
+        assert user
+        assert user.location == LOCATION
+        assert user.website == WEBSITE
+        assert user.github_id == GITHUB_ID
+
     def test_follow_user_api(self):
         # test follow
         self.login(0)

@@ -1,8 +1,9 @@
 # coding=utf-8
 from __future__ import absolute_import
 from flask_wtf import Form
+from flask_login import current_user
 from wtforms import StringField, PasswordField
-from wtforms.validators import ValidationError, Email, Required
+from wtforms.validators import ValidationError, Email, Required, URL
 
 from firefly.models.user import User
 
@@ -39,3 +40,17 @@ class LoginForm(Form):
             self.user = user
         else:
             raise ValidationError('邮箱或密码错误')
+
+
+class ProfileForm(Form):
+    location = StringField('Location')
+    website = StringField('URL', [URL()])
+    github_id = StringField('Github')
+
+    def save(self):
+        user = current_user
+        if user and not user.is_anonymous():
+            user.location = self.location.data
+            user.website = self.website.data
+            user.github_id = self.github_id.data
+            user.save()
