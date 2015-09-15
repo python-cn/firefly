@@ -6,6 +6,7 @@ from flask_restful import Api
 from .category import CategoryApi, CategoryListApi
 from .comment import ReplyApi
 from .user import FollowUserApi, BlockUserApi
+from .topic import LikePostApi
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 api = Api(bp)
@@ -14,3 +15,4 @@ api.add_resource(CategoryApi, '/categories/<slug>')
 api.add_resource(FollowUserApi, '/users/<id>/follow')
 api.add_resource(BlockUserApi, '/users/<id>/block')
 api.add_resource(ReplyApi, '/posts/<int:id>/replies')
+api.add_resource(LikePostApi, '/posts/<int:id>/like', endpoint='like')
