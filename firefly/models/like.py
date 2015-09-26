@@ -36,13 +36,11 @@ class Likes(object):
     def delete(self, user_id):
         user = User.objects(id=user_id).first()
         if user:
-            like = Like.objects.filter(
+            Like.objects.filter(
                 product_id=self.product_id,
                 product_type=self.product_type,
                 user=user
-            ).first()
-            if like:
-                like.delete()
+            ).delete()
 
 
 class Like(db.Document):

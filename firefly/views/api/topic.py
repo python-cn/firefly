@@ -15,12 +15,10 @@ class LikePostApi(Resource):
 
     def put(self, id):
         post = Post.objects.get_or_404(id=id)
-        if post:
-            post.likes.add(current_user.id)
-        return '', 201
+        post.likes.add(current_user.id)
+        return '', 202
 
     def delete(self, id):
         post = Post.objects.get_or_404(id=id)
-        if post:
-            post.likes.delete(current_user.id)
-        return '', 201
+        post.likes.delete(current_user.id)
+        return '', 204

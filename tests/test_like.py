@@ -52,9 +52,9 @@ class TestLike:
             self.login(user.email)
             url = url_for('api.like', id=post.id)
             rv = self.client.put(url)
-            assert rv.status_code == 201
+            assert rv.status_code == 202
         assert len(post.likes) == len(self.users)
 
-        rv = self.client.delete(url)
-        assert rv.status_code == 201
+        rv = self.client.delete(url, buffered=True)
+        assert rv.status_code == 204
         assert len(post.likes) == 2
