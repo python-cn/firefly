@@ -59,11 +59,7 @@ class Post(db.Document):
     comments = db.ListField(db.ReferenceField('Comment'))
     category = db.ReferenceField(Category)
 
-    likes = Likes('Post')
-
-    @likes.productidgetter
-    def product_id(self):
-        return self.id
+    likes = Likes()
 
     def url(self):
         return url_for('post.detail', id=self.id)
@@ -91,17 +87,14 @@ class Post(db.Document):
 
 
 class Video(Post):
-    likes = Likes('Video')
     embed_code = db.StringField(required=True)
 
 
 class Image(Post):
-    likes = Likes('Image')
     image_url = db.StringField(required=True, max_length=255)
 
 
 class Quote(Post):
-    likes = Likes('Quote')
     content = db.StringField(required=True)
     author = db.ReferenceField(User)
 
@@ -113,11 +106,7 @@ class Comment(db.Document):
     author = db.ReferenceField(User)
     ref_id = db.IntField(default=0)
 
-    likes = Likes('Comment')
-
-    @likes.productidgetter
-    def product_id(self):
-        return str(self.id)
+    likes = Likes()
 
     @property
     def post_type(self):

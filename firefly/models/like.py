@@ -8,12 +8,14 @@ from .user import User
 
 
 class Likes(object):
-    def __init__(self, product_type):
-        self.product_type = product_type
-        self._instance = None
+
+    def __init__(self):
+        self.product_id = None
+        self.product_type = None
 
     def __get__(self, instance, owner):
-        self._instance = instance
+        self.product_id = str(instance.id)
+        self.product_type = owner.__name__
         return self
 
     def __len__(self):
@@ -21,13 +23,6 @@ class Likes(object):
             product_id=self.product_id,
             product_type=self.product_type
         ).count()
-
-    def productidgetter(self, func):
-        return func
-
-    @property
-    def product_id(self):
-        return str(self.productidgetter(self._instance))
 
     def add(self, user_id):
         user = User.objects(id=user_id).first()
