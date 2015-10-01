@@ -10,6 +10,7 @@ from firefly.ext import db
 from firefly.views.utils import timesince
 from firefly.models.consts import CATEGORY_COLORS
 from .user import User
+from .like import Likes
 
 __all__ = ["Category", "Post", "Video", "Image", "Comment"]
 
@@ -58,6 +59,8 @@ class Post(db.Document):
     comments = db.ListField(db.ReferenceField('Comment'))
     category = db.ReferenceField(Category)
 
+    likes = Likes()
+
     def url(self):
         return url_for('post.detail', id=self.id)
 
@@ -102,6 +105,8 @@ class Comment(db.Document):
     content = db.StringField(verbose_name='Comment', required=True)
     author = db.ReferenceField(User)
     ref_id = db.IntField(default=0)
+
+    likes = Likes()
 
     @property
     def post_type(self):
