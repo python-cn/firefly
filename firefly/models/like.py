@@ -24,6 +24,12 @@ class Likes(object):
             product_type=self.product_type
         ).count()
 
+    def __getitem__(self, position):
+        return Like.objects(
+            product_id=self.product_id,
+            product_type=self.product_type,
+        )[position]
+
     def add(self, user_id):
         user = User.objects(id=user_id).first()
         if user:

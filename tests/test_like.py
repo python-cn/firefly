@@ -55,6 +55,10 @@ class TestLike:
             assert rv.status_code == 202
         assert len(post.likes) == len(self.users)
 
+        assert post.likes[0].user == self.users[0]
+        assert post.likes[1].user == self.users[1]
+        assert post.likes[2].user == self.users[2]
+
         rv = self.client.delete(url, buffered=True)
         assert rv.status_code == 204
         assert len(post.likes) == 2
