@@ -21,3 +21,4 @@ httplib2
 requests
 requests-oauthlib
 py-bcrypt
+git+git://github.com/python-cn/flask-social-blueprint
